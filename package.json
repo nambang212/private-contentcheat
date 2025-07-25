@@ -1,0 +1,8 @@
+{
+  "name": "content-cheat-netlify-function",
+  "version": "1.0.0",
+  "description": "Backend function for Content Cheat app.",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

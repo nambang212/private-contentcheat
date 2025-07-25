@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTENT CHEAT v60 (BYOK) © Brata Hanggara Putra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #0D1120;
+            background-image: radial-gradient(at 27% 37%, hsla(215, 98%, 22%, 0.2) 0px, transparent 50%), radial-gradient(at 97% 21%, hsla(212, 98%, 23%, 0.2) 0px, transparent 50%), radial-gradient(at 70% 94%, hsla(282, 98%, 23%, 0.2) 0px, transparent 50%), radial-gradient(at 10% 29%, hsla(282, 98%, 23%, 0.2) 0px, transparent 50%);
+            color: #E0E0E0;
+        }
+        .glass-effect {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .modern-input, .modern-input-group {
+            background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .modern-input:focus {
+            outline: none; border-color: rgba(167, 139, 250, 0.8);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+        }
+        select.modern-input option { background: #0D1120; color: #E0E0E0; }
+        .modern-btn {
+            background: linear-gradient(90deg, #5F00D8, #A78BFA); border: none;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4);
+        }
+        .modern-btn:hover {
+            box-shadow: 0 6px 20px 0 rgba(167, 139, 250, 0.6); transform: translateY(-2px);
+        }
+        .modern-btn:disabled {
+            background: #374151; box-shadow: none;
+            cursor: not-allowed; transform: none;
+        }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center;
+            z-index: 50; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content {
+            background-color: rgba(13, 17, 32, 0.8);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 1.5rem;
+            width: 90%; max-width: 600px; transform: scale(0.95); transition: transform 0.3s;
+            display: flex; flex-direction: column; max-height: 90vh;
+        }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-body { overflow-y: auto; padding-right: 1rem; }
+        .loader { display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 1rem; color: #94a3b8; }
+        .spinner {
+            width: 56px; height: 56px; border-radius: 50%; border: 9px solid;
+            border-color: #A78BFA; border-right-color: #374151; animation: spinner-d3wgkg 1s infinite linear;
+        }
+        @keyframes spinner-d3wgkg { to { transform: rotate(1turn); } }
+        .info-box {
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 4px solid #a78bfa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="modal-overlay">
+        <div class="modal-content !max-w-lg">
+            <h2 class="text-2xl font-bold text-center text-white mb-4">Masukkan Kunci API Anda</h2>
+            <p class="text-slate-400 text-center mb-6">Tools ini membutuhkan kunci API dari Google AI Studio untuk berfungsi. Tenang, kunci Anda aman dan hanya disimpan di browser Anda.</p>
+            <input type="password" id="apiKeyInput" class="w-full rounded-lg p-3 modern-input mb-4" placeholder="Masukkan Gemini API Key di sini...">
+            <button id="saveApiKeyBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mb-4">Simpan & Mulai</button>
+            <div class="text-center">
+                <button id="howToGetApiKeyBtn" class="text-purple-400 hover:text-purple-300 text-sm">Bagaimana caranya mendapatkan Kunci API?</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="modal-overlay">
+         <div class="modal-content !max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2>
+                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div class="modal-body space-y-6 text-slate-300">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-100">Langkah 1: Buka Halaman Google AI Studio</h3>
+                    <p>Klik tombol di bawah ini. Anda mungkin akan diminta login ke akun Google (Gmail) Anda.</p>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-block mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Buka Google AI Studio</a>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-slate-100">Langkah 2: Buat Kunci Baru</h3>
+                    <p>Setelah halaman terbuka, klik tombol biru yang bertuliskan <strong class="text-amber-400">"Create API key in new project"</strong>.</p>
+                    <img src="https://i.imgur.com/gYf20a9.png" alt="Tombol Create API Key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'">
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-slate-100">Langkah 3: Salin Kunci Anda</h3>
+                    <p>Sebuah pop-up akan muncul menampilkan kunci rahasia Anda. Klik ikon "salin" di sebelahnya.</p>
+                    <img src="https://i.imgur.com/V9n8co3.png" alt="Pop-up dengan API key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'">
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-slate-100">Selesai!</h3>
+                    <p>Sekarang, kembali ke aplikasi ini dan tempel (paste) kunci yang sudah Anda salin tadi ke dalam kolom yang tersedia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
+        <header class="text-center mb-12 relative">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
+            <p class="text-slate-400 mt-4 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
+            <div class="mt-4 info-box">
+                <p class="text-slate-300">Sisa kuota generate hari ini: <strong id="quota-counter" class="text-xl text-green-400">200</strong></p>
+                <p class="text-xs text-slate-500 mt-1">Kuota direset setiap hari. <button id="changeApiKey" class="text-purple-400 hover:underline">Ganti API Key</button></p>
+            </div>
+        </header>
+
+        <div class="p-8 glass-effect">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div>
+                    <label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label>
+                    <input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah">
+                </div>
+                <div>
+                    <label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label>
+                    <input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
+                    <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
+                </div>
+                <div>
+                    <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">4. Pilih Jenis Hasil (Opsional)</label>
+                    <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
+                        <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option>
+                        <option value="Narasi">Narasi</option>
+                        <option value="Pertanyaan">Pertanyaan</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">5. Jumlah Hasil (Opsional)</label>
+                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input">
+                        <option value="5">5 Hasil</option>
+                        <option value="10">10 Hasil</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-8">
+                <button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+                    Generate Konten!
+                </button>
+            </div>
+        </div>
+        <div id="results"></div>
+    </div>
+    
+    <div id="scriptModal" class="modal-overlay"></div>
+    <div id="notification" class="fixed bottom-5 right-5 bg-green-600 text-white py-3 px-5 rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-500 z-50"></div>
+
+    <script type="module">
+        let userAPIKey = null;
+
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `fixed bottom-5 right-5 text-white py-3 px-5 rounded-lg shadow-lg opacity-100 transform translate-y-0 transition-all duration-500 z-50 ${isError ? 'bg-red-600' : 'bg-green-600'}`;
+            setTimeout(() => { notification.classList.replace('opacity-100', 'opacity-0'); }, 3000);
+        }
+        
+        // --- Fungsi API (Versi Netlify) ---
+        async function callNetlifyFunction(prompt, apiKey) {
+            // Memanggil endpoint function di Netlify
+            const response = await fetch('/.netlify/functions/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt, apiKey })
+            });
+
+            const responseBody = await response.json();
+
+            if (!response.ok) {
+                 if (response.status === 400 && responseBody.error && responseBody.error.includes("API key not valid")) {
+                     throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
+                }
+                throw new Error(responseBody.error || `Netlify Function request failed: ${response.status}`);
+            }
+            return responseBody;
+        }
+
+        async function generateAIHooks(topic, audience, details, hookType, hookCount, apiKey) {
+             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels. ATURAN: 1. **WAJIB SINGKAT!** (di bawah 12 kata). 2. Gunakan bahasa Indonesia sehari-hari. 3. WAJIB relevan dengan Topik. DATA: - Topik: "${topic}" - Audiens: "${audience || 'Umum'}" - Detail Tambahan: "${details || 'Tidak ada'}" - Jenis Hook: "${hookType}". Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). Contoh format: [{"hook": "Teks hook pertama...", "category": "Kategori1"}, {"hook": "Teks hook kedua...", "category": "Kategori2"}]`;
+             const result = await callNetlifyFunction(prompt, apiKey);
+             
+             if (result.candidates?.[0]?.content?.parts?.[0]) {
+                 const rawText = result.candidates[0].content.parts[0].text;
+                 const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                 try {
+                     return JSON.parse(cleanedText);
+                 } catch (e) {
+                     console.error("JSON Parsing Error. Raw text:", cleanedText);
+                     throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
+                 }
+             }
+             throw new Error("Struktur respons AI tidak terduga.");
+        }
+        
+        function displayHooks(hooks) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            const resultsGrid = document.createElement('div');
+            resultsGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 mt-8';
+            hooks.forEach(hookData => {
+                 const card = document.createElement('div');
+                 card.className = 'bg-slate-800/20 p-5 rounded-xl fade-in';
+                 card.innerHTML = `<p class="text-slate-200 text-lg">${hookData.hook}</p><span class="inline-block bg-purple-500/20 text-purple-300 text-xs font-semibold mt-3 px-2 py-1 rounded-full">${hookData.category}</span>`;
+                 resultsGrid.appendChild(card);
+            });
+            resultsContainer.appendChild(resultsGrid);
+        }
+
+        // --- QUOTA MANAGEMENT ---
+        const quotaManager = {
+            getQuotaData: function() {
+                const data = localStorage.getItem('userQuotaData');
+                return data ? JSON.parse(data) : { quotaLeft: 200, lastReset: '' };
+            },
+            saveQuotaData: function(data) {
+                localStorage.setItem('userQuotaData', JSON.stringify(data));
+            },
+            checkAndResetQuota: function() {
+                const today = new Date().toISOString().split('T')[0];
+                let data = this.getQuotaData();
+                if (data.lastReset !== today) {
+                    data.quotaLeft = 200;
+                    data.lastReset = today;
+                    this.saveQuotaData(data);
+                }
+                this.updateDisplay(data.quotaLeft);
+            },
+            decrementQuota: function() {
+                let data = this.getQuotaData();
+                if (data.quotaLeft > 0) {
+                    data.quotaLeft -= 1;
+                    this.saveQuotaData(data);
+                    this.updateDisplay(data.quotaLeft);
+                    return true;
+                }
+                return false;
+            },
+            updateDisplay: function(quota) {
+                const counterEl = document.getElementById('quota-counter');
+                if (counterEl) {
+                    counterEl.textContent = quota;
+                    if (quota < 20) counterEl.classList.replace('text-green-400', 'text-red-400');
+                    else counterEl.classList.replace('text-red-400', 'text-green-400');
+                }
+                document.getElementById('generateBtn').disabled = quota <= 0;
+            }
+        };
+
+        function initializeApp() {
+            const storedApiKey = localStorage.getItem('userGeminiApiKey');
+            const appContainer = document.getElementById('app-container');
+            const apiKeyModal = document.getElementById('apiKeyModal');
+            
+            if (storedApiKey) {
+                userAPIKey = storedApiKey;
+                appContainer.style.display = 'block';
+                apiKeyModal.classList.remove('visible');
+                quotaManager.checkAndResetQuota();
+            } else {
+                appContainer.style.display = 'none';
+                apiKeyModal.classList.add('visible');
+            }
+        }
+        
+        document.getElementById('saveApiKeyBtn').addEventListener('click', () => {
+            const apiKeyInput = document.getElementById('apiKeyInput').value.trim();
+            if (apiKeyInput) {
+                localStorage.setItem('userGeminiApiKey', apiKeyInput);
+                initializeApp();
+                showNotification('API Key berhasil disimpan!', false);
+            } else {
+                showNotification('Mohon masukkan API Key.', true);
+            }
+        });
+        
+        document.getElementById('changeApiKey').addEventListener('click', () => {
+            localStorage.removeItem('userGeminiApiKey');
+            localStorage.removeItem('userQuotaData');
+            initializeApp();
+        });
+
+        document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => {
+            document.getElementById('tutorialModal').classList.add('visible');
+        });
+
+        document.querySelectorAll('.close-modal-btn, .modal-overlay').forEach(el => {
+            el.addEventListener('click', (e) => {
+                if (e.target === el) {
+                    el.closest('.modal-overlay').classList.remove('visible');
+                }
+            });
+        });
+
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            if (quotaManager.getQuotaData().quotaLeft <= 0) {
+                showNotification('Maaf, kuota generate harian Anda sudah habis.', true);
+                return;
+            }
+
+            const topic = document.getElementById('topic').value.trim();
+            if (!topic) {
+                showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true);
+                return;
+            }
+
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<div class="spinner !w-6 !h-6 !border-4"></div><span>Generating...</span>';
+            
+            try {
+                if (quotaManager.decrementQuota()) {
+                    const hooks = await generateAIHooks(
+                        topic,
+                        document.getElementById('audience').value.trim(),
+                        document.getElementById('details').value.trim(),
+                        document.getElementById('hook-type').value,
+                        document.getElementById('hook-count').value,
+                        userAPIKey
+                    );
+                    displayHooks(hooks);
+                } else {
+                     showNotification('Maaf, kuota generate harian Anda sudah habis.', true);
+                }
+            } catch (error) {
+                console.error('AI Generation Error:', error);
+                showNotification(error.message, true);
+                if (error.message.includes("API Key tidak valid")) {
+                    localStorage.removeItem('userGeminiApiKey');
+                    initializeApp();
+                }
+            }
+            generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
+            generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg> Generate Konten!';
+        });
+
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
