@@ -89,7 +89,13 @@
         @keyframes spinner-d3wgkg { to { transform: rotate(1turn); } }
         @keyframes -rotate { to { transform: rotate(360deg); } }
         @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
-
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        .shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
         .info-box {
             background: rgba(30, 41, 59, 0.5);
             border-left: 4px solid #a78bfa;
@@ -97,18 +103,8 @@
             border-radius: 0.5rem;
         }
         .favorite-btn.favorited .star-icon { color: #facc15; }
-        .category-label { cursor: pointer; transition: background-color 0.2s; }
-        .category-label:hover { background-color: rgba(167, 139, 250, 0.3); }
         .pustaka-entry .efektif-title { color: #facc15; font-weight: 600;}
-        .script-section .saran-shot {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #93c5fd;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-        }
+        .script-section .saran-shot-text { color: #93c5fd; }
         .hashtag {
             background-color: rgba(59, 130, 246, 0.2);
             color: #93c5fd;
@@ -130,6 +126,26 @@
             padding: 1rem;
             border-radius: 0.75rem;
         }
+        /* New styles for result card */
+        .result-card-category {
+            background-color: #374151;
+            color: #f3f4f6;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .result-card-category:hover { background-color: #4b5563; }
+        .result-card-copy-btn {
+            background-color: #374151;
+            color: #d1d5db;
+            transition: background-color 0.2s;
+        }
+        .result-card-copy-btn:hover { background-color: #4b5563; }
+        .result-card-script-btn {
+            background: linear-gradient(90deg, #5F00D8, #A78BFA);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .result-card-script-btn:hover { box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4); }
     </style>
 </head>
 <body class="antialiased">
@@ -146,8 +162,20 @@
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium text-slate-300 mb-1">Password</label>
-                    <input type="password" id="password" class="w-full rounded-lg p-3 modern-input">
-                     <p class="text-xs text-slate-500 mt-1">Hint: Follow Instagram @brata_putra</p>
+                    <div class="relative">
+                        <input type="password" id="password" class="w-full rounded-lg p-3 pr-10 modern-input">
+                        <div id="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white cursor-pointer">
+                            <svg id="eye-show" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                            </svg>
+                            <svg id="eye-hide" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill hidden" viewBox="0 0 16 16">
+                                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                            </svg>
+                        </div>
+                    </div>
+                     <p class="text-xs text-slate-500 mt-1">Hint: Nama akun IG developer.</p>
                 </div>
             </div>
             <button id="loginBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mt-6">Masuk</button>
@@ -155,8 +183,8 @@
     </div>
 
     <div id="apiKeyModal" class="modal-overlay">
-        <div class="modal-content !max-w-lg">
-            <h2 class="text-2xl font-bold text-center text-white mb-4">Masukkan Kunci API Anda</h2>
+         <div class="modal-content !max-w-lg">
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Masukkan Kunci API Anda</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
             <p class="text-slate-400 text-center mb-6">Tools ini membutuhkan kunci API dari Google AI Studio untuk berfungsi. Tenang, kunci Anda aman dan hanya disimpan di browser Anda.</p>
             <input type="password" id="apiKeyInput" class="w-full rounded-lg p-3 modern-input mb-4" placeholder="Masukkan Gemini API Key di sini...">
             <button id="saveApiKeyBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mb-4">Simpan & Mulai</button>
@@ -248,7 +276,7 @@
                 </div>
                 <div>
                     <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">5. Jumlah Hasil (Opsional)</label>
-                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option></select>
+                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option><option value="20">20 Hasil</option></select>
                 </div>
             </div>
             <div class="mt-8"><button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!</button></div>
@@ -291,8 +319,8 @@
                 efektif: "Semua Kategori, terutama E-commerce"
             },
             "Janji & Manfaat": {
-                desc: "Memberikan janji nilai yang jelas dan langsung di awal video. Menjawab pertanyaan 'kenapa saya harus nonton ini?'.",
-                efektif: "Produk Digital, Jasa, Konten Edukasi"
+                desc: "Memberikan janji nilai yang jelas dan langsung di awal video. Membuat audiens penasaran dengan hasilnya.",
+                efektif: "Jasa, Edukasi, Produk Solutif"
             },
             "How-To": {
                 desc: "Menawarkan tutorial atau cara melakukan sesuatu yang diinginkan oleh target audiens.",
@@ -436,15 +464,20 @@ Contoh struktur JSON yang diharapkan:
             hooksToDisplay.forEach(hookData => {
                  const isFavorited = favorites.some(fav => fav.hook === hookData.hook);
                  const card = document.createElement('div');
-                 card.className = 'bg-slate-800/20 p-5 rounded-xl fade-in flex flex-col justify-between';
+                 card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                  card.innerHTML = `
-                    <div><p class="text-slate-200 text-lg">${hookData.hook}</p></div>
-                    <div class="flex justify-between items-center mt-4">
-                        <button class="category-label inline-block bg-purple-500/20 text-purple-300 text-xs font-semibold px-2 py-1 rounded-full" data-category="${hookData.category}">${hookData.category}</button>
-                        <div class="flex items-center gap-2">
-                             <button class="generate-script-btn bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full" data-hook="${hookData.hook}">Buat Script</button>
-                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg></button>
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                             </button>
+                             <button class="result-card-category text-sm font-semibold px-4 py-1 rounded-full" data-category="${hookData.category}">${hookData.category}</button>
                         </div>
+                        <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                        <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
                     </div>
                  `;
                  resultsGrid.appendChild(card);
@@ -456,7 +489,7 @@ Contoh struktur JSON yang diharapkan:
             currentScriptData = data;
             container.innerHTML = ''; 
 
-            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '�', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
@@ -493,7 +526,7 @@ Contoh struktur JSON yang diharapkan:
                             <p class="text-sm text-slate-400 mb-2">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
                             <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
                             <p class="text-slate-300 mt-1">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
-                            <p class="mt-2"><span class="saran-shot">🎬 Saran Shot: ${item.saran_shot || ''}</span></p>
+                            <p class="mt-2">🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
                         </div>`;
                     editHTML = `<div class="space-y-2">
                             <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
@@ -547,10 +580,12 @@ Contoh struktur JSON yang diharapkan:
             const modal = document.getElementById('hookExplanationModal');
             const explanationData = hookExplanations[category];
             if (explanationData) {
-                document.getElementById('explanation-title').textContent = `Strategi Hook: ${category}`;
+                document.getElementById('explanation-title').textContent = `${category}`;
                 document.getElementById('explanation-body').innerHTML = `
-                    <p class="text-slate-300">${explanationData.desc}</p>
-                    <p class="mt-4"><strong class="pustaka-entry efektif-title">Paling Efektif Untuk:</strong> <span class="text-yellow-300">${explanationData.efektif}</span></p>`;
+                    <h3 class="font-bold text-slate-100 mb-1">Deskripsi</h3>
+                    <p class="text-slate-300 mb-4">${explanationData.desc}</p>
+                    <h3 class="font-bold text-slate-100 mb-1">Paling Efektif Untuk</h3>
+                    <p class="efektif-title">${explanationData.efektif}</p>`;
                 modal.classList.add('visible');
             }
         }
@@ -616,19 +651,29 @@ Contoh struktur JSON yang diharapkan:
         }
         
         document.querySelectorAll('.close-modal-btn').forEach(btn => {
-             btn.addEventListener('click', () => { btn.closest('.modal-overlay').classList.remove('visible'); });
+             btn.addEventListener('click', (e) => { 
+                e.stopPropagation();
+                btn.closest('.modal-overlay').classList.remove('visible'); 
+            });
         });
         
         document.getElementById('loginBtn').addEventListener('click', () => {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
             const errorMsg = document.getElementById('loginErrorMsg');
-            if (user === 'username' && pass === 'FollowIG@brata_putra') {
+            const loginModalContent = document.querySelector('#loginModal .modal-content');
+            
+            if (user === 'username' && pass === 'followIG@brata_putra') {
                 sessionStorage.setItem('isLoggedIn', 'true');
                 errorMsg.style.display = 'none';
+                loginModalContent.classList.remove('shake');
                 checkLogin();
             } else {
                 errorMsg.style.display = 'block';
+                loginModalContent.classList.add('shake');
+                setTimeout(() => {
+                    loginModalContent.classList.remove('shake');
+                }, 820);
             }
         });
 
@@ -648,9 +693,15 @@ Contoh struktur JSON yang diharapkan:
             document.getElementById('cancelChangeApiKeyBtn').classList.remove('hidden');
             document.getElementById('apiKeyModal').classList.add('visible');
         });
-
-        document.getElementById('cancelChangeApiKeyBtn').addEventListener('click', () => {
-            document.getElementById('apiKeyModal').classList.remove('visible');
+        
+        document.getElementById('togglePasswordVisibility').addEventListener('click', () => {
+            const passwordInput = document.getElementById('password');
+            const eyeShow = document.getElementById('eye-show');
+            const eyeHide = document.getElementById('eye-hide');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            eyeShow.classList.toggle('hidden');
+            eyeHide.classList.toggle('hidden');
         });
 
         document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => { document.getElementById('tutorialModal').classList.add('visible'); });
@@ -690,9 +741,17 @@ Contoh struktur JSON yang diharapkan:
                 btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>Favorit (<span id="favorite-count">${favorites.length}</span>)`;
             }
         });
-
+        
         document.getElementById('results-grid').addEventListener('click', async (e) => {
-            const scriptBtn = e.target.closest('.generate-script-btn');
+            const scriptBtn = e.target.closest('.result-card-script-btn');
+            const copyBtn = e.target.closest('.result-card-copy-btn');
+            const favBtn = e.target.closest('.favorite-btn');
+            const categoryBtn = e.target.closest('.result-card-category');
+
+            if(categoryBtn) { showHookExplanation(categoryBtn.dataset.category); }
+            if(favBtn) { toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category }); }
+            if(copyBtn) { fallbackCopy(copyBtn.dataset.hook); }
+
             if (scriptBtn) {
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
@@ -844,3 +903,4 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
+�
