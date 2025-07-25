@@ -115,7 +115,8 @@
             <p class="text-slate-400 text-center mb-6">Tools ini membutuhkan kunci API dari Google AI Studio untuk berfungsi. Tenang, kunci Anda aman dan hanya disimpan di browser Anda.</p>
             <input type="password" id="apiKeyInput" class="w-full rounded-lg p-3 modern-input mb-4" placeholder="Masukkan Gemini API Key di sini...">
             <button id="saveApiKeyBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mb-4">Simpan & Mulai</button>
-            <div class="text-center">
+            <button id="cancelChangeApiKeyBtn" class="w-full text-slate-300 font-bold py-2 px-4 rounded-full bg-slate-600 hover:bg-slate-700 transition-colors hidden">Batal</button>
+            <div class="text-center mt-4">
                 <button id="howToGetApiKeyBtn" class="text-purple-400 hover:text-purple-300 text-sm">Bagaimana caranya mendapatkan Kunci API?</button>
             </div>
         </div>
@@ -634,6 +635,7 @@ Contoh struktur JSON yang diharapkan:
                 populatePustaka();
             } else {
                 appContainer.style.display = 'none';
+                document.getElementById('cancelChangeApiKeyBtn').classList.add('hidden');
                 apiKeyModal.classList.add('visible');
             }
         }
@@ -642,10 +644,15 @@ Contoh struktur JSON yang diharapkan:
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) {
                     const modalId = overlay.id;
-                    overlay.classList.remove('visible');
-                    const hasApiKey = !!localStorage.getItem('userGeminiApiKey');
-                    if (modalId === 'apiKeyModal' && !hasApiKey) {
-                        setTimeout(() => initializeApp(), 50);
+                    const cancelBtn = document.getElementById('cancelChangeApiKeyBtn');
+                    // Only re-trigger initializeApp if it's the API modal AND the cancel button is NOT visible (meaning it's the initial setup)
+                    if (modalId === 'apiKeyModal' && cancelBtn.classList.contains('hidden')) {
+                         const hasApiKey = !!localStorage.getItem('userGeminiApiKey');
+                         if(!hasApiKey) {
+                             setTimeout(() => initializeApp(), 50); // Re-prompt if no key is entered on first load
+                         }
+                    } else {
+                        overlay.classList.remove('visible');
                     }
                 }
             });
@@ -659,6 +666,7 @@ Contoh struktur JSON yang diharapkan:
             const apiKeyInput = document.getElementById('apiKeyInput').value.trim();
             if (apiKeyInput) {
                 localStorage.setItem('userGeminiApiKey', apiKeyInput);
+                localStorage.removeItem('userQuotaData'); // Reset quota when key changes
                 initializeApp();
                 showNotification('API Key berhasil disimpan!', false);
             } else {
@@ -667,9 +675,12 @@ Contoh struktur JSON yang diharapkan:
         });
         
         document.getElementById('changeApiKey').addEventListener('click', () => {
-            localStorage.removeItem('userGeminiApiKey');
-            localStorage.removeItem('userQuotaData');
-            initializeApp();
+            document.getElementById('cancelChangeApiKeyBtn').classList.remove('hidden');
+            document.getElementById('apiKeyModal').classList.add('visible');
+        });
+
+        document.getElementById('cancelChangeApiKeyBtn').addEventListener('click', () => {
+            document.getElementById('apiKeyModal').classList.remove('visible');
         });
 
         document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => { document.getElementById('tutorialModal').classList.add('visible'); });
