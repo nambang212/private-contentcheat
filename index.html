@@ -63,7 +63,33 @@
             width: 56px; height: 56px; border-radius: 50%; border: 9px solid;
             border-color: #A78BFA; border-right-color: #374151; animation: spinner-d3wgkg 1s infinite linear;
         }
+        .script-loading-spinner {
+            width: 48px; height: 48px; border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            border: 3px solid;
+            border-color: #A78BFA #A78BFA transparent;
+            animation:-rotate 1s linear infinite;
+        }
+        .script-loading-spinner:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border: 3px solid;
+            border-color: transparent #374151 #374151;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            animation: rotate-reverse 0.5s linear infinite;
+        }
         @keyframes spinner-d3wgkg { to { transform: rotate(1turn); } }
+        @keyframes -rotate { to { transform: rotate(360deg); } }
+        @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
+
         .info-box {
             background: rgba(30, 41, 59, 0.5);
             border-left: 4px solid #a78bfa;
@@ -71,14 +97,10 @@
             border-radius: 0.5rem;
         }
         .favorite-btn.favorited .star-icon { color: #facc15; }
-        .category-label {
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .category-label:hover {
-            background-color: rgba(167, 139, 250, 0.3);
-        }
-        .pustaka-entry .efektif, .script-section .saran-shot {
+        .category-label { cursor: pointer; transition: background-color 0.2s; }
+        .category-label:hover { background-color: rgba(167, 139, 250, 0.3); }
+        .pustaka-entry .efektif-title { color: #facc15; font-weight: 600;}
+        .script-section .saran-shot {
             background-color: rgba(167, 139, 250, 0.1);
             color: #c4b5fd;
             padding: 2px 8px;
@@ -96,19 +118,42 @@
             cursor: pointer;
             transition: background-color 0.2s;
         }
-        .hashtag:hover {
-            background-color: rgba(59, 130, 246, 0.4);
+        .hashtag:hover { background-color: rgba(59, 130, 246, 0.4); }
+        .script-edit-view { background-color: #1f2937; padding: 1rem; border-radius: 0.5rem; }
+        .kerangka-konten-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #d8b4fe;
         }
-        .script-edit-view {
-            background-color: #1f2937;
+        .kerangka-audio-section {
+            background: linear-gradient(135deg, rgba(126, 34, 206, 0.3) 0%, rgba(29, 78, 216, 0.2) 100%);
             padding: 1rem;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
         }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Modals -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content !max-w-md">
+            <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
+            <p class="text-slate-400 text-center mb-6" id="loginErrorMsg" style="display:none; color: #f87171;">Username atau Password salah!</p>
+            <div class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-slate-300 mb-1">Username</label>
+                    <input type="text" id="username" class="w-full rounded-lg p-3 modern-input" value="username">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-300 mb-1">Password</label>
+                    <input type="password" id="password" class="w-full rounded-lg p-3 modern-input">
+                     <p class="text-xs text-slate-500 mt-1">Hint: Follow Instagram @brata_putra</p>
+                </div>
+            </div>
+            <button id="loginBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mt-6">Masuk</button>
+        </div>
+    </div>
+
     <div id="apiKeyModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <h2 class="text-2xl font-bold text-center text-white mb-4">Masukkan Kunci API Anda</h2>
@@ -123,69 +168,52 @@
     </div>
     
     <div id="tutorialModal" class="modal-overlay">
-         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2>
-                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
-            </div>
+        <div class="modal-content !max-w-2xl">
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
             <div class="modal-body space-y-6 text-slate-300">
-                <div>
-                    <h3 class="font-bold text-lg text-slate-100">Langkah 1: Buka Google AI Studio</h3>
-                    <p>Klik tombol di bawah ini. Anda mungkin akan diminta login ke akun Google (Gmail) Anda.</p>
-                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-block mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Buka Google AI Studio</a>
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg text-slate-100">Langkah 2: Buat Kunci Baru</h3>
-                    <p>Setelah halaman terbuka, klik tombol biru yang bertuliskan <strong class="text-amber-400">"Create API key in new project"</strong>.</p>
-                    <img src="https://i.ibb.co/6m6Mv4T/image.png" alt="Tombol Create API Key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'">
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg text-slate-100">Langkah 3: Salin Kunci Anda</h3>
-                    <p>Sebuah pop-up akan muncul menampilkan kunci rahasia Anda. Klik ikon "salin" di sebelahnya.</p>
-                    <img src="https://i.ibb.co/qN9qZ8j/image.png" alt="Pop-up dengan API key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'">
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg text-slate-100">Selesai!</h3>
-                    <p>Sekarang, kembali ke aplikasi ini dan tempel (paste) kunci yang sudah Anda salin tadi ke dalam kolom yang tersedia.</p>
-                </div>
+                <div><h3 class="font-bold text-lg text-slate-100">Langkah 1: Buka Google AI Studio</h3><p>Klik tombol di bawah ini. Anda mungkin akan diminta login ke akun Google (Gmail) Anda.</p><a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-block mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Buka Google AI Studio</a></div>
+                <div><h3 class="font-bold text-lg text-slate-100">Langkah 2: Buat Kunci Baru</h3><p>Setelah halaman terbuka, klik tombol biru yang bertuliskan <strong class="text-amber-400">"Create API key in new project"</strong>.</p><img src="https://i.ibb.co/6m6Mv4T/image.png" alt="Tombol Create API Key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'"></div>
+                <div><h3 class="font-bold text-lg text-slate-100">Langkah 3: Salin Kunci Anda</h3><p>Sebuah pop-up akan muncul menampilkan kunci rahasia Anda. Klik ikon "salin" di sebelahnya.</p><img src="https://i.ibb.co/qN9qZ8j/image.png" alt="Pop-up dengan API key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'"></div>
+                <div><h3 class="font-bold text-lg text-slate-100">Selesai!</h3><p>Sekarang, kembali ke aplikasi ini dan tempel (paste) kunci yang sudah Anda salin tadi ke dalam kolom yang tersedia.</p></div>
             </div>
         </div>
     </div>
     
     <div id="hookExplanationModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h2 id="explanation-title" class="text-2xl font-bold text-purple-400">Penjelasan Hook</h2>
-                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
-            </div>
+        <div class="modal-content !max-w-lg">
+            <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
             <div id="explanation-body" class="modal-body text-slate-300"></div>
         </div>
     </div>
 
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2>
-                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
-            </div>
-            <div id="pustaka-body" class="modal-body space-y-6 text-slate-300">
-            </div>
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div id="pustaka-body" class="modal-body space-y-6 text-slate-300"></div>
         </div>
     </div>
     
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-purple-400">✨ Kerangka Konten AI</h2>
-                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
-            </div>
-            <div id="script-result-structured" class="modal-body space-y-5">
-                 <!-- Structured script will be injected here -->
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/50 flex flex-col sm:flex-row gap-3">
-                <button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button>
-                <button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button>
-                <button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDGocs</button>
+            <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div id="script-result-container" class="modal-body space-y-5"></div>
+            <div id="script-buttons" class="mt-6 pt-4 border-t border-slate-700/50 flex-col sm:flex-row gap-3" style="display:none;"><button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button><button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button><button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDGocs</button></div>
+        </div>
+    </div>
+
+    <div id="hashtagModal" class="modal-overlay">
+        <div class="modal-content !max-w-md">
+            <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="text-slate-300 mb-4">Lihat popularitas dan konten terkait untuk tag ini di platform berikut:</div>
+            <div class="space-y-3">
+                <a id="instagram-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.843-.038 1.096-.047 3.232-.047h.001zm-1.843 2.822a4.102 4.102 0 1 0 0 8.204 4.102 4.102 0 0 0 0-8.204zm0 1.442a2.658 2.658 0 1 1 0 5.316 2.658 2.658 0 0 1 0-5.316zm4.958-1.442a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/></svg>
+                    Lihat di Instagram
+                </a>
+                <a id="tiktok-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-black border border-slate-600 hover:bg-slate-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg>
+                    Lihat di TikTok
+                </a>
             </div>
         </div>
     </div>
@@ -193,80 +221,37 @@
     <!-- Main App Container -->
     <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
         <header class="text-center mb-12 relative">
-            <button id="pustaka-hook-btn" title="Pustaka Hook" class="absolute top-0 right-0 p-2 text-slate-400 hover:text-purple-400 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
-                </svg>
-            </button>
+            <button id="pustaka-hook-btn" title="Pustaka Hook" class="absolute top-0 right-0 p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
-            <a href="https://www.instagram.com/bratahanggaraputra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
+            <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
-            
-            <div class="mt-6 info-box">
-                <p class="text-slate-300">Sisa kuota generate hari ini: <strong id="quota-counter" class="text-xl text-green-400">200</strong></p>
-                <p class="text-xs text-slate-500 mt-1">Kuota direset setiap hari. <button id="changeApiKey" class="text-purple-400 hover:underline">Ganti API Key</button></p>
-            </div>
+            <div class="mt-6 info-box"><p class="text-slate-300">Sisa kuota generate hari ini: <strong id="quota-counter" class="text-xl text-green-400">200</strong></p><p class="text-xs text-slate-500 mt-1">Kuota direset setiap hari. <button id="changeApiKey" class="text-purple-400 hover:underline">Ganti API Key</button></p></div>
         </header>
 
         <div class="p-8 glass-effect">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 <div>
-                    <label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label>
-                    <input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah">
-                </div>
-                <div>
-                    <label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label>
-                    <input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online">
-                </div>
-                <div class="md:col-span-2">
-                    <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
-                    <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
-                </div>
+                <div><label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label><input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah"></div>
+                <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
+                <div class="md:col-span-2"><label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label><input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama"></div>
                 <div>
                     <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">4. Pilih Jenis Hasil (Opsional)</label>
                     <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
-                        <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option>
-                        <option value="Narasi">Narasi</option>
-                        <option value="Pertanyaan">Pertanyaan</option>
-                        <option value="Sebelum & Sesudah">Sebelum & Sesudah</option>
-                        <option value="Social Proof">Social Proof</option>
-                        <option value="Janji & Manfaat">Janji & Manfaat</option>
-                        <option value="How-To">How-To</option>
-                        <option value="Kontroversial">Kontroversial</option>
-                        <option value="Negatif">Negatif</option>
-                        <option value="FOMO">FOMO</option>
-                        <option value="Penasaran">Penasaran</option>
-                        <option value="Statistik">Statistik</option>
-                        <option value="Kutipan">Kutipan</option>
-                        <option value="Panggilan Langsung">Panggilan Langsung</option>
+                        <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
                     </select>
                 </div>
                 <div>
                     <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">5. Jumlah Hasil (Opsional)</label>
-                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input">
-                        <option value="5">5 Hasil</option>
-                        <option value="10">10 Hasil</option>
-                    </select>
+                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option></select>
                 </div>
             </div>
-            <div class="mt-8">
-                <button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
-                    Generate Konten!
-                </button>
-            </div>
+            <div class="mt-8"><button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!</button></div>
         </div>
         
         <div id="results-container" class="mt-12">
             <div id="results-header" class="flex justify-between items-center mb-4" style="display: none;">
                 <h2 class="text-2xl font-bold text-slate-200">Hasil Ide Konten</h2>
-                <div class="flex items-center gap-4">
-                     <button id="view-favorites-btn" class="bg-yellow-500/10 text-yellow-300 font-bold py-2 px-4 rounded-lg flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                        Favorit (<span id="favorite-count">0</span>)
-                    </button>
-                </div>
+                <div class="flex items-center gap-4"><button id="view-favorites-btn" class="bg-yellow-500/10 text-yellow-300 font-bold py-2 px-4 rounded-lg flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>Favorit (<span id="favorite-count">0</span>)</button></div>
             </div>
             <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
@@ -320,7 +305,7 @@
                 efektif: "Promo Terbatas, Produk Eksklusif, Event"
             },
             "Penasaran": {
-                desc: "Membuat audiens bertanya-tanya dengan memberikan potongan informasi yang tidak lengkap atau misterius.",
+                desc: "Menciptakan 'kesenjangan informasi' yang membuat audiens harus menonton sampai akhir untuk tahu jawabannya.",
                 efektif: "Storytelling, Product Teaser, Vlog"
             },
             "Statistik": {
@@ -345,8 +330,22 @@
             setTimeout(() => { notification.classList.replace('opacity-100', 'opacity-0'); }, 3000);
         }
 
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
+        function copyToClipboard(text, html = null) {
+            if (html && navigator.clipboard && typeof ClipboardItem !== "undefined") {
+                const type = "text/html";
+                const blob = new Blob([html], { type });
+                const data = [new ClipboardItem({ [type]: blob })];
+                navigator.clipboard.write(data).then(
+                    () => showNotification("Format GDocs berhasil disalin! Tinggal paste (Ctrl+V)."),
+                    () => fallbackCopy(text) // Fallback to text copy
+                );
+            } else {
+               fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+             const textarea = document.createElement('textarea');
             textarea.value = text;
             document.body.appendChild(textarea);
             textarea.select();
@@ -396,21 +395,23 @@ Hook: "${hookText}"
 Produk/Jasa: "${document.getElementById('topic').value}"
 
 ATURAN WAJIB:
-1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON. Tidak boleh ada teks atau markdown lain di luar JSON.
+1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON.
 2.  **Konten JSON**: JSON harus memiliki kunci-kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
-3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi" (string, cth: "0-5"), "estimasi" (integer, cth: 5), "visual" (string), "narasi" (string), dan "saran_shot" (string).
-4.  **Konten Lain**: "saran_audio" harus array string. "caption" harus string. "hashtags" harus array string.
+3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", dan "saran_shot".
+4.  **Konten Lain**: "saran_audio" harus array string. "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
 5.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
+6.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
+7.  **Saran Audio**: Berikan 2-3 saran audio yang sedang tren.
 
 Contoh struktur JSON yang diharapkan:
 {
   "saran_audio": ["'Espresso' - Sabrina Carpenter", "Suara viral lainnya"],
   "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
-  "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus? Bikin pusing yang nonton!", "saran_shot": "Close-up" },
+  "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
   "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
   "cta": { "durasi": "17-20", "estimasi": 3, "visual": "Tampilan layar dengan teks 'Beli Sekarang' dan link ke toko.", "narasi": "Langsung checkout sekarang! Stok terbatas!", "saran_shot": "Close-up" },
-  "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.",
-  "hashtags": ["#tripod", "#videostabil", "#kontenkreator"]
+  "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.\\nBikin konten makin profesional dan menarik!",
+  "hashtags": ["tripod", "videostabil", "kontenkreator"]
 }`;
             const result = await callNetlifyFunction(prompt, apiKey);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
@@ -445,16 +446,12 @@ Contoh struktur JSON yang diharapkan:
                  const card = document.createElement('div');
                  card.className = 'bg-slate-800/20 p-5 rounded-xl fade-in flex flex-col justify-between';
                  card.innerHTML = `
-                    <div>
-                        <p class="text-slate-200 text-lg">${hookData.hook}</p>
-                    </div>
+                    <div><p class="text-slate-200 text-lg">${hookData.hook}</p></div>
                     <div class="flex justify-between items-center mt-4">
                         <button class="category-label inline-block bg-purple-500/20 text-purple-300 text-xs font-semibold px-2 py-1 rounded-full" data-category="${hookData.category}">${hookData.category}</button>
                         <div class="flex items-center gap-2">
                              <button class="generate-script-btn bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full" data-hook="${hookData.hook}">Buat Script</button>
-                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                             </button>
+                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg></button>
                         </div>
                     </div>
                  `;
@@ -463,62 +460,62 @@ Contoh struktur JSON yang diharapkan:
         }
         
         function displayStructuredScript(data) {
-            const container = document.getElementById('script-result-structured');
+            const container = document.getElementById('script-result-container');
             currentScriptData = data;
             container.innerHTML = ''; 
 
-            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '�', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
             sectionOrder.forEach(key => {
-                if (!data[key]) return;
+                if (!data[key] || (Array.isArray(data[key]) && data[key].length === 0)) return;
 
                 const sectionWrapper = document.createElement('div');
                 sectionWrapper.className = 'script-section-wrapper';
                 sectionWrapper.dataset.sectionKey = key;
+                
+                const isAudioSection = key === 'saran_audio';
+                if(isAudioSection) sectionWrapper.classList.add('kerangka-audio-section');
 
-                let displayHTML = '';
-                let editHTML = '';
+                let displayHTML = ''; let editHTML = '';
 
-                // --- Build Display and Edit HTML ---
                 if (key === 'saran_audio' || key === 'hashtags') {
-                    const content = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
-                    const tagsHTML = key === 'hashtags' ? data[key].map(tag => `<span class="hashtag">${tag}</span>`).join(' ') : `<p class="text-slate-300">${content}</p>`;
-                    displayHTML = `<div class="pl-7">${key === 'hashtags' ? `<div class="flex flex-wrap gap-2">${tagsHTML}</div>` : tagsHTML}</div>`;
-                    editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${content}</textarea>`;
+                    const isHashtag = key === 'hashtags';
+                    const contentArray = Array.isArray(data[key]) ? data[key] : [data[key]];
+                    const contentString = contentArray.join(', ');
+
+                    const displayContent = isHashtag
+                        ? contentArray.map(tag => `<span class="hashtag" data-tag="${tag}">#${tag}</span>`).join(' ')
+                        : `<p class="text-slate-200">${contentArray.join('; ')}</p>`;
+                    
+                    displayHTML = `<div class="pl-7">${isHashtag ? `<div class="flex flex-wrap gap-2">${displayContent}</div>` : displayContent}</div>`;
+                    editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${contentString}</textarea>`;
                 } else if (key === 'caption') {
-                    displayHTML = `<div class="pl-7"><p class="text-slate-300">${data[key]}</p></div>`;
+                    const captionText = data[key].replace(/\n/g, '<br>');
+                    displayHTML = `<div class="pl-7"><p class="text-slate-300 whitespace-pre-wrap">${data[key]}</p></div>`;
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key]}</textarea>`;
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
                     const item = data[key];
-                    displayHTML = `
-                        <div class="pl-7">
+                    displayHTML = `<div class="pl-7">
                             <p class="text-sm text-slate-400 mb-2">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
-                            <p><strong class="text-slate-100">VISUAL:</strong> ${item.visual || ''}</p>
-                            <p><strong class="text-slate-100">NARASI:</strong> ${item.narasi || ''}</p>
+                            <p class="text-slate-300"><strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
+                            <p class="text-slate-300 mt-1"><strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
                             <p class="mt-2"><span class="saran-shot">Saran Shot: ${item.saran_shot || ''}</span></p>
                         </div>`;
-                    editHTML = `
-                        <div class="space-y-2">
-                            <label class="block text-xs text-slate-400">Visual</label>
-                            <textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
-                            <label class="block text-xs text-slate-400">Narasi</label>
-                            <textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                    editHTML = `<div class="space-y-2">
+                            <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                            <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
                         </div>`;
                 }
 
                 sectionWrapper.innerHTML = `
                     <div class="script-section-display">
                         <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold text-slate-100">${sectionIcons[key]} ${sectionTitles[key]}</h3>
-                            <div class="flex items-center gap-2">
-                                <button class="edit-section-btn p-1 text-slate-400 hover:text-white" title="Edit bagian ini">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg>
-                                </button>
-                                <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3z"/></svg>
-                                </button>
+                            <h3 class="text-lg font-bold text-slate-100 ${isAudioSection ? 'text-xl' : ''}">${sectionIcons[key]} ${sectionTitles[key]}</h3>
+                            <div class="flex items-center gap-3">
+                                <button class="edit-section-btn p-1 text-slate-400 hover:text-white" title="Edit bagian ini"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>
+                                <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3z"/></svg></button>
                             </div>
                         </div>
                         ${displayHTML}
@@ -530,32 +527,22 @@ Contoh struktur JSON yang diharapkan:
                             <button class="save-edit-btn flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Simpan</button>
                             <button class="cancel-edit-btn flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700 transition-colors">Batal</button>
                          </div>
-                    </div>
-                `;
+                    </div>`;
                 container.appendChild(sectionWrapper);
             });
+            document.getElementById('script-buttons').style.display = 'flex';
         }
-        
         
         // --- FAVORITES LOGIC ---
         function toggleFavorite(hookData) {
             const index = favorites.findIndex(fav => fav.hook === hookData.hook);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showNotification('Dihapus dari favorit!', false);
-            } else {
-                favorites.push(hookData);
-                showNotification('Ditambahkan ke favorit!', false);
-            }
-            saveFavorites();
-            updateFavoriteCount();
+            if (index > -1) { favorites.splice(index, 1); showNotification('Dihapus dari favorit!'); } 
+            else { favorites.push(hookData); showNotification('Ditambahkan ke favorit!'); }
+            saveFavorites(); updateFavoriteCount();
             displayHooks(showingFavorites ? favorites : lastGeneratedHooks);
         }
         function saveFavorites() { localStorage.setItem('contentCheatFavorites', JSON.stringify(favorites)); }
-        function loadFavorites() {
-            favorites = JSON.parse(localStorage.getItem('contentCheatFavorites')) || [];
-            updateFavoriteCount();
-        }
+        function loadFavorites() { favorites = JSON.parse(localStorage.getItem('contentCheatFavorites')) || []; updateFavoriteCount(); }
         function updateFavoriteCount() { document.getElementById('favorite-count').textContent = favorites.length; }
 
         // --- MODAL & EXPLANATION LOGIC ---
@@ -565,9 +552,8 @@ Contoh struktur JSON yang diharapkan:
             if (explanationData) {
                 document.getElementById('explanation-title').textContent = `Strategi Hook: ${category}`;
                 document.getElementById('explanation-body').innerHTML = `
-                    <p>${explanationData.desc}</p>
-                    <p class="mt-4"><span class="efektif">Efektif untuk:</span> ${explanationData.efektif}</p>
-                `;
+                    <p class="text-slate-300">${explanationData.desc}</p>
+                    <p class="mt-4"><strong class="pustaka-entry efektif-title">Paling Efektif Untuk:</strong> <span class="text-yellow-300">${explanationData.efektif}</span></p>`;
                 modal.classList.add('visible');
             }
         }
@@ -578,11 +564,8 @@ Contoh struktur JSON yang diharapkan:
             for (const [title, data] of Object.entries(hookExplanations)) {
                 const entry = document.createElement('div');
                 entry.className = 'pustaka-entry';
-                entry.innerHTML = `
-                    <h3 class="font-bold text-lg text-slate-100">${title}</h3>
-                    <p class="mt-1">${data.desc}</p>
-                    <p class="mt-2"><span class="efektif">Efektif untuk:</span> ${data.efektif}</p>
-                `;
+                entry.innerHTML = `<h3 class="font-bold text-lg text-slate-100">${title}</h3><p class="mt-1">${data.desc}</p>
+                    <p class="mt-2"><strong class="efektif-title">Paling Efektif Untuk:</strong> <span class="text-yellow-300">${data.efektif}</span></p>`;
                 container.appendChild(entry);
             }
         }
@@ -594,66 +577,54 @@ Contoh struktur JSON yang diharapkan:
             checkAndResetQuota: function() {
                 const today = new Date().toISOString().split('T')[0];
                 let data = this.getQuotaData();
-                if (data.lastReset !== today) {
-                    data.quotaLeft = 200;
-                    data.lastReset = today;
-                    this.saveQuotaData(data);
-                }
+                if (data.lastReset !== today) { data.quotaLeft = 200; data.lastReset = today; this.saveQuotaData(data); }
                 this.updateDisplay(data.quotaLeft);
             },
             decrementQuota: function() {
                 let data = this.getQuotaData();
-                if (data.quotaLeft > 0) {
-                    data.quotaLeft -= 1;
-                    this.saveQuotaData(data);
-                    this.updateDisplay(data.quotaLeft);
-                }
+                if (data.quotaLeft > 0) { data.quotaLeft -= 1; this.saveQuotaData(data); this.updateDisplay(data.quotaLeft); }
             },
             updateDisplay: function(quota) {
                 const counterEl = document.getElementById('quota-counter');
                 if(counterEl) {
                     counterEl.textContent = quota;
-                    counterEl.classList.toggle('text-red-400', quota < 20);
-                    counterEl.classList.toggle('text-green-400', quota >= 20);
+                    counterEl.classList.toggle('text-red-400', quota < 20); counterEl.classList.toggle('text-green-400', quota >= 20);
                 }
                 document.getElementById('generateBtn').disabled = quota <= 0;
             }
         };
 
         // --- APP INITIALIZATION & EVENT LISTENERS ---
-        function initializeApp() {
+        function checkLogin() {
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('loginModal').classList.remove('visible');
+                checkApiKey();
+            } else {
+                document.getElementById('loginModal').classList.add('visible');
+            }
+        }
+
+        function checkApiKey() {
             const storedApiKey = localStorage.getItem('userGeminiApiKey');
-            const appContainer = document.getElementById('app-container');
-            const apiKeyModal = document.getElementById('apiKeyModal');
-            
             if (storedApiKey) {
                 userAPIKey = storedApiKey;
-                appContainer.style.display = 'block';
-                apiKeyModal.classList.remove('visible');
-                quotaManager.checkAndResetQuota();
-                loadFavorites();
-                populatePustaka();
+                document.getElementById('app-container').style.display = 'block';
+                document.getElementById('apiKeyModal').classList.remove('visible');
+                quotaManager.checkAndResetQuota(); loadFavorites(); populatePustaka();
             } else {
-                appContainer.style.display = 'none';
+                document.getElementById('app-container').style.display = 'none';
                 document.getElementById('cancelChangeApiKeyBtn').classList.add('hidden');
-                apiKeyModal.classList.add('visible');
+                document.getElementById('apiKeyModal').classList.add('visible');
             }
         }
         
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) {
-                    const modalId = overlay.id;
-                    const cancelBtn = document.getElementById('cancelChangeApiKeyBtn');
-                    // Only re-trigger initializeApp if it's the API modal AND the cancel button is NOT visible (meaning it's the initial setup)
-                    if (modalId === 'apiKeyModal' && cancelBtn.classList.contains('hidden')) {
-                         const hasApiKey = !!localStorage.getItem('userGeminiApiKey');
-                         if(!hasApiKey) {
-                             setTimeout(() => initializeApp(), 50); // Re-prompt if no key is entered on first load
-                         }
-                    } else {
-                        overlay.classList.remove('visible');
+                    if (overlay.id === 'loginModal' || (overlay.id === 'apiKeyModal' && !localStorage.getItem('userGeminiApiKey'))) {
+                        return; // Prevent closing login/initial API modal by clicking outside
                     }
+                    overlay.classList.remove('visible');
                 }
             });
         });
@@ -662,12 +633,25 @@ Contoh struktur JSON yang diharapkan:
              btn.addEventListener('click', () => { btn.closest('.modal-overlay').classList.remove('visible'); });
         });
         
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errorMsg = document.getElementById('loginErrorMsg');
+            if (user === 'username' && pass === 'FollowIG@brata_putra') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                errorMsg.style.display = 'none';
+                checkLogin();
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        });
+
         document.getElementById('saveApiKeyBtn').addEventListener('click', () => {
             const apiKeyInput = document.getElementById('apiKeyInput').value.trim();
             if (apiKeyInput) {
                 localStorage.setItem('userGeminiApiKey', apiKeyInput);
-                localStorage.removeItem('userQuotaData'); // Reset quota when key changes
-                initializeApp();
+                localStorage.removeItem('userQuotaData');
+                checkApiKey();
                 showNotification('API Key berhasil disimpan!', false);
             } else {
                 showNotification('Mohon masukkan API Key.', true);
@@ -686,19 +670,13 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => { document.getElementById('tutorialModal').classList.add('visible'); });
         document.getElementById('pustaka-hook-btn').addEventListener('click', () => { document.getElementById('pustakaHookModal').classList.add('visible'); });
 
-        // Main Generate Button
         document.getElementById('generateBtn').addEventListener('click', async () => {
-            if (quotaManager.getQuotaData().quotaLeft <= 0) {
-                showNotification('Maaf, kuota generate harian Anda sudah habis.', true); return;
-            }
+            if (quotaManager.getQuotaData().quotaLeft <= 0) { showNotification('Maaf, kuota generate harian Anda sudah habis.', true); return; }
             const topic = document.getElementById('topic').value.trim();
-            if (!topic) {
-                showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true); return;
-            }
+            if (!topic) { showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true); return; }
             const generateBtn = document.getElementById('generateBtn');
             generateBtn.disabled = true;
             generateBtn.innerHTML = '<div class="spinner !w-6 !h-6 !border-4"></div><span>Generating...</span>';
-            
             try {
                 const hooks = await generateAIHooks(topic, document.getElementById('audience').value.trim(), document.getElementById('details').value.trim(), document.getElementById('hook-type').value, document.getElementById('hook-count').value, userAPIKey);
                 quotaManager.decrementQuota();
@@ -709,10 +687,7 @@ Contoh struktur JSON yang diharapkan:
             } catch (error) {
                 console.error('AI Generation Error:', error);
                 showNotification(error.message, true);
-                if (error.message.includes("API Key tidak valid")) {
-                    localStorage.removeItem('userGeminiApiKey');
-                    initializeApp();
-                }
+                if (error.message.includes("API Key tidak valid")) { localStorage.removeItem('userGeminiApiKey'); checkApiKey(); }
             }
             generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
             generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg> Generate Konten!';
@@ -730,23 +705,17 @@ Contoh struktur JSON yang diharapkan:
             }
         });
 
-        // Event Delegation for dynamic cards
         document.getElementById('results-grid').addEventListener('click', async (e) => {
-            const favoriteBtn = e.target.closest('.favorite-btn');
             const scriptBtn = e.target.closest('.generate-script-btn');
-            const categoryLabel = e.target.closest('.category-label');
-
-            if (favoriteBtn) {
-                toggleFavorite({ hook: favoriteBtn.dataset.hook, category: favoriteBtn.dataset.category });
-            }
-            if (categoryLabel) {
-                showHookExplanation(categoryLabel.dataset.category);
-            }
             if (scriptBtn) {
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
-                const resultContainer = document.getElementById('script-result-structured');
-                resultContainer.innerHTML = '<div class="flex justify-center items-center h-full"><div class="spinner !w-10 !h-10 !border-4"></div></div>';
+                const resultContainer = document.getElementById('script-result-container');
+                document.getElementById('script-buttons').style.display = 'none';
+                resultContainer.innerHTML = `<div class="flex flex-col justify-center items-center h-full gap-4 py-8">
+                    <div class="script-loading-spinner"></div>
+                    <p class="text-slate-400">AI sedang merancang skrip, audio, dan shot...</p>
+                </div>`;
                 modal.classList.add('visible');
                 
                 try {
@@ -758,8 +727,7 @@ Contoh struktur JSON yang diharapkan:
             }
         });
 
-        // Script Modal Buttons
-        document.getElementById('script-result-structured').addEventListener('click', e => {
+        document.getElementById('script-result-container').addEventListener('click', e => {
             const wrapper = e.target.closest('.script-section-wrapper');
             if (!wrapper) return;
             const sectionKey = wrapper.dataset.sectionKey;
@@ -768,33 +736,33 @@ Contoh struktur JSON yang diharapkan:
             const saveBtn = e.target.closest('.save-edit-btn');
             const cancelBtn = e.target.closest('.cancel-edit-btn');
             const copyBtn = e.target.closest('.copy-section-btn');
+            const hashtagSpan = e.target.closest('.hashtag');
 
-            const displayView = wrapper.querySelector('.script-section-display');
-            const editView = wrapper.querySelector('.script-edit-view');
+            if (hashtagSpan) {
+                const tag = hashtagSpan.dataset.tag;
+                document.getElementById('hashtag-title').textContent = `#${tag}`;
+                document.getElementById('instagram-link').href = `https://www.instagram.com/explore/tags/${tag}/`;
+                document.getElementById('tiktok-link').href = `https://www.tiktok.com/tag/${tag}`;
+                document.getElementById('hashtagModal').classList.add('visible');
+            }
 
             if(editBtn) {
-                displayView.classList.add('hidden');
-                editView.classList.remove('hidden');
+                wrapper.querySelector('.script-section-display').classList.add('hidden');
+                wrapper.querySelector('.script-edit-view').classList.remove('hidden');
             }
             if(cancelBtn) {
-                displayView.classList.remove('hidden');
-                editView.classList.add('hidden');
+                wrapper.querySelector('.script-section-display').classList.remove('hidden');
+                wrapper.querySelector('.script-edit-view').classList.add('hidden');
                 showNotification('Perubahan dibatalkan');
             }
             if(saveBtn) {
-                // Save logic
                 const sectionData = currentScriptData[sectionKey];
                 if (typeof sectionData === 'object' && sectionData !== null && !Array.isArray(sectionData)) {
-                    editView.querySelectorAll('textarea').forEach(area => {
-                       currentScriptData[sectionKey][area.dataset.field] = area.value;
-                    });
+                    wrapper.querySelectorAll('textarea').forEach(area => { currentScriptData[sectionKey][area.dataset.field] = area.value; });
                 } else {
-                     const mainTextarea = editView.querySelector('textarea');
-                      if (Array.isArray(sectionData)) {
-                         currentScriptData[sectionKey] = mainTextarea.value.split(',').map(item => item.trim());
-                      } else {
-                         currentScriptData[sectionKey] = mainTextarea.value;
-                      }
+                     const mainTextarea = wrapper.querySelector('textarea');
+                      if (Array.isArray(sectionData)) { currentScriptData[sectionKey] = mainTextarea.value.split(',').map(item => item.trim()); } 
+                      else { currentScriptData[sectionKey] = mainTextarea.value; }
                 }
                 displayStructuredScript(currentScriptData);
                 showNotification('Perubahan berhasil disimpan!', false);
@@ -802,14 +770,10 @@ Contoh struktur JSON yang diharapkan:
             if (copyBtn) {
                 const sectionData = currentScriptData[sectionKey];
                 let textToCopy = '';
-                if (typeof sectionData === 'string') {
-                    textToCopy = sectionData;
-                } else if (Array.isArray(sectionData)) {
-                    textToCopy = sectionData.join(', ');
-                } else if (typeof sectionData === 'object' && sectionData !== null) {
-                    textToCopy = `VISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}`;
-                }
-                copyToClipboard(textToCopy);
+                if (typeof sectionData === 'string') textToCopy = sectionData;
+                else if (Array.isArray(sectionData)) textToCopy = isNaN(sectionData[0]) ? '#' + sectionData.join(' #') : sectionData.join(', ');
+                else if (typeof sectionData === 'object' && sectionData !== null) textToCopy = `VISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}`;
+                fallbackCopy(textToCopy);
             }
         });
 
@@ -817,35 +781,50 @@ Contoh struktur JSON yang diharapkan:
             if (!currentScriptData) return;
             let fullText = "✨ Kerangka Konten AI ✨\n\n";
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
-            for(const key in sectionTitles) {
-                if(currentScriptData[key]) {
+            sectionOrder.forEach(key => {
+                 if(currentScriptData[key]) {
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
-                     if (typeof data === 'string') {
-                        fullText += data + '\n\n';
-                    } else if (Array.isArray(data)) {
-                        fullText += data.join(', ') + '\n\n';
-                    } else if (typeof data === 'object') {
-                        fullText += `Durasi: Detik ${data.durasi}\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
-                    }
+                     if (typeof data === 'string') { fullText += data + '\n\n'; } 
+                     else if (Array.isArray(data)) { fullText += (key === 'hashtags' ? '#' + data.join(' #') : data.join(', ')) + '\n\n';} 
+                     else if (typeof data === 'object') { fullText += `Durasi: Detik ${data.durasi}\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;}
                 }
-            }
-            copyToClipboard(fullText);
+            });
+            fallbackCopy(fullText);
+        });
+        
+        document.getElementById('export-gdocs-btn').addEventListener('click', () => {
+            if (!currentScriptData) return;
+            let htmlContent = `<h1>✨ Kerangka Konten AI ✨</h1>`;
+            const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
+            const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+
+            sectionOrder.forEach(key => {
+                const data = currentScriptData[key];
+                if(data) {
+                    htmlContent += `<br/><h2><b>${sectionTitles[key].toUpperCase()}</b></h2>`;
+                    if (typeof data === 'string') { htmlContent += `<p>${data.replace(/\n/g, '<br>')}</p>`; }
+                    else if (Array.isArray(data)) { htmlContent += `<p>${(key === 'hashtags' ? '#' + data.join(' #') : data.join(', '))}</p>`; }
+                    else if (typeof data === 'object') { htmlContent += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`; }
+                }
+            });
+            copyToClipboard(htmlContent, htmlContent); // Pass HTML for rich copy
         });
 
         document.getElementById('download-doc-btn').addEventListener('click', () => {
             if (!currentScriptData) return;
             let content = `<h1>Kerangka Konten AI</h1>`;
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
-            for(const key in sectionTitles) {
+            const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+            sectionOrder.forEach(key => {
                 if(currentScriptData[key]) {
                     content += `<h2>${sectionTitles[key]}</h2>`;
                     const data = currentScriptData[key];
-                    if (typeof data === 'string') content += `<p>${data}</p>`;
-                    else if (Array.isArray(data)) content += `<p>${data.join(', ')}</p>`;
+                    if (typeof data === 'string') content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                    else if (Array.isArray(data)) content += `<p>${(key === 'hashtags' ? '#' + data.join(' #') : data.join(', '))}</p>`;
                     else if (typeof data === 'object') content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
                 }
-            }
+            });
             const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -855,12 +834,8 @@ Contoh struktur JSON yang diharapkan:
             document.body.removeChild(link);
         });
 
-        document.getElementById('export-gdocs-btn').addEventListener('click', () => {
-             showNotification('Fitur ini sedang dalam pengembangan.', true);
-        });
-
-
-        document.addEventListener('DOMContentLoaded', initializeApp);
+        document.addEventListener('DOMContentLoaded', checkLogin);
     </script>
 </body>
 </html>
+�
