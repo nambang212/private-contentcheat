@@ -22,11 +22,11 @@
             border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        .modern-input, .modern-input-group {
+        .modern-input, .modern-input-group, .edit-textarea {
             background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
-        .modern-input:focus {
+        .modern-input:focus, .edit-textarea:focus {
             outline: none; border-color: rgba(167, 139, 250, 0.8);
             box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
         }
@@ -85,6 +85,7 @@
             border-radius: 9999px;
             font-size: 0.8rem;
             font-weight: 500;
+            display: inline-block;
         }
         .hashtag {
             background-color: rgba(59, 130, 246, 0.2);
@@ -97,6 +98,11 @@
         }
         .hashtag:hover {
             background-color: rgba(59, 130, 246, 0.4);
+        }
+        .script-edit-view {
+            background-color: #1f2937;
+            padding: 1rem;
+            border-radius: 0.5rem;
         }
     </style>
 </head>
@@ -457,56 +463,78 @@ Contoh struktur JSON yang diharapkan:
         
         function displayStructuredScript(data) {
             const container = document.getElementById('script-result-structured');
-            currentScriptData = data; // Store for later use (copy/download)
-            
-            const sectionIcons = {
-                saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣'
-            };
-            const sectionTitles = {
-                saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags'
-            };
+            currentScriptData = data;
+            container.innerHTML = ''; 
 
-            container.innerHTML = ''; // Clear previous content
-
-            // Order of sections
+            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
             sectionOrder.forEach(key => {
                 if (!data[key]) return;
 
-                const section = document.createElement('div');
-                section.className = 'script-section';
-                let contentHTML = '';
+                const sectionWrapper = document.createElement('div');
+                sectionWrapper.className = 'script-section-wrapper';
+                sectionWrapper.dataset.sectionKey = key;
 
-                if (key === 'saran_audio' && Array.isArray(data[key])) {
-                     contentHTML = `<p class="text-slate-300">${data[key].join(', ')}</p>`;
+                let displayHTML = '';
+                let editHTML = '';
+
+                // --- Build Display and Edit HTML ---
+                if (key === 'saran_audio' || key === 'hashtags') {
+                    const content = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+                    const tagsHTML = key === 'hashtags' ? data[key].map(tag => `<span class="hashtag">${tag}</span>`).join(' ') : `<p class="text-slate-300">${content}</p>`;
+                    displayHTML = `<div class="pl-7">${key === 'hashtags' ? `<div class="flex flex-wrap gap-2">${tagsHTML}</div>` : tagsHTML}</div>`;
+                    editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${content}</textarea>`;
                 } else if (key === 'caption') {
-                     contentHTML = `<p class="text-slate-300">${data[key]}</p>`;
-                } else if (key === 'hashtags' && Array.isArray(data[key])) {
-                    const tagsHTML = data[key].map(tag => `<span class="hashtag">${tag}</span>`).join(' ');
-                    contentHTML = `<div class="flex flex-wrap gap-2">${tagsHTML}</div>`;
+                    displayHTML = `<div class="pl-7"><p class="text-slate-300">${data[key]}</p></div>`;
+                    editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key]}</textarea>`;
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
                     const item = data[key];
-                    contentHTML = `
-                        <p class="text-sm text-slate-400 mb-2">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
-                        <p><strong class="text-slate-100">VISUAL:</strong> ${item.visual || ''}</p>
-                        <p><strong class="text-slate-100">NARASI:</strong> ${item.narasi || ''}</p>
-                        <p class="mt-2"><span class="saran-shot">Saran Shot: ${item.saran_shot || ''}</span></p>
-                    `;
+                    displayHTML = `
+                        <div class="pl-7">
+                            <p class="text-sm text-slate-400 mb-2">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                            <p><strong class="text-slate-100">VISUAL:</strong> ${item.visual || ''}</p>
+                            <p><strong class="text-slate-100">NARASI:</strong> ${item.narasi || ''}</p>
+                            <p class="mt-2"><span class="saran-shot">Saran Shot: ${item.saran_shot || ''}</span></p>
+                        </div>`;
+                    editHTML = `
+                        <div class="space-y-2">
+                            <label class="block text-xs text-slate-400">Visual</label>
+                            <textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                            <label class="block text-xs text-slate-400">Narasi</label>
+                            <textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                        </div>`;
                 }
 
-                section.innerHTML = `
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-bold text-slate-100">${sectionIcons[key]} ${sectionTitles[key]}</h3>
-                        <button class="copy-section-btn p-1 text-slate-400 hover:text-white" data-section-key="${key}" title="Salin bagian ini">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zM-1 8a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1h-15A.5.5 0 0 1-1 8z"/></svg>
-                        </button>
+                sectionWrapper.innerHTML = `
+                    <div class="script-section-display">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-bold text-slate-100">${sectionIcons[key]} ${sectionTitles[key]}</h3>
+                            <div class="flex items-center gap-2">
+                                <button class="edit-section-btn p-1 text-slate-400 hover:text-white" title="Edit bagian ini">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg>
+                                </button>
+                                <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        ${displayHTML}
                     </div>
-                    <div class="pl-7">${contentHTML}</div>
+                    <div class="script-edit-view hidden">
+                         <h3 class="text-xl font-bold text-slate-100 mb-4">${sectionIcons[key]} Edit ${sectionTitles[key]}</h3>
+                         ${editHTML}
+                         <div class="flex gap-3 mt-4">
+                            <button class="save-edit-btn flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Simpan</button>
+                            <button class="cancel-edit-btn flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700 transition-colors">Batal</button>
+                         </div>
+                    </div>
                 `;
-                container.appendChild(section);
+                container.appendChild(sectionWrapper);
             });
         }
+        
         
         // --- FAVORITES LOGIC ---
         function toggleFavorite(hookData) {
@@ -720,17 +748,54 @@ Contoh struktur JSON yang diharapkan:
         });
 
         // Script Modal Buttons
-        document.getElementById('scriptModal').addEventListener('click', e => {
+        document.getElementById('script-result-structured').addEventListener('click', e => {
+            const wrapper = e.target.closest('.script-section-wrapper');
+            if (!wrapper) return;
+            const sectionKey = wrapper.dataset.sectionKey;
+            
+            const editBtn = e.target.closest('.edit-section-btn');
+            const saveBtn = e.target.closest('.save-edit-btn');
+            const cancelBtn = e.target.closest('.cancel-edit-btn');
             const copyBtn = e.target.closest('.copy-section-btn');
-            if (copyBtn && currentScriptData) {
-                const sectionKey = copyBtn.dataset.sectionKey;
+
+            const displayView = wrapper.querySelector('.script-section-display');
+            const editView = wrapper.querySelector('.script-edit-view');
+
+            if(editBtn) {
+                displayView.classList.add('hidden');
+                editView.classList.remove('hidden');
+            }
+            if(cancelBtn) {
+                displayView.classList.remove('hidden');
+                editView.classList.add('hidden');
+                showNotification('Perubahan dibatalkan');
+            }
+            if(saveBtn) {
+                // Save logic
+                const sectionData = currentScriptData[sectionKey];
+                if (typeof sectionData === 'object' && sectionData !== null && !Array.isArray(sectionData)) {
+                    editView.querySelectorAll('textarea').forEach(area => {
+                       currentScriptData[sectionKey][area.dataset.field] = area.value;
+                    });
+                } else {
+                     const mainTextarea = editView.querySelector('textarea');
+                      if (Array.isArray(sectionData)) {
+                         currentScriptData[sectionKey] = mainTextarea.value.split(',').map(item => item.trim());
+                      } else {
+                         currentScriptData[sectionKey] = mainTextarea.value;
+                      }
+                }
+                displayStructuredScript(currentScriptData);
+                showNotification('Perubahan berhasil disimpan!', false);
+            }
+            if (copyBtn) {
                 const sectionData = currentScriptData[sectionKey];
                 let textToCopy = '';
                 if (typeof sectionData === 'string') {
                     textToCopy = sectionData;
                 } else if (Array.isArray(sectionData)) {
                     textToCopy = sectionData.join(', ');
-                } else if (typeof sectionData === 'object') {
+                } else if (typeof sectionData === 'object' && sectionData !== null) {
                     textToCopy = `VISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}`;
                 }
                 copyToClipboard(textToCopy);
