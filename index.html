@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v68.0 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v69.0 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,6 +160,23 @@
         }
         #scrollToTopBtn:hover {
              background-color: rgba(167, 139, 250, 1);
+        }
+        .tone-label {
+            background-color: rgba(209, 213, 219, 0.1);
+            color: #9ca3af;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+        .audio-suggestion {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
+        }
+        .audio-suggestion:hover {
+            color: #c4b5fd;
         }
     </style>
 </head>
@@ -342,6 +359,27 @@
             </div>
         </div>
     </div>
+    
+    <div id="audioSearchModal" class="modal-overlay">
+        <div class="modal-content !max-w-md">
+            <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="text-slate-300 mb-4">Dengarkan atau cari audio ini di platform berikut:</div>
+            <div class="space-y-3">
+                <a id="tiktok-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-black border border-slate-600 hover:bg-slate-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg>
+                    Cari di TikTok
+                </a>
+                <a id="youtube-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"/></svg>
+                    Dengarkan di YouTube
+                </a>
+                 <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z"/></svg>
+                    Cari di Spotify
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main App Container -->
     <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
@@ -351,7 +389,7 @@
                 <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v68.0</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v69.0</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -369,12 +407,8 @@
                         <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
                     </select>
                 </div>
-                <div>
-                    <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">5. Jumlah Hasil (Opsional)</label>
-                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option><option value="20">20 Hasil</option></select>
-                </div>
                  <div class="md:col-span-2">
-                    <label for="tone-of-voice" class="block text-sm font-medium text-slate-300 mb-2">6. Pilih Gaya Bahasa (Opsional)</label>
+                    <label for="tone-of-voice" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Gaya Bahasa (Opsional)</label>
                     <select id="tone-of-voice" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">✨ Tampilkan Semua (Direkomendasikan)</option>
                         <option value="Profesional">Profesional</option>
@@ -383,6 +417,10 @@
                         <option value="Storytelling">Storytelling</option>
                         <option value="Santai">Santai</option>
                     </select>
+                </div>
+                 <div>
+                    <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">6. Jumlah Hasil (Opsional)</label>
+                    <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option><option value="20">20 Hasil</option></select>
                 </div>
             </div>
             <div class="mt-8"><button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!</button></div>
@@ -522,7 +560,23 @@
 
         async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
              const allCategories = Object.keys(hookExplanations).join(", ");
-             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels. ATURAN: 1. **WAJIB SINGKAT!** (di bawah 12 kata). 2. Gunakan bahasa Indonesia sehari-hari. 3. WAJIB relevan dengan Topik. 4. Pastikan kategori sesuai jenis hook yang diminta. Jika jenis hook "semua", buat variasi dari kategori berikut: ${allCategories}. DATA: - Topik: "${topic}" - Audiens: "${audience || 'Umum'}" - Detail Tambahan: "${details || 'Tidak ada'}" - Jenis Hook: "${hookType}" - Gaya Bahasa: "${tone}". Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan"}]`;
+             const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
+             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
+ATURAN:
+1. **WAJIB SINGKAT!** (di bawah 12 kata).
+2. Gunakan bahasa Indonesia sehari-hari.
+3. WAJIB relevan dengan Topik.
+4. Pastikan kategori sesuai jenis hook yang diminta. Jika jenis hook "semua", buat variasi dari kategori berikut: ${allCategories}.
+5. Pastikan gaya bahasa (tone) sesuai yang diminta. Jika gaya bahasa "semua", buat variasi dari gaya bahasa berikut: ${allTones}.
+DATA:
+- Topik: "${topic}"
+- Audiens: "${audience || 'Umum'}"
+- Detail Tambahan: "${details || 'Tidak ada'}"
+- Jenis Hook: "${hookType}"
+- Gaya Bahasa: "${tone}"
+
+Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). 
+Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "Storytelling"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan", "tone": "Santai"}]`;
              const result = await callNetlifyFunction(prompt, apiKey);
              if (result.candidates?.[0]?.content?.parts?.[0]) {
                  const rawText = result.candidates[0].content.parts[0].text;
@@ -547,14 +601,14 @@ ATURAN WAJIB:
 1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON.
 2.  **Konten JSON**: JSON harus memiliki kunci-kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
 3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", dan "saran_shot".
-4.  **Konten Lain**: "saran_audio" harus array string. "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
-5.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
-6.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
-7.  **Saran Audio**: Berikan 2-3 saran audio yang sedang tren.
+4.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
+5.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
+6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
+7.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
 
 Contoh struktur JSON yang diharapkan:
 {
-  "saran_audio": ["'Espresso' - Sabrina Carpenter", "Suara viral lainnya"],
+  "saran_audio": [{"title": "Espresso", "artist": "Sabrina Carpenter"}, {"title": "LUNCH", "artist": "Billie Eilish"}],
   "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
   "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
   "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
@@ -593,15 +647,17 @@ Contoh struktur JSON yang diharapkan:
             hooksToDisplay.forEach(hookData => {
                  const isFavorited = favorites.some(fav => fav.hook === hookData.hook);
                  const categoryStyle = hookCategoryStyles[hookData.category] || hookCategoryStyles['Default'];
+                 const toneLabel = hookData.tone ? `<span class="tone-label">${hookData.tone}</span>` : '';
                  const card = document.createElement('div');
                  card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                  card.innerHTML = `
                     <div>
                         <div class="flex items-center gap-3 mb-3">
-                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}">
+                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
                              </button>
                              <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                             ${toneLabel}
                         </div>
                         <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
                     </div>
@@ -635,19 +691,22 @@ Contoh struktur JSON yang diharapkan:
 
                 let displayHTML = ''; let editHTML = '';
 
-                if (key === 'saran_audio' || key === 'hashtags') {
-                    const isHashtag = key === 'hashtags';
+                 if (key === 'saran_audio') {
+                    const audioList = data[key].map(audio => 
+                        `<span class="audio-suggestion" data-title="${audio.title}" data-artist="${audio.artist || ''}">'${audio.title}' by ${audio.artist || 'Unknown'}</span>`
+                    ).join('; ');
+                    displayHTML = `<div class="pl-7"><p class="text-slate-200">${audioList}</p></div>`;
+                    // Edit view for audio can be simplified as it's less likely to be edited manually
+                    editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key].map(a => `${a.title} by ${a.artist}`).join(', ')}</textarea>`;
+                } else if (key === 'hashtags') {
                     const contentArray = Array.isArray(data[key]) ? data[key] : [data[key]];
                     const contentString = contentArray.join(', ');
 
-                    const displayContent = isHashtag
-                        ? contentArray.map(tag => `<span class="hashtag" data-tag="${tag}">#${tag}</span>`).join(' ')
-                        : `<p class="text-slate-200">${contentArray.join('; ')}</p>`;
+                    const displayContent = contentArray.map(tag => `<span class="hashtag" data-tag="${tag}">#${tag}</span>`).join(' ');
                     
-                    displayHTML = `<div class="pl-7">${isHashtag ? `<div class="flex flex-wrap gap-2">${displayContent}</div>` : displayContent}</div>`;
+                    displayHTML = `<div class="pl-7"><div class="flex flex-wrap gap-2">${displayContent}</div></div>`;
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${contentString}</textarea>`;
                 } else if (key === 'caption') {
-                    const captionText = data[key].replace(/\n/g, '<br>');
                     displayHTML = `<div class="pl-7"><p class="text-slate-300 whitespace-pre-wrap">${data[key]}</p></div>`;
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key]}</textarea>`;
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
@@ -915,7 +974,11 @@ Contoh struktur JSON yang diharapkan:
             if (categoryBtn) {
                 showHookExplanation(categoryBtn.dataset.category);
             } else if (favBtn) {
-                toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category });
+                toggleFavorite({ 
+                    hook: favBtn.dataset.hook, 
+                    category: favBtn.dataset.category,
+                    tone: favBtn.dataset.tone
+                });
             } else if (copyBtn) {
                 fallbackCopy(copyBtn.dataset.hook);
             } else if (scriptBtn) {
@@ -949,6 +1012,7 @@ Contoh struktur JSON yang diharapkan:
             const cancelBtn = e.target.closest('.cancel-edit-btn');
             const copyBtn = e.target.closest('.copy-section-btn');
             const hashtagSpan = e.target.closest('.hashtag');
+            const audioSpan = e.target.closest('.audio-suggestion');
 
             if (hashtagSpan) {
                 const tag = hashtagSpan.dataset.tag;
@@ -957,6 +1021,17 @@ Contoh struktur JSON yang diharapkan:
                 document.getElementById('tiktok-link').href = `https://www.tiktok.com/tag/${tag}`;
                 document.getElementById('facebook-link').href = `https://www.facebook.com/hashtag/${tag}`;
                 document.getElementById('hashtagModal').classList.add('visible');
+            }
+            
+            if (audioSpan) {
+                const title = audioSpan.dataset.title;
+                const artist = audioSpan.dataset.artist;
+                const fullQuery = `${title} ${artist}`;
+                document.getElementById('audio-title').textContent = `'${title}' by ${artist}`;
+                document.getElementById('tiktok-audio-link').href = `https://www.tiktok.com/search?q=${encodeURIComponent(fullQuery)}`;
+                document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(fullQuery)}`;
+                document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/${encodeURIComponent(fullQuery)}`;
+                document.getElementById('audioSearchModal').classList.add('visible');
             }
 
             if(editBtn) {
@@ -999,9 +1074,15 @@ Contoh struktur JSON yang diharapkan:
                  if(currentScriptData[key]) {
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
-                     if (typeof data === 'string') { fullText += data + '\n\n'; } 
-                     else if (Array.isArray(data)) { fullText += (key === 'hashtags' ? '#' + data.join(' #') : data.join(', ')) + '\n\n';} 
-                     else if (typeof data === 'object') { fullText += `Durasi: Detik ${data.durasi}\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;}
+                     if (key === 'saran_audio') {
+                        fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                     } else if (key === 'hashtags') {
+                        fullText += '#' + data.join(' #') + '\n\n';
+                     } else if (typeof data === 'string') { 
+                        fullText += data + '\n\n'; 
+                     } else if (typeof data === 'object') { 
+                        fullText += `Durasi: Detik ${data.durasi}\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                     }
                 }
             });
             fallbackCopy(fullText);
@@ -1017,9 +1098,15 @@ Contoh struktur JSON yang diharapkan:
                 const data = currentScriptData[key];
                 if(data) {
                     htmlContent += `<br/><h2><b>${sectionTitles[key].toUpperCase()}</b></h2>`;
-                    if (typeof data === 'string') { htmlContent += `<p>${data.replace(/\n/g, '<br>')}</p>`; }
-                    else if (Array.isArray(data)) { htmlContent += `<p>${(key === 'hashtags' ? '#' + data.join(' #') : data.join(', '))}</p>`; }
-                    else if (typeof data === 'object') { htmlContent += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`; }
+                    if (key === 'saran_audio') {
+                        htmlContent += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                    } else if (key === 'hashtags') {
+                         htmlContent += `<p>${'#' + data.join(' #')}</p>`;
+                    } else if (typeof data === 'string') { 
+                        htmlContent += `<p>${data.replace(/\n/g, '<br>')}</p>`; 
+                    } else if (typeof data === 'object') { 
+                        htmlContent += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`; 
+                    }
                 }
             });
 
@@ -1052,9 +1139,15 @@ Contoh struktur JSON yang diharapkan:
                 if(currentScriptData[key]) {
                     content += `<h2>${sectionTitles[key]}</h2>`;
                     const data = currentScriptData[key];
-                    if (typeof data === 'string') content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
-                    else if (Array.isArray(data)) content += `<p>${(key === 'hashtags' ? '#' + data.join(' #') : data.join(', '))}</p>`;
-                    else if (typeof data === 'object') content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                    if (key === 'saran_audio') {
+                        content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                    } else if (key === 'hashtags') {
+                         content += `<p>${'#' + data.join(' #')}</p>`;
+                    } else if (typeof data === 'string') { 
+                        content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                    } else if (typeof data === 'object') { 
+                        content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                    }
                 }
             });
             const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
