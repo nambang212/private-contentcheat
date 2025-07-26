@@ -104,7 +104,7 @@
         }
         .favorite-btn.favorited .star-icon { color: #facc15; }
         .pustaka-entry .efektif-title, .faq-entry .efektif-title { color: #facc15; font-weight: 600;}
-        .script-section .saran-shot-text { color: #60a5fa; font-weight: 600; }
+        .script-section .saran-shot-text { color: #60a5fa !important; font-weight: 600; }
         .hashtag {
             background-color: rgba(59, 130, 246, 0.2);
             color: #93c5fd;
@@ -309,7 +309,14 @@
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
             <div id="script-result-container" class="modal-body space-y-5"></div>
-            <div id="script-buttons" class="mt-6 pt-4 border-t border-slate-700/50 flex-col sm:flex-row gap-3" style="display:none;"><button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button><button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button><button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDGocs</button></div>
+            <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-3">
+                <div id="script-buttons" class="sm:flex-row flex-col flex gap-3" style="display:none;">
+                    <button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button>
+                    <button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button>
+                    <button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDGocs</button>
+                </div>
+                <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
+            </div>
         </div>
     </div>
 
@@ -365,6 +372,17 @@
                 <div>
                     <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">5. Jumlah Hasil (Opsional)</label>
                     <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option><option value="20">20 Hasil</option></select>
+                </div>
+                 <div class="md:col-span-2">
+                    <label for="tone-of-voice" class="block text-sm font-medium text-slate-300 mb-2">6. Pilih Gaya Bahasa (Opsional)</label>
+                    <select id="tone-of-voice" class="w-full rounded-lg p-3 modern-input">
+                        <option value="semua">✨ Tampilkan Semua (Direkomendasikan)</option>
+                        <option value="Profesional">Profesional</option>
+                        <option value="Lucu/Humoris">Lucu/Humoris</option>
+                        <option value="Inspiratif">Inspiratif</option>
+                        <option value="Storytelling">Storytelling</option>
+                        <option value="Santai">Santai</option>
+                    </select>
                 </div>
             </div>
             <div class="mt-8"><button id="generateBtn" class="w-full flex items-center justify-center gap-3 text-white font-bold py-4 px-6 rounded-full text-lg modern-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!</button></div>
@@ -502,9 +520,9 @@
             return responseBody;
         }
 
-        async function generateAIHooks(topic, audience, details, hookType, hookCount, apiKey) {
+        async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
              const allCategories = Object.keys(hookExplanations).join(", ");
-             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels. ATURAN: 1. **WAJIB SINGKAT!** (di bawah 12 kata). 2. Gunakan bahasa Indonesia sehari-hari. 3. WAJIB relevan dengan Topik. 4. Pastikan kategori sesuai jenis hook yang diminta. Jika jenis hook "semua", buat variasi dari kategori berikut: ${allCategories}. DATA: - Topik: "${topic}" - Audiens: "${audience || 'Umum'}" - Detail Tambahan: "${details || 'Tidak ada'}" - Jenis Hook: "${hookType}". Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan"}]`;
+             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels. ATURAN: 1. **WAJIB SINGKAT!** (di bawah 12 kata). 2. Gunakan bahasa Indonesia sehari-hari. 3. WAJIB relevan dengan Topik. 4. Pastikan kategori sesuai jenis hook yang diminta. Jika jenis hook "semua", buat variasi dari kategori berikut: ${allCategories}. DATA: - Topik: "${topic}" - Audiens: "${audience || 'Umum'}" - Detail Tambahan: "${details || 'Tidak ada'}" - Jenis Hook: "${hookType}" - Gaya Bahasa: "${tone}". Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan"}]`;
              const result = await callNetlifyFunction(prompt, apiKey);
              if (result.candidates?.[0]?.content?.parts?.[0]) {
                  const rawText = result.candidates[0].content.parts[0].text;
@@ -583,7 +601,7 @@ Contoh struktur JSON yang diharapkan:
                              <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
                              </button>
-                             <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                             <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
                         </div>
                         <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
                     </div>
@@ -634,11 +652,11 @@ Contoh struktur JSON yang diharapkan:
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key]}</textarea>`;
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
                     const item = data[key];
-                    displayHTML = `<div class="pl-7">
-                            <p class="text-sm text-slate-400 mb-2">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                    displayHTML = `<div class="pl-7 space-y-2">
+                            <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
                             <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
-                            <p class="text-slate-300 mt-1">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
-                            <p class="mt-2">🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
+                            <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
+                            <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
                         </div>`;
                     editHTML = `<div class="space-y-2">
                             <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
@@ -673,6 +691,7 @@ Contoh struktur JSON yang diharapkan:
                 container.appendChild(sectionWrapper);
             });
             document.getElementById('script-buttons').style.display = 'flex';
+            document.getElementById('script-disclaimer').style.display = 'block';
         }
         
         // --- FAVORITES LOGIC ---
@@ -852,7 +871,15 @@ Contoh struktur JSON yang diharapkan:
             generateBtn.disabled = true;
             generateBtn.innerHTML = '<div class="spinner !w-6 !h-6 !border-4"></div><span>Generating...</span>';
             try {
-                const hooks = await generateAIHooks(topic, document.getElementById('audience').value.trim(), document.getElementById('details').value.trim(), document.getElementById('hook-type').value, document.getElementById('hook-count').value, userAPIKey);
+                const hooks = await generateAIHooks(
+                    topic, 
+                    document.getElementById('audience').value.trim(), 
+                    document.getElementById('details').value.trim(), 
+                    document.getElementById('hook-type').value, 
+                    document.getElementById('hook-count').value,
+                    document.getElementById('tone-of-voice').value,
+                    userAPIKey
+                );
                 quotaManager.decrementQuota();
                 lastGeneratedHooks = hooks;
                 showingFavorites = false;
@@ -883,17 +910,20 @@ Contoh struktur JSON yang diharapkan:
             const scriptBtn = e.target.closest('.result-card-script-btn');
             const copyBtn = e.target.closest('.result-card-copy-btn');
             const favBtn = e.target.closest('.favorite-btn');
-            const categoryBtn = e.target.closest('[data-category]');
+            const categoryBtn = e.target.closest('.result-card-category');
 
-            if(categoryBtn) { showHookExplanation(categoryBtn.dataset.category); }
-            if(favBtn) { toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category }); }
-            if(copyBtn) { fallbackCopy(copyBtn.dataset.hook); }
-
-            if (scriptBtn) {
+            if (categoryBtn) {
+                showHookExplanation(categoryBtn.dataset.category);
+            } else if (favBtn) {
+                toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category });
+            } else if (copyBtn) {
+                fallbackCopy(copyBtn.dataset.hook);
+            } else if (scriptBtn) {
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
                 const resultContainer = document.getElementById('script-result-container');
                 document.getElementById('script-buttons').style.display = 'none';
+                document.getElementById('script-disclaimer').style.display = 'none';
                 resultContainer.innerHTML = `<div class="flex flex-col justify-center items-center h-full gap-4 py-8">
                     <div class="script-loading-spinner"></div>
                     <p class="text-slate-400">AI sedang merancang skrip, audio, dan shot...</p>
