@@ -1000,7 +1000,6 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('script-result-container').addEventListener('click', e => {
             const wrapper = e.target.closest('.script-section-wrapper');
             if (!wrapper) return;
-            const sectionKey = wrapper.dataset.sectionKey;
             
             const editBtn = e.target.closest('.edit-section-btn');
             const saveBtn = e.target.closest('.save-edit-btn');
@@ -1013,32 +1012,25 @@ Contoh struktur JSON yang diharapkan:
                 const tag = hashtagSpan.dataset.tag;
                 document.getElementById('hashtag-title').textContent = `#${tag}`;
                 document.getElementById('instagram-link').href = `https://www.instagram.com/explore/tags/${tag}/`;
-                document.getElementById('tiktok-link').href = `https://www.tiktok.com/tag/${tag}`;
                 document.getElementById('facebook-link').href = `https://www.facebook.com/hashtag/${tag}`;
                 document.getElementById('hashtagModal').classList.add('visible');
-            }
-            
-            if (audioSpan) {
+            } else if (audioSpan) {
                 const title = audioSpan.dataset.title;
                 const artist = audioSpan.dataset.artist;
                 const fullQuery = `${title} ${artist}`;
                 document.getElementById('audio-title').textContent = `'${title}' by ${artist}`;
-                document.getElementById('tiktok-audio-link').href = `https://www.tiktok.com/search?q=${encodeURIComponent(fullQuery)}`;
                 document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(fullQuery)}`;
                 document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/${encodeURIComponent(fullQuery)}`;
                 document.getElementById('audioSearchModal').classList.add('visible');
-            }
-
-            if(editBtn) {
+            } else if(editBtn) {
                 wrapper.querySelector('.script-section-display').classList.add('hidden');
                 wrapper.querySelector('.script-edit-view').classList.remove('hidden');
-            }
-            if(cancelBtn) {
+            } else if(cancelBtn) {
                 wrapper.querySelector('.script-section-display').classList.remove('hidden');
                 wrapper.querySelector('.script-edit-view').classList.add('hidden');
                 showNotification('Perubahan dibatalkan');
-            }
-            if(saveBtn) {
+            } else if(saveBtn) {
+                const sectionKey = wrapper.dataset.sectionKey;
                 const sectionData = currentScriptData[sectionKey];
                 if (typeof sectionData === 'object' && sectionData !== null && !Array.isArray(sectionData)) {
                     wrapper.querySelectorAll('textarea').forEach(area => { currentScriptData[sectionKey][area.dataset.field] = area.value; });
@@ -1049,8 +1041,8 @@ Contoh struktur JSON yang diharapkan:
                 }
                 displayStructuredScript(currentScriptData);
                 showNotification('Perubahan berhasil disimpan!', false);
-            }
-            if (copyBtn) {
+            } else if (copyBtn) {
+                const sectionKey = wrapper.dataset.sectionKey;
                 const sectionData = currentScriptData[sectionKey];
                 let textToCopy = '';
                 if (typeof sectionData === 'string') textToCopy = sectionData;
