@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v59.1 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v68.0 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,7 +104,7 @@
         }
         .favorite-btn.favorited .star-icon { color: #facc15; }
         .pustaka-entry .efektif-title { color: #facc15; font-weight: 600;}
-        .script-section .saran-shot-text { color: #93c5fd; }
+        .script-section .saran-shot-text { color: #60a5fa; font-weight: 600; }
         .hashtag {
             background-color: rgba(59, 130, 246, 0.2);
             color: #93c5fd;
@@ -126,14 +126,6 @@
             padding: 1rem;
             border-radius: 0.75rem;
         }
-        /* New styles for result card */
-        .result-card-category {
-            background-color: #374151;
-            color: #f3f4f6;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .result-card-category:hover { background-color: #4b5563; }
         .result-card-copy-btn {
             background-color: #374151;
             color: #d1d5db;
@@ -146,6 +138,29 @@
             transition: all 0.3s ease;
         }
         .result-card-script-btn:hover { box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4); }
+
+        .hook-label-container { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+        .hook-label-dot { width: 8px; height: 8px; border-radius: 9999px; }
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: rgba(167, 139, 250, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        #scrollToTopBtn:hover {
+             background-color: rgba(167, 139, 250, 1);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -257,6 +272,7 @@
         <header class="text-center mb-12 relative">
             <button id="pustaka-hook-btn" title="Pustaka Hook" class="absolute top-0 right-0 p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v68.0</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -291,6 +307,12 @@
         </div>
     </div>
     
+    <button id="scrollToTopBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+    
     <div id="notification" class="fixed bottom-5 right-5 bg-green-600 text-white py-3 px-5 rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-500 z-50"></div>
 
     <script type="module">
@@ -300,6 +322,23 @@
         let favorites = [];
         let showingFavorites = false;
         let currentScriptData = null;
+
+        const hookCategoryStyles = {
+            'Default': 'bg-gray-500/20 text-gray-300',
+            'Narasi': 'bg-purple-500/20 text-purple-300',
+            'Pertanyaan': 'bg-sky-500/20 text-sky-300',
+            'Sebelum & Sesudah': 'bg-teal-500/20 text-teal-300',
+            'Social Proof': 'bg-blue-500/20 text-blue-300',
+            'Janji & Manfaat': 'bg-amber-500/20 text-amber-300',
+            'How-To': 'bg-green-500/20 text-green-300',
+            'Kontroversial': 'bg-orange-500/20 text-orange-300',
+            'Negatif': 'bg-rose-500/20 text-rose-300',
+            'FOMO': 'bg-red-500/20 text-red-300',
+            'Penasaran': 'bg-indigo-500/20 text-indigo-300',
+            'Statistik': 'bg-pink-500/20 text-pink-300',
+            'Kutipan': 'bg-lime-500/20 text-lime-300',
+            'Panggilan Langsung': 'bg-cyan-500/20 text-cyan-300',
+        };
 
         const hookExplanations = {
             "Narasi": { 
@@ -463,6 +502,7 @@ Contoh struktur JSON yang diharapkan:
 
             hooksToDisplay.forEach(hookData => {
                  const isFavorited = favorites.some(fav => fav.hook === hookData.hook);
+                 const categoryStyle = hookCategoryStyles[hookData.category] || hookCategoryStyles['Default'];
                  const card = document.createElement('div');
                  card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                  card.innerHTML = `
@@ -471,7 +511,7 @@ Contoh struktur JSON yang diharapkan:
                              <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
                              </button>
-                             <button class="result-card-category text-sm font-semibold px-4 py-1 rounded-full" data-category="${hookData.category}">${hookData.category}</button>
+                             <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
                         </div>
                         <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
                     </div>
@@ -489,7 +529,7 @@ Contoh struktur JSON yang diharapkan:
             currentScriptData = data;
             container.innerHTML = ''; 
 
-            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '�', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
@@ -594,9 +634,15 @@ Contoh struktur JSON yang diharapkan:
             const container = document.getElementById('pustaka-body');
             container.innerHTML = '';
             for (const [title, data] of Object.entries(hookExplanations)) {
+                const categoryStyle = hookCategoryStyles[title] || hookCategoryStyles['Default'];
                 const entry = document.createElement('div');
                 entry.className = 'pustaka-entry';
-                entry.innerHTML = `<h3 class="font-bold text-lg text-slate-100">${title}</h3><p class="mt-1">${data.desc}</p>
+                entry.innerHTML = `
+                    <div class="hook-label-container mb-1">
+                        <div class="hook-label-dot ${categoryStyle.split(' ')[0]}"></div>
+                        <h3 class="font-bold text-lg ${categoryStyle.split(' ')[1]}">${title}</h3>
+                    </div>
+                    <p class="mt-1">${data.desc}</p>
                     <p class="mt-2"><strong class="efektif-title">Paling Efektif Untuk:</strong> <span class="text-yellow-300">${data.efektif}</span></p>`;
                 container.appendChild(entry);
             }
@@ -692,6 +738,10 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('changeApiKey').addEventListener('click', () => {
             document.getElementById('cancelChangeApiKeyBtn').classList.remove('hidden');
             document.getElementById('apiKeyModal').classList.add('visible');
+        });
+
+        document.getElementById('cancelChangeApiKeyBtn').addEventListener('click', () => {
+            document.getElementById('apiKeyModal').classList.remove('visible');
         });
         
         document.getElementById('togglePasswordVisibility').addEventListener('click', () => {
@@ -893,14 +943,28 @@ Contoh struktur JSON yang diharapkan:
             const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'kerangka-konten.doc';
+            const topicValue = document.getElementById('topic').value.trim().toUpperCase();
+            const fileName = `SCRIPT ${topicValue || 'KONTEN'}.doc`;
+            link.download = fileName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        });
+
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopBtn.style.display = "flex";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
         });
 
         document.addEventListener('DOMContentLoaded', checkLogin);
     </script>
 </body>
 </html>
-�
