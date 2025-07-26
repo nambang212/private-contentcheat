@@ -199,7 +199,17 @@
 
     <div id="apiKeyModal" class="modal-overlay">
          <div class="modal-content !max-w-lg">
-            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Masukkan Kunci API Anda</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-purple-400">Masukkan Kunci API Anda</h2>
+                <div class="flex items-center gap-2">
+                     <button id="apiKeyFaqBtn" title="FAQ about API Key" class="p-1 text-slate-400 hover:text-purple-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                     </button>
+                     <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
+                </div>
+            </div>
             <p class="text-slate-400 text-center mb-6">Tools ini membutuhkan kunci API dari Google AI Studio untuk berfungsi. Tenang, kunci Anda aman dan hanya disimpan di browser Anda.</p>
             <input type="password" id="apiKeyInput" class="w-full rounded-lg p-3 modern-input mb-4" placeholder="Masukkan Gemini API Key di sini...">
             <button id="saveApiKeyBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mb-4">Simpan & Mulai</button>
@@ -241,6 +251,17 @@
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
             <div id="faq-body" class="modal-body space-y-6 text-slate-300">
                 <div class="faq-entry">
+                    <h3 class="font-bold text-lg text-slate-100">Apa keunggulan aplikasi ini?</h3>
+                    <p class="mt-1">Content Cheat dirancang untuk menjadi asisten konten lengkap Anda. Keunggulannya adalah:</p>
+                    <ul class="list-disc list-inside mt-2 text-slate-400">
+                        <li><strong>Cepat & Efisien:</strong> Hasilkan puluhan ide konten unik dalam hitungan detik.</li>
+                        <li><strong>Kerangka Lengkap:</strong> Tidak hanya ide, dapatkan juga kerangka skrip lengkap mulai dari audio, visual, narasi, hingga CTA.</li>
+                        <li><strong>Kustomisasi Penuh:</strong> Edit setiap bagian dari kerangka konten sesuai kebutuhan brand Anda.</li>
+                        <li><strong>Fitur Favorit:</strong> Simpan ide-ide terbaik Anda agar tidak hilang dan mudah diakses kembali.</li>
+                        <li><strong>Privasi Terjamin:</strong> Kunci API Anda 100% aman dan hanya disimpan di browser Anda.</li>
+                    </ul>
+                </div>
+                <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Apa itu API Key?</h3>
                     <p class="mt-1">API Key adalah kode unik, mirip seperti password, yang memberikan Anda akses ke layanan AI dari Google. Anda membutuhkannya agar aplikasi ini bisa berfungsi.</p>
                 </div>
@@ -259,6 +280,26 @@
                  <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Mengapa ada kuota generate?</h3>
                     <p class="mt-1">Kuota harian adalah fitur keamanan untuk melindungi Anda dari penggunaan berlebih yang tidak disengaja, yang mungkin bisa menimbulkan biaya dari Google. Ini membantu memastikan penggunaan API Key Anda tetap dalam batas wajar setiap harinya.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="apiKeyFaqModal" class="modal-overlay">
+        <div class="modal-content !max-w-2xl">
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="modal-body space-y-6 text-slate-300">
+                <div class="faq-entry">
+                    <h3 class="font-bold text-lg text-slate-100">Apa itu Kunci API / API Key?</h3>
+                    <p class="mt-1">API Key adalah kode unik, mirip seperti password, yang memberikan Anda akses ke layanan AI dari Google. Anda membutuhkannya agar aplikasi ini bisa berfungsi.</p>
+                </div>
+                <div class="faq-entry">
+                    <h3 class="font-bold text-lg text-slate-100">Apakah Aman?</h3>
+                    <p class="mt-1"><strong>Sangat aman.</strong> Kunci API Anda hanya disimpan di browser Anda dan tidak pernah dikirim ke server kami. Kunci tersebut hanya digunakan untuk berkomunikasi langsung antara browser Anda dan Google AI.</p>
+                </div>
+                <div class="faq-entry">
+                    <h3 class="font-bold text-lg text-slate-100">Bagaimana cara mendapatkan Kunci API?</h3>
+                    <p class="mt-1">Anda bisa mengikuti tutorial lengkap dengan menekan tombol "Bagaimana caranya mendapatkan Kunci API?" di halaman sebelumnya atau <button id="openTutorialFromFaq" class="text-purple-400 hover:underline">klik di sini</button>.</p>
                 </div>
             </div>
         </div>
@@ -730,7 +771,15 @@ Contoh struktur JSON yang diharapkan:
         document.querySelectorAll('.close-modal-btn').forEach(btn => {
              btn.addEventListener('click', (e) => { 
                 e.stopPropagation();
-                btn.closest('.modal-overlay').classList.remove('visible'); 
+                const modal = btn.closest('.modal-overlay');
+
+                if (modal.id === 'apiKeyModal' && !localStorage.getItem('userGeminiApiKey')) {
+                    sessionStorage.removeItem('isLoggedIn');
+                    modal.classList.remove('visible');
+                    document.getElementById('loginModal').classList.add('visible');
+                } else {
+                    modal.classList.remove('visible');
+                }
             });
         });
         
@@ -788,6 +837,12 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => { document.getElementById('tutorialModal').classList.add('visible'); });
         document.getElementById('pustaka-hook-btn').addEventListener('click', () => { document.getElementById('pustakaHookModal').classList.add('visible'); });
         document.getElementById('faq-btn').addEventListener('click', () => { document.getElementById('faqModal').classList.add('visible'); });
+        document.getElementById('apiKeyFaqBtn').addEventListener('click', () => { document.getElementById('apiKeyFaqModal').classList.add('visible'); });
+        
+        document.getElementById('openTutorialFromFaq').addEventListener('click', () => {
+            document.getElementById('apiKeyFaqModal').classList.remove('visible');
+            document.getElementById('tutorialModal').classList.add('visible');
+        });
 
         document.getElementById('generateBtn').addEventListener('click', async () => {
             if (quotaManager.getQuotaData().quotaLeft <= 0) { showNotification('Maaf, kuota generate harian Anda sudah habis.', true); return; }
@@ -828,7 +883,7 @@ Contoh struktur JSON yang diharapkan:
             const scriptBtn = e.target.closest('.result-card-script-btn');
             const copyBtn = e.target.closest('.result-card-copy-btn');
             const favBtn = e.target.closest('.favorite-btn');
-            const categoryBtn = e.target.closest('.text-sm.font-semibold');
+            const categoryBtn = e.target.closest('[data-category]');
 
             if(categoryBtn) { showHookExplanation(categoryBtn.dataset.category); }
             if(favBtn) { toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category }); }
