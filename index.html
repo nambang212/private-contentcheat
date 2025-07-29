@@ -717,7 +717,7 @@ Contoh struktur JSON yang diharapkan:
             currentScriptData = data;
             container.innerHTML = ''; 
 
-            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionIcons = { saran_audio: '�', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
@@ -1243,14 +1243,14 @@ Contoh struktur JSON yang diharapkan:
             }
         };
         
+        const fileDropZone = document.getElementById('file-drop-zone');
         const imageUploadInput = document.getElementById('image-upload');
         const imagePreviewContainer = document.getElementById('image-preview-container');
         const imagePreview = document.getElementById('image-preview');
         const removeImageBtn = document.getElementById('remove-image-btn');
 
-        imageUploadInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     uploadedImageBase64 = e.target.result;
@@ -1258,6 +1258,32 @@ Contoh struktur JSON yang diharapkan:
                     imagePreviewContainer.classList.remove('hidden');
                 };
                 reader.readAsDataURL(file);
+            } else {
+                showNotification("Hanya file gambar yang didukung.", true);
+            }
+        }
+
+        imageUploadInput.addEventListener('change', (event) => handleFile(event.target.files[0]));
+        
+        fileDropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            fileDropZone.classList.add('drag-over');
+        });
+
+        fileDropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            fileDropZone.classList.remove('drag-over');
+        });
+
+        fileDropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            fileDropZone.classList.remove('drag-over');
+            const files = event.dataTransfer.files;
+            if (files.length) {
+                handleFile(files[0]);
             }
         });
         
@@ -1276,4 +1302,4 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
-
+�
