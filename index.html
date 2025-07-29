@@ -420,7 +420,7 @@
                     </div>
                     <div id="image-preview-container" class="mt-2 hidden relative w-32 h-32">
                         <img id="image-preview" class="rounded-lg w-full h-full object-cover">
-                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-content: center;">&times;</button>
+                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">&times;</button>
                     </div>
                 </div>
 
@@ -643,6 +643,7 @@ ATURAN WAJIB:
 5.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
 6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
 7.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
+8.  **PENTING**: Pastikan respons Anda adalah JSON yang valid dan lengkap, dimulai dengan "{" dan diakhiri dengan "}".
 
 Contoh struktur JSON yang diharapkan:
 {
@@ -663,10 +664,13 @@ Contoh struktur JSON yang diharapkan:
                  const rawText = result.candidates[0].content.parts[0].text;
                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
                  try {
+                     if (!cleanedText.startsWith('{') || !cleanedText.endsWith('}')) {
+                         throw new Error("Format respons AI tidak valid.");
+                     }
                      return JSON.parse(cleanedText);
                  } catch (e) {
                      console.error("JSON Parsing Error for script. Raw text:", cleanedText);
-                     throw new Error("Gagal memproses kerangka konten dari AI.");
+                     throw new Error(`Gagal memproses kerangka konten dari AI. ${e.message}`);
                  }
              }
              throw new Error("Struktur respons kerangka konten tidak terduga.");
@@ -717,7 +721,7 @@ Contoh struktur JSON yang diharapkan:
             currentScriptData = data;
             container.innerHTML = ''; 
 
-            const sectionIcons = { saran_audio: '�', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
+            const sectionIcons = { saran_audio: '🎵', hook_scene: '🎬', masalah: '😟', solusi: '💡', cta: '🚀', caption: '✍️', hashtags: '#️⃣' };
             const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
 
@@ -1302,4 +1306,3 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
-�
