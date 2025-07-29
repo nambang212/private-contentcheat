@@ -304,7 +304,7 @@
                 </div>
                  <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Mengapa ada kuota generate?</h3>
-                    <p class="mt-1">Kuota harian adalah fitur keamanan untuk melindungi Anda dari penggunaan berlebih yang tidak disengaja, yang mungkin bisa menimbulkan biaya dari Google. Ini membantu memastikan penggunaan API Key Anda tetap dalam batas wajar setiap harinya.</p>
+                    <p class="mt-1">Kuota harian adalah fitur keamanan untuk melindungi Anda dari penggunaan berlebih yang tidak disengaja, yang mungkin bisa menimbulkan biaya dari Google. Ini membantu memastikan penggunaan API Key Anda tetap dalam batas wjar setiap harinya.</p>
                 </div>
             </div>
         </div>
@@ -626,7 +626,7 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
             let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap dan terstruktur.`;
 
             if (imageBase64) {
-                 prompt += `\n\n**ANALISIS GAMBAR**: Gunakan detail dari gambar yang diberikan (misalnya: warna, bentuk, fitur, suasana) untuk membuat deskripsi VISUAL, NARASI, dan SARAN SHOT yang lebih spesifik dan relevan dengan produk/jasa yang terlihat di gambar.`
+                 prompt += `\n\n**ANALISIS GAMBAR**: Produk/jasa utama adalah "${document.getElementById('topic').value}". Gunakan gambar terlampir untuk memperkaya deskripsi VISUAL, NARASI, dan SARAN SHOT dengan detail yang akurat sesuai gambar. Fokus pada topik yang diberikan, jangan menebak objek yang berbeda.`
             }
 
             prompt += `\n\nHook: "${hookText}"
@@ -963,7 +963,10 @@ Contoh struktur JSON yang diharapkan:
         
         let loadingInterval;
         document.getElementById('generateBtn').addEventListener('click', async () => {
-            if (quotaManager.getQuotaData().quotaLeft <= 0) { showNotification('Maaf, kuota generate harian Anda sudah habis.', true); return; }
+            if (quotaManager.getQuotaData().quotaLeft <= 0) { 
+                showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
+                return; 
+            }
             const topic = document.getElementById('topic').value.trim();
             if (!topic) { showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true); return; }
             
@@ -1042,6 +1045,10 @@ Contoh struktur JSON yang diharapkan:
             } else if (copyBtn) {
                 fallbackCopy(copyBtn.dataset.hook);
             } else if (scriptBtn) {
+                if (quotaManager.getQuotaData().quotaLeft <= 0) { 
+                    showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
+                    return; 
+                }
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
                 const resultContainer = document.getElementById('script-result-container');
@@ -1055,9 +1062,15 @@ Contoh struktur JSON yang diharapkan:
                 
                 try {
                     const scriptData = await generateAIScript(hookText, userAPIKey, uploadedImageBase64);
+                    quotaManager.decrementQuota();
                     displayStructuredScript(scriptData);
                 } catch (error) {
-                    resultContainer.innerHTML = `<p class="text-red-400 text-center">Gagal membuat kerangka konten: ${error.message}</p>`;
+                    console.error('Script Generation Error:', error);
+                    let errorMessage = `Gagal membuat kerangka: ${error.message}`;
+                    if (error.message === "API_QUOTA_EXCEEDED") {
+                        errorMessage = "Kuota API Key Anda untuk hari ini sudah habis. Coba lagi besok.";
+                    }
+                    resultContainer.innerHTML = `<p class="text-red-400 text-center">${errorMessage}</p>`;
                 }
             }
         });
