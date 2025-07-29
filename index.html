@@ -188,6 +188,10 @@
             border-color: rgba(167, 139, 250, 0.8);
             background-color: rgba(167, 139, 250, 0.1);
         }
+        #remove-image-btn {
+             line-height: 1;
+             padding-bottom: 2px;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -374,7 +378,9 @@
             <div class="text-slate-300 mb-4">Dengarkan atau cari audio ini di platform berikut:</div>
             <div class="space-y-3">
                 <a id="youtube-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"/></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648l3.5 2.025-3.5 2.025v-4.05z"/>
+                    </svg>
                     Dengarkan di YouTube
                 </a>
                  <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
@@ -641,16 +647,16 @@ ATURAN WAJIB:
 3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", dan "saran_shot".
 4.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
 5.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
-6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
+6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik. Untuk "saran_shot", gunakan Bahasa Indonesia, namun istilah teknis sinematografi seperti 'close-up', 'medium shot', 'POV' diperbolehkan.
 7.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
 8.  **PENTING**: Pastikan respons Anda adalah JSON yang valid dan lengkap, dimulai dengan "{" dan diakhiri dengan "}".
 
 Contoh struktur JSON yang diharapkan:
 {
   "saran_audio": [{"title": "Espresso", "artist": "Sabrina Carpenter"}, {"title": "LUNCH", "artist": "Billie Eilish"}],
-  "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
+  "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Perbandingan berdampingan (side-by-side)" },
   "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
-  "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
+  "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "Tampilan 360 derajat" },
   "cta": { "durasi": "17-20", "estimasi": 3, "visual": "Tampilan layar dengan teks 'Beli Sekarang' dan link ke toko.", "narasi": "Langsung checkout sekarang! Stok terbatas!", "saran_shot": "Close-up" },
   "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.\\nBikin konten makin profesional dan menarik!",
   "hashtags": ["tripod", "videostabil", "kontenkreator"]
@@ -1035,6 +1041,7 @@ Contoh struktur JSON yang diharapkan:
             }
         });
         
+        let scriptLoadingInterval;
         document.getElementById('results-grid').addEventListener('click', async (e) => {
             const scriptBtn = e.target.closest('.result-card-script-btn');
             const copyBtn = e.target.closest('.result-card-copy-btn');
@@ -1061,10 +1068,20 @@ Contoh struktur JSON yang diharapkan:
                 const resultContainer = document.getElementById('script-result-container');
                 document.getElementById('script-buttons').style.display = 'none';
                 document.getElementById('script-disclaimer').style.display = 'none';
+                
+                const scriptLoadingMessages = ["Menganalisis hook...", "Merancang visual & narasi...", "Menambahkan CTA...", "Menyiapkan hasil..."];
+                let scriptMessageIndex = 0;
                 resultContainer.innerHTML = `<div class="flex flex-col justify-center items-center h-full gap-4 py-8">
                     <div class="script-loading-spinner"></div>
-                    <p class="text-slate-400">AI sedang merancang skrip, audio, dan shot...</p>
+                    <p id="script-loading-text" class="text-slate-400">${scriptLoadingMessages[scriptMessageIndex]}</p>
                 </div>`;
+                
+                scriptLoadingInterval = setInterval(() => {
+                    scriptMessageIndex = (scriptMessageIndex + 1) % scriptLoadingMessages.length;
+                    const loadingSpan = document.getElementById('script-loading-text');
+                    if(loadingSpan) loadingSpan.textContent = scriptLoadingMessages[scriptMessageIndex];
+                }, 2000);
+
                 modal.classList.add('visible');
                 
                 try {
@@ -1078,6 +1095,8 @@ Contoh struktur JSON yang diharapkan:
                         errorMessage = "Kuota API Key Anda untuk hari ini sudah habis. Coba lagi besok.";
                     }
                     resultContainer.innerHTML = `<p class="text-red-400 text-center">${errorMessage}</p>`;
+                } finally {
+                    clearInterval(scriptLoadingInterval);
                 }
             }
         });
@@ -1257,9 +1276,23 @@ Contoh struktur JSON yang diharapkan:
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    uploadedImageBase64 = e.target.result;
-                    imagePreview.src = uploadedImageBase64;
-                    imagePreviewContainer.classList.remove('hidden');
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const jpgDataUrl = canvas.toDataURL('image/jpeg');
+                        
+                        uploadedImageBase64 = jpgDataUrl;
+                        imagePreview.src = jpgDataUrl;
+                        imagePreviewContainer.classList.remove('hidden');
+                    };
+                    img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             } else {
