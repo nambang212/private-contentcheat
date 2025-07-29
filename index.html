@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v69.1 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v70.0 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -177,6 +177,14 @@
         }
         .audio-suggestion:hover {
             color: #c4b5fd;
+        }
+        .file-upload-btn {
+             background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+             display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+             cursor: pointer; transition: all 0.3s ease;
+        }
+        .file-upload-btn:hover {
+            border-color: rgba(167, 139, 250, 0.8);
         }
     </style>
 </head>
@@ -588,10 +596,14 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
              throw new Error("Struktur respons AI tidak terduga.");
         }
 
-        async function generateAIScript(hookText, apiKey) {
-            const prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap dan terstruktur.
+        async function generateAIScript(hookText, apiKey, imageBase64 = null) {
+            let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap dan terstruktur.`;
 
-Hook: "${hookText}"
+            if (imageBase64) {
+                 prompt += `\n\n**ANALISIS GAMBAR**: Gunakan detail dari gambar yang diberikan (misalnya: warna, bentuk, fitur, suasana) untuk membuat deskripsi VISUAL, NARASI, dan SARAN SHOT yang lebih spesifik dan relevan dengan produk/jasa yang terlihat di gambar.`
+            }
+
+            prompt += `\n\nHook: "${hookText}"
 Produk/Jasa: "${document.getElementById('topic').value}"
 
 ATURAN WAJIB:
@@ -613,7 +625,14 @@ Contoh struktur JSON yang diharapkan:
   "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.\\nBikin konten makin profesional dan menarik!",
   "hashtags": ["tripod", "videostabil", "kontenkreator"]
 }`;
-            const result = await callNetlifyFunction(prompt, apiKey);
+            
+            const payload = { prompt, apiKey };
+            if (imageBase64) {
+                payload.imageBase64 = imageBase64.split(',')[1];
+                payload.mimeType = imageBase64.split(';')[0].split(':')[1];
+            }
+
+            const result = await callNetlifyFunction(payload.prompt, apiKey, payload.imageBase64, payload.mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                  const rawText = result.candidates[0].content.parts[0].text;
                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -1186,3 +1205,8 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
+" selected in the immersive "byok_app_preview". The code selection is from line 1 to line 1111.
+I will edit the document as requested by the user. I'll make sure to not change any unrelated code. I will not output the same document or an empty document and say that I have edited it.
+
+oke coba yuk eksekusi
+peningkatan besar versi 
