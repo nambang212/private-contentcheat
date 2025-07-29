@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v70.0 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v70.1 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -391,7 +391,7 @@
                 <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v69.0</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v70.0</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -399,21 +399,36 @@
         </header>
 
         <div class="p-8 glass-effect">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div><label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label><input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah"></div>
                 <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
-                <div>
+                <div class="col-span-1 md:col-span-2">
                     <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
                     <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
                 </div>
-                <div>
-                    <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">4. Pilih Jenis Hasil (Opsional)</label>
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">4. Unggah Referensi Visual (Opsional)</label>
+                    <div id="image-upload-container">
+                        <label for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16"><path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/></svg>
+                            <span>Pilih Gambar...</span>
+                        </label>
+                        <input type="file" id="image-upload" class="hidden" accept="image/png, image/jpeg, image/webp">
+                    </div>
+                    <div id="image-preview-container" class="mt-2 hidden relative w-32 h-32">
+                        <img id="image-preview" class="rounded-lg w-full h-full object-cover">
+                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-content: center;">&times;</button>
+                    </div>
+                </div>
+
+                 <div>
+                    <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Jenis Hasil (Opsional)</label>
                     <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
                     </select>
                 </div>
                  <div>
-                    <label for="tone-of-voice" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Gaya Bahasa (Opsional)</label>
+                    <label for="tone-of-voice" class="block text-sm font-medium text-slate-300 mb-2">6. Pilih Gaya Bahasa (Opsional)</label>
                     <select id="tone-of-voice" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">✨ Tampilkan Semua (Direkomendasikan)</option>
                         <option value="Profesional">Profesional</option>
@@ -423,8 +438,8 @@
                         <option value="Santai">Santai</option>
                     </select>
                 </div>
-                 <div>
-                    <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">6. Jumlah Hasil (Opsional)</label>
+                 <div class="col-span-1 md:col-span-2">
+                    <label for="hook-count" class="block text-sm font-medium text-slate-300 mb-2">7. Jumlah Hasil (Opsional)</label>
                     <select id="hook-count" class="w-full rounded-lg p-3 modern-input"><option value="5">5 Hasil</option><option value="10">10 Hasil</option><option value="20">20 Hasil</option></select>
                 </div>
             </div>
@@ -455,6 +470,7 @@
         let favorites = [];
         let showingFavorites = false;
         let currentScriptData = null;
+        let uploadedImageBase64 = null;
 
         const hookCategoryStyles = {
             'Default': 'bg-gray-500/20 text-gray-300',
@@ -547,18 +563,28 @@
         }
         
         // --- API CALLS ---
-        async function callNetlifyFunction(prompt, apiKey) {
+        async function callNetlifyFunction(prompt, apiKey, imageBase64 = null, mimeType = null) {
+            const body = { prompt, apiKey };
+            if (imageBase64 && mimeType) {
+                body.imageBase64 = imageBase64;
+                body.mimeType = mimeType;
+            }
+
             const response = await fetch('/.netlify/functions/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt, apiKey })
+                body: JSON.stringify(body)
             });
+
             const responseBody = await response.json();
             if (!response.ok) {
                 if (response.status === 400 && responseBody.error && responseBody.error.includes("API key not valid")) {
                     throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
                 }
-                throw new Error(responseBody.error || `Netlify Function request failed: ${response.status}`);
+                if (response.status === 429) {
+                     throw new Error("API_QUOTA_EXCEEDED");
+                }
+                throw new Error(responseBody.error || `Sistem AI sibuk atau terjadi kesalahan. Coba lagi.`);
             }
             return responseBody;
         }
@@ -626,13 +652,10 @@ Contoh struktur JSON yang diharapkan:
   "hashtags": ["tripod", "videostabil", "kontenkreator"]
 }`;
             
-            const payload = { prompt, apiKey };
-            if (imageBase64) {
-                payload.imageBase64 = imageBase64.split(',')[1];
-                payload.mimeType = imageBase64.split(';')[0].split(':')[1];
-            }
+            const mimeType = imageBase64 ? imageBase64.split(';')[0].split(':')[1] : null;
+            const imageData = imageBase64 ? imageBase64.split(',')[1] : null;
 
-            const result = await callNetlifyFunction(payload.prompt, apiKey, payload.imageBase64, payload.mimeType);
+            const result = await callNetlifyFunction(prompt, apiKey, imageData, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                  const rawText = result.candidates[0].content.parts[0].text;
                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -974,8 +997,15 @@ Contoh struktur JSON yang diharapkan:
                 displayHooks(lastGeneratedHooks);
             } catch (error) {
                 console.error('AI Generation Error:', error);
-                showNotification(error.message, true);
-                if (error.message.includes("API Key tidak valid")) { localStorage.removeItem('userGeminiApiKey'); checkApiKey(); }
+                if (error.message.includes("API Key tidak valid")) {
+                    showNotification("API Key tidak valid. Mohon periksa kembali.", true);
+                    localStorage.removeItem('userGeminiApiKey'); 
+                    checkApiKey();
+                } else if (error.message === "API_QUOTA_EXCEEDED") {
+                    showNotification("Kuota API Key Anda habis. Coba lagi besok atau gunakan kunci lain.", true);
+                } else {
+                    showNotification(error.message, true);
+                }
             } finally {
                 clearInterval(loadingInterval);
                 generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
@@ -1024,7 +1054,7 @@ Contoh struktur JSON yang diharapkan:
                 modal.classList.add('visible');
                 
                 try {
-                    const scriptData = await generateAIScript(hookText, userAPIKey);
+                    const scriptData = await generateAIScript(hookText, userAPIKey, uploadedImageBase64);
                     displayStructuredScript(scriptData);
                 } catch (error) {
                     resultContainer.innerHTML = `<p class="text-red-400 text-center">Gagal membuat kerangka konten: ${error.message}</p>`;
@@ -1196,6 +1226,31 @@ Contoh struktur JSON yang diharapkan:
                 scrollToTopBtn.style.display = "none";
             }
         };
+        
+        const imageUploadInput = document.getElementById('image-upload');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const removeImageBtn = document.getElementById('remove-image-btn');
+
+        imageUploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImageBase64 = e.target.result;
+                    imagePreview.src = uploadedImageBase64;
+                    imagePreviewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        removeImageBtn.addEventListener('click', () => {
+            uploadedImageBase64 = null;
+            imageUploadInput.value = ''; // Reset file input
+            imagePreviewContainer.classList.add('hidden');
+        });
+
 
         scrollToTopBtn.addEventListener('click', function() {
             window.scrollTo({top: 0, behavior: 'smooth'});
@@ -1205,8 +1260,3 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
-" selected in the immersive "byok_app_preview". The code selection is from line 1 to line 1111.
-I will edit the document as requested by the user. I'll make sure to not change any unrelated code. I will not output the same document or an empty document and say that I have edited it.
-
-oke coba yuk eksekusi
-peningkatan besar versi 
