@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v71.0 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v71.1 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1098,6 +1098,16 @@ Contoh struktur JSON yang diharapkan:
             }
         });
 
+        document.getElementById('view-favorites-btn').addEventListener('click', () => {
+            currentView = (currentView === 'favorites') ? 'results' : 'favorites';
+            updateCurrentViewDisplay();
+        });
+
+        document.getElementById('view-history-btn').addEventListener('click', () => {
+            currentView = (currentView === 'history') ? 'results' : 'history';
+            updateCurrentViewDisplay();
+        });
+
         document.getElementById('results-header').addEventListener('click', (e) => {
             const clearHistoryBtn = e.target.closest('#clear-history-btn');
             if (clearHistoryBtn) {
@@ -1400,3 +1410,4 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
+
