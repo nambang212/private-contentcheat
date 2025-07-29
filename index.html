@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v69.0 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v69.1 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,11 +127,11 @@
             border-radius: 0.75rem;
         }
         .result-card-copy-btn {
-            background-color: #374151;
-            color: #d1d5db;
+            background-color: #4b5563;
+            color: #f3f4f6;
             transition: background-color 0.2s;
         }
-        .result-card-copy-btn:hover { background-color: #4b5563; }
+        .result-card-copy-btn:hover { background-color: #6b7280; }
         .result-card-script-btn {
             background: linear-gradient(90deg, #5F00D8, #A78BFA);
             color: white;
@@ -918,14 +918,26 @@ Contoh struktur JSON yang diharapkan:
             document.getElementById('apiKeyFaqModal').classList.remove('visible');
             document.getElementById('tutorialModal').classList.add('visible');
         });
-
+        
+        let loadingInterval;
         document.getElementById('generateBtn').addEventListener('click', async () => {
             if (quotaManager.getQuotaData().quotaLeft <= 0) { showNotification('Maaf, kuota generate harian Anda sudah habis.', true); return; }
             const topic = document.getElementById('topic').value.trim();
             if (!topic) { showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true); return; }
+            
             const generateBtn = document.getElementById('generateBtn');
             generateBtn.disabled = true;
-            generateBtn.innerHTML = '<div class="spinner !w-6 !h-6 !border-4"></div><span>Generating...</span>';
+
+            const loadingMessages = [ "Menganalisis produk Anda...", "Mencari ide-ide kreatif...", "Menyusun kata-kata...", "Hampir selesai..." ];
+            let messageIndex = 0;
+            generateBtn.innerHTML = `<div class="spinner !w-6 !h-6 !border-4"></div><span id="loading-text">${loadingMessages[messageIndex]}</span>`;
+
+            loadingInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                const loadingSpan = document.getElementById('loading-text');
+                if (loadingSpan) loadingSpan.textContent = loadingMessages[messageIndex];
+            }, 2000);
+
             try {
                 const hooks = await generateAIHooks(
                     topic, 
@@ -945,9 +957,11 @@ Contoh struktur JSON yang diharapkan:
                 console.error('AI Generation Error:', error);
                 showNotification(error.message, true);
                 if (error.message.includes("API Key tidak valid")) { localStorage.removeItem('userGeminiApiKey'); checkApiKey(); }
+            } finally {
+                clearInterval(loadingInterval);
+                generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
+                generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg> Generate Konten!';
             }
-            generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
-            generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg> Generate Konten!';
         });
 
         document.getElementById('view-favorites-btn').addEventListener('click', () => {
