@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v70.1 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v71.0 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,15 +182,9 @@
              background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
              display: flex; align-items: center; justify-content: center; gap: 0.5rem;
              cursor: pointer; transition: all 0.3s ease;
-             border-style: dashed;
         }
-        .file-upload-btn:hover, .file-upload-btn.drag-over {
+        .file-upload-btn:hover, .file-upload-btn.dragover {
             border-color: rgba(167, 139, 250, 0.8);
-            background-color: rgba(167, 139, 250, 0.1);
-        }
-        #remove-image-btn {
-             line-height: 1;
-             padding-bottom: 2px;
         }
     </style>
 </head>
@@ -211,17 +205,15 @@
                     <div class="relative">
                         <input type="password" id="password" class="w-full rounded-lg p-3 pr-10 modern-input">
                         <div id="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white cursor-pointer">
-                            <svg id="eye-show" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                            </svg>
-                            <svg id="eye-hide" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill hidden" viewBox="0 0 16 16">
-                                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
-                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
-                            </svg>
+                            <svg id="eye-show" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            <svg id="eye-hide" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill hidden" viewBox="0 0 16 16"><path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/><path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg>
                         </div>
                     </div>
-                     <p class="text-xs text-slate-500 mt-1">Hint: Nama akun IG developer.</p>
+                    <p class="text-xs text-slate-500 mt-1">Hint: Nama akun IG developer.</p>
+                </div>
+                <div class="flex items-center mt-4">
+                    <input id="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                    <label for="remember-me" class="ml-2 block text-sm text-slate-400">Ingat saya</label>
                 </div>
             </div>
             <button id="loginBtn" class="w-full text-white font-bold py-3 px-6 rounded-full text-lg modern-btn mt-6">Masuk</button>
@@ -234,9 +226,7 @@
                 <h2 class="text-2xl font-bold text-purple-400">Masukkan Kunci API Anda</h2>
                 <div class="flex items-center gap-2">
                      <button id="apiKeyFaqBtn" title="FAQ about API Key" class="p-1 text-slate-400 hover:text-purple-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
                      </button>
                      <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
                 </div>
@@ -378,9 +368,7 @@
             <div class="text-slate-300 mb-4">Dengarkan atau cari audio ini di platform berikut:</div>
             <div class="space-y-3">
                 <a id="youtube-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648l3.5 2.025-3.5 2.025v-4.05z"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="flex-shrink-0"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"></path></svg>
                     Dengarkan di YouTube
                 </a>
                  <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
@@ -399,7 +387,7 @@
                 <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v70.0</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v70.1</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -418,15 +406,15 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">4. Unggah Referensi Visual (Opsional)</label>
                     <div id="image-upload-container">
-                        <label id="file-drop-zone" for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
+                        <label for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16"><path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/></svg>
-                            <span>Pilih atau jatuhkan gambar...</span>
+                            <span>Pilih Gambar...</span>
                         </label>
                         <input type="file" id="image-upload" class="hidden" accept="image/png, image/jpeg, image/webp">
                     </div>
                     <div id="image-preview-container" class="mt-2 hidden relative w-32 h-32">
                         <img id="image-preview" class="rounded-lg w-full h-full object-cover">
-                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">&times;</button>
+                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center p-1 text-lg leading-none">&times;</button>
                     </div>
                 </div>
 
@@ -458,7 +446,16 @@
         <div id="results-container" class="mt-12">
             <div id="results-header" class="flex justify-between items-center mb-4" style="display: none;">
                 <h2 class="text-2xl font-bold text-slate-200">Hasil Ide Konten</h2>
-                <div class="flex items-center gap-4"><button id="view-favorites-btn" class="bg-yellow-500/10 text-yellow-300 font-bold py-2 px-4 rounded-lg flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>Favorit (<span id="favorite-count">0</span>)</button></div>
+                <div class="flex items-center gap-4">
+                    <button id="view-history-btn" class="bg-sky-500/10 text-sky-300 font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+                        Riwayat
+                    </button>
+                    <button id="view-favorites-btn" class="bg-yellow-500/10 text-yellow-300 font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                        Favorit (<span id="favorite-count">0</span>)
+                    </button>
+                </div>
             </div>
             <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
@@ -477,8 +474,8 @@
         let userAPIKey = null;
         let lastGeneratedHooks = [];
         let favorites = [];
-        let showingFavorites = false;
-        let currentScriptData = null;
+        let history = [];
+        let currentView = 'results'; // can be 'results', 'favorites', or 'history'
         let uploadedImageBase64 = null;
 
         const hookCategoryStyles = {
@@ -622,7 +619,9 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
                  const rawText = result.candidates[0].content.parts[0].text;
                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
                  try {
-                     return JSON.parse(cleanedText);
+                     const parsed = JSON.parse(cleanedText);
+                     addToHistory(parsed);
+                     return parsed;
                  } catch (e) {
                      console.error("JSON Parsing Error. Raw text:", cleanedText);
                      throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
@@ -632,7 +631,7 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
         }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
-            let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap dan terstruktur.`;
+            let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
 
             if (imageBase64) {
                  prompt += `\n\n**ANALISIS GAMBAR**: Produk/jasa utama adalah "${document.getElementById('topic').value}". Gunakan gambar terlampir untuk memperkaya deskripsi VISUAL, NARASI, dan SARAN SHOT dengan detail yang akurat sesuai gambar. Fokus pada topik yang diberikan, jangan menebak objek yang berbeda.`
@@ -642,21 +641,20 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
 Produk/Jasa: "${document.getElementById('topic').value}"
 
 ATURAN WAJIB:
-1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON.
-2.  **Konten JSON**: JSON harus memiliki kunci-kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
+1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON. Pastikan JSON tidak terpotong dan valid sepenuhnya.
+2.  **Konten JSON**: JSON harus memiliki kunci- kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
 3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", dan "saran_shot".
 4.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
 5.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
-6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik. Untuk "saran_shot", gunakan Bahasa Indonesia, namun istilah teknis sinematografi seperti 'close-up', 'medium shot', 'POV' diperbolehkan.
+6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
 7.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
-8.  **PENTING**: Pastikan respons Anda adalah JSON yang valid dan lengkap, dimulai dengan "{" dan diakhiri dengan "}".
 
 Contoh struktur JSON yang diharapkan:
 {
   "saran_audio": [{"title": "Espresso", "artist": "Sabrina Carpenter"}, {"title": "LUNCH", "artist": "Billie Eilish"}],
-  "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Perbandingan berdampingan (side-by-side)" },
+  "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
   "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
-  "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "Tampilan 360 derajat" },
+  "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
   "cta": { "durasi": "17-20", "estimasi": 3, "visual": "Tampilan layar dengan teks 'Beli Sekarang' dan link ke toko.", "narasi": "Langsung checkout sekarang! Stok terbatas!", "saran_shot": "Close-up" },
   "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.\\nBikin konten makin profesional dan menarik!",
   "hashtags": ["tripod", "videostabil", "kontenkreator"]
@@ -670,33 +668,51 @@ Contoh struktur JSON yang diharapkan:
                  const rawText = result.candidates[0].content.parts[0].text;
                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
                  try {
-                     if (!cleanedText.startsWith('{') || !cleanedText.endsWith('}')) {
-                         throw new Error("Format respons AI tidak valid.");
-                     }
                      return JSON.parse(cleanedText);
                  } catch (e) {
-                     console.error("JSON Parsing Error for script. Raw text:", cleanedText);
-                     throw new Error(`Gagal memproses kerangka konten dari AI. ${e.message}`);
+                     console.error("JSON Parsing Error for script. Raw text:", cleanedText, e);
+                     throw new Error(`Gagal memproses kerangka: ${e.message}`);
                  }
              }
              throw new Error("Struktur respons kerangka konten tidak terduga.");
         }
         
         // --- DISPLAY LOGIC ---
-        function displayHooks(hooksToDisplay) {
+        function displayHooks(hooksToDisplay, isHistoryView = false) {
             const resultsGrid = document.getElementById('results-grid');
             const resultsHeader = document.getElementById('results-header');
+            const viewHistoryBtn = document.getElementById('view-history-btn');
+            const viewFavoritesBtn = document.getElementById('view-favorites-btn');
+            
             resultsGrid.innerHTML = '';
             resultsHeader.style.display = 'flex';
+            
+            // Update header text and buttons based on view
+            const headerTitle = document.querySelector('#results-header h2');
+            if (currentView === 'favorites') {
+                headerTitle.textContent = '⭐ Ide Favorit Anda';
+                viewFavoritesBtn.innerHTML = `« Kembali ke Hasil`;
+                viewHistoryBtn.classList.remove('bg-sky-500/30');
+            } else if (currentView === 'history') {
+                headerTitle.textContent = '🕒 Riwayat Generate';
+                viewHistoryBtn.innerHTML = `« Kembali ke Hasil`;
+                viewFavoritesBtn.innerHTML = `⭐ Favorit (<span id="favorite-count">${favorites.length}</span>)`;
+            } else {
+                headerTitle.textContent = 'Hasil Ide Konten';
+                viewFavoritesBtn.innerHTML = `⭐ Favorit (<span id="favorite-count">${favorites.length}</span>)`;
+                viewHistoryBtn.innerHTML = `🕒 Riwayat`;
+            }
+
 
             if (hooksToDisplay.length === 0) {
-                 resultsGrid.innerHTML = `<div class="md:col-span-2 text-center text-slate-400 py-8">
-                    ${showingFavorites ? 'Anda belum punya favorit. Tandai dengan ikon bintang!' : 'Generate ide untuk melihat hasilnya di sini.'}
-                 </div>`;
+                 let emptyMessage = 'Generate ide untuk melihat hasilnya di sini.';
+                 if(currentView === 'favorites') emptyMessage = 'Anda belum punya favorit. Tandai dengan ikon bintang!';
+                 if(currentView === 'history') emptyMessage = 'Riwayat generate Anda masih kosong.';
+                 resultsGrid.innerHTML = `<div class="md:col-span-2 text-center text-slate-400 py-8">${emptyMessage}</div>`;
                  return;
             }
 
-            hooksToDisplay.forEach(hookData => {
+            hooksToDisplay.forEach((hookData, index) => {
                  const isFavorited = favorites.some(fav => fav.hook === hookData.hook);
                  const categoryStyle = hookCategoryStyles[hookData.category] || hookCategoryStyles['Default'];
                  const toneLabel = hookData.tone ? `<span class="tone-label">${hookData.tone}</span>` : '';
@@ -710,6 +726,7 @@ Contoh struktur JSON yang diharapkan:
                              </button>
                              <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
                              ${toneLabel}
+                             ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
                         </div>
                         <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
                     </div>
@@ -805,17 +822,53 @@ Contoh struktur JSON yang diharapkan:
             document.getElementById('script-disclaimer').style.display = 'block';
         }
         
-        // --- FAVORITES LOGIC ---
+        // --- FAVORITES & HISTORY LOGIC ---
         function toggleFavorite(hookData) {
             const index = favorites.findIndex(fav => fav.hook === hookData.hook);
             if (index > -1) { favorites.splice(index, 1); showNotification('Dihapus dari favorit!'); } 
             else { favorites.push(hookData); showNotification('Ditambahkan ke favorit!'); }
-            saveFavorites(); updateFavoriteCount();
-            displayHooks(showingFavorites ? favorites : lastGeneratedHooks);
+            saveFavorites(); 
+            updateFavoriteCount();
+            if (currentView === 'favorites') {
+                displayHooks(favorites);
+            } else {
+                updateCurrentViewDisplay();
+            }
         }
         function saveFavorites() { localStorage.setItem('contentCheatFavorites', JSON.stringify(favorites)); }
         function loadFavorites() { favorites = JSON.parse(localStorage.getItem('contentCheatFavorites')) || []; updateFavoriteCount(); }
         function updateFavoriteCount() { document.getElementById('favorite-count').textContent = favorites.length; }
+
+        function addToHistory(hooks) {
+            history.unshift(...hooks);
+            if (history.length > 50) { history.length = 50; } // Keep last 50 hooks
+            saveHistory();
+        }
+        function saveHistory() { localStorage.setItem('contentCheatHistory', JSON.stringify(history)); }
+        function loadHistory() { history = JSON.parse(localStorage.getItem('contentCheatHistory')) || []; }
+        function deleteHistoryItem(index) {
+            history.splice(index, 1);
+            saveHistory();
+            displayHooks(history, true);
+        }
+        function clearHistory() {
+            if (confirm('Anda yakin ingin menghapus semua riwayat?')) {
+                history = [];
+                saveHistory();
+                displayHooks(history, true);
+                showNotification('Riwayat berhasil dihapus.');
+            }
+        }
+        
+        function updateCurrentViewDisplay() {
+            if (currentView === 'favorites') {
+                displayHooks(favorites);
+            } else if (currentView === 'history') {
+                displayHooks(history, true);
+            } else {
+                displayHooks(lastGeneratedHooks);
+            }
+        }
 
         // --- MODAL & EXPLANATION LOGIC ---
         function showHookExplanation(category) {
@@ -880,6 +933,13 @@ Contoh struktur JSON yang diharapkan:
                 document.getElementById('loginModal').classList.remove('visible');
                 checkApiKey();
             } else {
+                const savedCreds = localStorage.getItem('savedUserCredentials');
+                if (savedCreds) {
+                    const { username, password } = JSON.parse(savedCreds);
+                    document.getElementById('username').value = username;
+                    document.getElementById('password').value = password;
+                    document.getElementById('remember-me').checked = true;
+                }
                 document.getElementById('loginModal').classList.add('visible');
             }
         }
@@ -890,7 +950,7 @@ Contoh struktur JSON yang diharapkan:
                 userAPIKey = storedApiKey;
                 document.getElementById('app-container').style.display = 'block';
                 document.getElementById('apiKeyModal').classList.remove('visible');
-                quotaManager.checkAndResetQuota(); loadFavorites(); populatePustaka();
+                quotaManager.checkAndResetQuota(); loadFavorites(); loadHistory(); populatePustaka();
             } else {
                 document.getElementById('app-container').style.display = 'none';
                 document.getElementById('cancelChangeApiKeyBtn').classList.add('hidden');
@@ -916,11 +976,17 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('loginBtn').addEventListener('click', () => {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
             const errorMsg = document.getElementById('loginErrorMsg');
             const loginModalContent = document.querySelector('#loginModal .modal-content');
             
             if (user === 'username' && pass === 'followIG@brata_putra') {
                 sessionStorage.setItem('isLoggedIn', 'true');
+                if (rememberMe) {
+                    localStorage.setItem('savedUserCredentials', JSON.stringify({ username: user, password: pass }));
+                } else {
+                    localStorage.removeItem('savedUserCredentials');
+                }
                 errorMsg.style.display = 'none';
                 loginModalContent.classList.remove('shake');
                 checkLogin();
@@ -1008,9 +1074,8 @@ Contoh struktur JSON yang diharapkan:
                 );
                 quotaManager.decrementQuota();
                 lastGeneratedHooks = hooks;
-                showingFavorites = false;
-                document.getElementById('view-favorites-btn').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>Favorit (<span id="favorite-count">${favorites.length}</span>)`;
-                displayHooks(lastGeneratedHooks);
+                currentView = 'results';
+                updateCurrentViewDisplay();
             } catch (error) {
                 console.error('AI Generation Error:', error);
                 if (error.message.includes("API Key tidak valid")) {
@@ -1030,25 +1095,25 @@ Contoh struktur JSON yang diharapkan:
         });
 
         document.getElementById('view-favorites-btn').addEventListener('click', () => {
-            showingFavorites = !showingFavorites;
-            const btn = document.getElementById('view-favorites-btn');
-            if (showingFavorites) {
-                displayHooks(favorites);
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/></svg>Kembali ke Hasil`;
-            } else {
-                displayHooks(lastGeneratedHooks);
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>Favorit (<span id="favorite-count">${favorites.length}</span>)`;
-            }
+            currentView = (currentView === 'favorites') ? 'results' : 'favorites';
+            updateCurrentViewDisplay();
+        });
+
+        document.getElementById('view-history-btn').addEventListener('click', () => {
+            currentView = (currentView === 'history') ? 'results' : 'history';
+            updateCurrentViewDisplay();
         });
         
-        let scriptLoadingInterval;
         document.getElementById('results-grid').addEventListener('click', async (e) => {
             const scriptBtn = e.target.closest('.result-card-script-btn');
             const copyBtn = e.target.closest('.result-card-copy-btn');
             const favBtn = e.target.closest('.favorite-btn');
             const categoryBtn = e.target.closest('.result-card-category');
+            const deleteHistoryBtn = e.target.closest('.delete-history-item-btn');
 
-            if (categoryBtn) {
+            if (deleteHistoryBtn) {
+                deleteHistoryItem(parseInt(deleteHistoryBtn.dataset.index));
+            } else if (categoryBtn) {
                 showHookExplanation(categoryBtn.dataset.category);
             } else if (favBtn) {
                 toggleFavorite({ 
@@ -1068,20 +1133,10 @@ Contoh struktur JSON yang diharapkan:
                 const resultContainer = document.getElementById('script-result-container');
                 document.getElementById('script-buttons').style.display = 'none';
                 document.getElementById('script-disclaimer').style.display = 'none';
-                
-                const scriptLoadingMessages = ["Menganalisis hook...", "Merancang visual & narasi...", "Menambahkan CTA...", "Menyiapkan hasil..."];
-                let scriptMessageIndex = 0;
                 resultContainer.innerHTML = `<div class="flex flex-col justify-center items-center h-full gap-4 py-8">
                     <div class="script-loading-spinner"></div>
-                    <p id="script-loading-text" class="text-slate-400">${scriptLoadingMessages[scriptMessageIndex]}</p>
+                    <p class="text-slate-400">AI sedang merancang skrip, audio, dan shot...</p>
                 </div>`;
-                
-                scriptLoadingInterval = setInterval(() => {
-                    scriptMessageIndex = (scriptMessageIndex + 1) % scriptLoadingMessages.length;
-                    const loadingSpan = document.getElementById('script-loading-text');
-                    if(loadingSpan) loadingSpan.textContent = scriptLoadingMessages[scriptMessageIndex];
-                }, 2000);
-
                 modal.classList.add('visible');
                 
                 try {
@@ -1095,8 +1150,6 @@ Contoh struktur JSON yang diharapkan:
                         errorMessage = "Kuota API Key Anda untuk hari ini sudah habis. Coba lagi besok.";
                     }
                     resultContainer.innerHTML = `<p class="text-red-400 text-center">${errorMessage}</p>`;
-                } finally {
-                    clearInterval(scriptLoadingInterval);
                 }
             }
         });
@@ -1266,63 +1319,58 @@ Contoh struktur JSON yang diharapkan:
             }
         };
         
-        const fileDropZone = document.getElementById('file-drop-zone');
         const imageUploadInput = document.getElementById('image-upload');
+        const imageUploadContainer = document.getElementById('image-upload-container');
         const imagePreviewContainer = document.getElementById('image-preview-container');
         const imagePreview = document.getElementById('image-preview');
         const removeImageBtn = document.getElementById('remove-image-btn');
+        const uploadLabel = imageUploadContainer.querySelector('label');
 
         function handleFile(file) {
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.fillStyle = '#FFFFFF';
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(img, 0, 0);
-                        
-                        const jpgDataUrl = canvas.toDataURL('image/jpeg');
-                        
-                        uploadedImageBase64 = jpgDataUrl;
-                        imagePreview.src = jpgDataUrl;
-                        imagePreviewContainer.classList.remove('hidden');
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                showNotification("Hanya file gambar yang didukung.", true);
+            if (!file || !file.type.startsWith('image/')) {
+                showNotification('Hanya file gambar yang diizinkan.', true);
+                return;
             }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    uploadedImageBase64 = canvas.toDataURL('image/jpeg');
+                    imagePreview.src = uploadedImageBase64;
+                    imagePreviewContainer.classList.remove('hidden');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         imageUploadInput.addEventListener('change', (event) => handleFile(event.target.files[0]));
         
-        fileDropZone.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            fileDropZone.classList.add('drag-over');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
         });
 
-        fileDropZone.addEventListener('dragleave', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            fileDropZone.classList.remove('drag-over');
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, () => uploadLabel.classList.add('dragover'), false);
         });
 
-        fileDropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            fileDropZone.classList.remove('drag-over');
-            const files = event.dataTransfer.files;
-            if (files.length) {
-                handleFile(files[0]);
-            }
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, () => uploadLabel.classList.remove('dragover'), false);
         });
+
+        uploadLabel.addEventListener('drop', (e) => {
+            handleFile(e.dataTransfer.files[0]);
+        }, false);
         
         removeImageBtn.addEventListener('click', () => {
             uploadedImageBase64 = null;
