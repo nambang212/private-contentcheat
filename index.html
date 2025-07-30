@@ -1,3 +1,14 @@
+Baik, saya akan menerapkan perubahan yang telah kita diskusikan langsung ke dalam kode yang Anda berikan.
+
+Perubahan ini mencakup:
+
+1.  **Pembaruan `generateAIScript`**: Untuk meminta AI agar menyertakan detail **Lokasi, Properti, Pencahayaan,** dan **Mood** yang konsisten.
+2.  **Pembaruan `displayStructuredScript`**: Untuk menampilkan dan memungkinkan pengeditan detail baru tersebut di dalam modal kerangka konten.
+3.  **Pembaruan Fungsi Ekspor**: Agar detail baru ini juga ikut tercantum saat Anda menyalin (copy) atau mengunduh (.doc, GDocs) skrip.
+
+Berikut adalah kode lengkap yang sudah dimodifikasi:
+
+````html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -190,7 +201,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- Modals -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
@@ -226,11 +236,11 @@
                 <h2 class="text-2xl font-bold text-purple-400">Masukkan Kunci API Anda</h2>
                 <div class="flex items-center gap-2">
                      <button id="apiKeyFaqBtn" title="FAQ about API Key" class="p-1 text-slate-400 hover:text-purple-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                        </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                             <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                         </svg>
                      </button>
-                     <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button>
+                     <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button>
                 </div>
             </div>
             <p class="text-slate-400 text-center mb-6">Tools ini membutuhkan kunci API dari Google AI Studio untuk berfungsi. Tenang, kunci Anda aman dan hanya disimpan di browser Anda.</p>
@@ -245,7 +255,7 @@
     
     <div id="tutorialModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div class="modal-body space-y-6 text-slate-300">
                 <div><h3 class="font-bold text-lg text-slate-100">Langkah 1: Buka Google AI Studio</h3><p>Klik tombol di bawah ini. Anda mungkin akan diminta login ke akun Google (Gmail) Anda.</p><a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-block mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Buka Google AI Studio</a></div>
                 <div><h3 class="font-bold text-lg text-slate-100">Langkah 2: Buat Kunci Baru</h3><p>Setelah halaman terbuka, klik tombol biru yang bertuliskan <strong class="text-amber-400">"Create API key in new project"</strong>.</p><img src="https://i.ibb.co/6m6Mv4T/image.png" alt="Tombol Create API Key" class="mt-2 rounded-lg border border-slate-700 w-full max-w-md" onerror="this.style.display='none'"></div>
@@ -257,21 +267,21 @@
     
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
-            <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div id="explanation-body" class="modal-body text-slate-300"></div>
         </div>
     </div>
 
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div id="pustaka-body" class="modal-body space-y-6 text-slate-300"></div>
         </div>
     </div>
 
     <div id="faqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div id="faq-body" class="modal-body space-y-6 text-slate-300">
                 <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Apa keunggulan aplikasi ini?</h3>
@@ -310,7 +320,7 @@
 
     <div id="apiKeyFaqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div class="modal-body space-y-6 text-slate-300">
                 <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Apa itu Kunci API / API Key?</h3>
@@ -330,13 +340,13 @@
     
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
-            <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div id="script-result-container" class="modal-body space-y-5"></div>
             <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-3">
                 <div id="script-buttons" class="sm:flex-row flex-col flex gap-3" style="display:none;">
                     <button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button>
                     <button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button>
-                    <button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDGocs</button>
+                    <button id="export-gdocs-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition-colors">Export ke GDocs</button>
                 </div>
                 <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
             </div>
@@ -345,7 +355,7 @@
 
     <div id="hashtagModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
-            <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div class="text-slate-300 mb-4">Lihat popularitas dan konten terkait untuk tag ini di platform berikut:</div>
             <div class="space-y-3">
                 <a id="instagram-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 transition-opacity">
@@ -366,7 +376,7 @@
     
     <div id="audioSearchModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
-            <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">&times;</button></div>
+            <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div class="text-slate-300 mb-4">Dengarkan atau cari audio ini di platform berikut:</div>
             <div class="space-y-3">
                 <a id="youtube-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
@@ -381,7 +391,6 @@
         </div>
     </div>
 
-    <!-- Main App Container -->
     <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
         <header class="text-center mb-12 relative">
             <div class="absolute top-0 right-0 flex items-center gap-2">
@@ -389,7 +398,7 @@
                 <button id="faq-btn" title="FAQ" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/></svg></button>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.0</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.1</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -399,13 +408,13 @@
         <div class="p-8 glass-effect">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                  <div><label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label><input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah"></div>
-                <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
+                 <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
                 
-                <div>
+                 <div>
                     <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
                     <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
                 </div>
-                <div>
+                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">4. Unggah Referensi Visual (Opsional)</label>
                     <div id="image-upload-container">
                         <label for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
@@ -416,7 +425,7 @@
                     </div>
                     <div id="image-preview-container" class="mt-2 hidden relative w-32 h-32">
                         <img id="image-preview" class="rounded-lg w-full h-full object-cover">
-                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center p-1 text-lg leading-none">&times;</button>
+                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center p-1 text-lg leading-none">×</button>
                     </div>
                 </div>
 
@@ -563,12 +572,12 @@
 
         function fallbackCopy(text) {
              const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            showNotification('Berhasil disalin ke clipboard!');
+             textarea.value = text;
+             document.body.appendChild(textarea);
+             textarea.select();
+             document.execCommand('copy');
+             document.body.removeChild(textarea);
+             showNotification('Berhasil disalin ke clipboard!');
         }
         
         // --- API CALLS ---
@@ -637,7 +646,7 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
             let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
 
             if (imageBase64) {
-                 prompt += `\n\n**ANALISIS GAMBAR**: Produk/jasa utama adalah "${document.getElementById('topic').value}". Gunakan gambar terlampir untuk memperkaya deskripsi VISUAL, NARASI, dan SARAN SHOT dengan detail yang akurat sesuai gambar. Fokus pada topik yang diberikan, jangan menebak objek yang berbeda.`
+                prompt += `\n\n**ANALISIS GAMBAR**: Produk/jasa utama adalah "${document.getElementById('topic').value}". Gunakan gambar terlampir untuk memperkaya deskripsi VISUAL, NARASI, dan SARAN SHOT dengan detail yang akurat sesuai gambar. Fokus pada topik yang diberikan, jangan menebak objek yang berbeda.`
             }
 
             prompt += `\n\nHook: "${hookText}"
@@ -645,20 +654,21 @@ Produk/Jasa: "${document.getElementById('topic').value}"
 
 ATURAN WAJIB:
 1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON. Pastikan JSON tidak terpotong dan valid sepenuhnya.
-2.  **Konten JSON**: JSON harus memiliki kunci- kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
-3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", dan "saran_shot".
-4.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
-5.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
-6.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
-7.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
+2.  **Konten JSON**: JSON harus memiliki kunci-kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
+3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", "saran_shot", dan WAJIB ada "lokasi", "properti", "pencahayaan", dan "mood".
+4.  **KONSISTENSI SCENE**: Pastikan "lokasi", "properti", "pencahayaan", dan "mood" untuk setiap scene saling berhubungan dan menciptakan alur cerita yang logis. Jika tidak ada perubahan signifikan, pertahankan lokasi yang sama di beberapa scene awal (contoh: hook dan masalah terjadi di lokasi yang sama).
+5.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
+6.  **Konten Lain**: "caption" harus string. "hashtags" harus array string HANYA BERISI KATA TANPA SIMBOL #.
+7.  **Bahasa**: Gunakan bahasa Indonesia yang kasual dan menarik.
+8.  **Larangan**: **JANGAN** sertakan simbol hashtag (#) di dalam string "caption". Buat caption yang enak dibaca, boleh menggunakan line break (\\n) untuk paragraf.
 
 Contoh struktur JSON yang diharapkan:
 {
   "saran_audio": [{"title": "Espresso", "artist": "Sabrina Carpenter"}, {"title": "LUNCH", "artist": "Billie Eilish"}],
-  "hook_scene": { "durasi": "0-5", "estimasi": 5, "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
-  "masalah": { "durasi": "5-10", "estimasi": 5, "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
-  "solusi": { "durasi": "10-17", "estimasi": 7, "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
-  "cta": { "durasi": "17-20", "estimasi": 3, "visual": "Tampilan layar dengan teks 'Beli Sekarang' dan link ke toko.", "narasi": "Langsung checkout sekarang! Stok terbatas!", "saran_shot": "Close-up" },
+  "hook_scene": { "durasi": "0-3", "estimasi": 3, "lokasi": "Kamar tidur yang berantakan", "properti": "Pakaian di lantai, buku berserakan", "pencahayaan": "Cahaya pagi dari jendela", "mood": "Merasa kewalahan, pusing", "visual": "Video goyang sebelum pakai tripod, lalu stabil setelahnya.", "narasi": "Video stabil? Tripod ini jawabannya!", "saran_shot": "Side-by-side comparison" },
+  "masalah": { "durasi": "3-8", "estimasi": 5, "lokasi": "Kamar tidur yang berantakan", "properti": "Handphone dipegang dengan tangan yang gemetar", "pencahayaan": "Sama seperti scene hook", "mood": "Frustrasi, hampir menyerah", "visual": "Close-up video yang goyang, memperlihatkan kesulitan merekam.", "narasi": "Capek video goyang terus?\\nBikin pusing yang nonton!", "saran_shot": "Close-up" },
+  "solusi": { "durasi": "8-15", "estimasi": 7, "lokasi": "Studio mini di sudut kamar yang sudah rapi", "properti": "Tripod, produk, ring light kecil", "pencahayaan": "Terang dan fokus ke produk", "mood": "Percaya diri, senang, puas", "visual": "Demonstrasi penggunaan tripod dalam berbagai situasi.", "narasi": "Nih, kenalan sama tripod andalan! Ringan, kuat, fleksibel!", "saran_shot": "360 degree view" },
+  "cta": { "durasi": "15-18", "estimasi": 3, "lokasi": "Studio mini di sudut kamar yang sudah rapi", "properti": "Tampilan produk di tripod dengan jelas", "pencahayaan": "Pencahayaan terbaik (golden hour/studio)", "mood": "Antusias, mengajak", "visual": "Tampilan layar dengan teks 'Beli Sekarang' dan link ke toko.", "narasi": "Langsung checkout sekarang! Stok terbatas!", "saran_shot": "Extreme close-up produk" },
   "caption": "Gak ada lagi video goyang! Tripod ini solusi konten stabilmu.\\nBikin konten makin profesional dan menarik!",
   "hashtags": ["tripod", "videostabil", "kontenkreator"]
 }`;
@@ -668,16 +678,16 @@ Contoh struktur JSON yang diharapkan:
 
             const result = await callNetlifyFunction(prompt, apiKey, imageData, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
-                 const rawText = result.candidates[0].content.parts[0].text;
-                 const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                 try {
-                     return JSON.parse(cleanedText);
-                 } catch (e) {
-                     console.error("JSON Parsing Error for script. Raw text:", cleanedText, e);
-                     throw new Error(`Gagal memproses kerangka: ${e.message}`);
-                 }
-             }
-             throw new Error("Struktur respons kerangka konten tidak terduga.");
+                const rawText = result.candidates[0].content.parts[0].text;
+                const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                try {
+                    return JSON.parse(cleanedText);
+                } catch (e) {
+                    console.error("JSON Parsing Error for script. Raw text:", cleanedText, e);
+                    throw new Error(`Gagal memproses kerangka: ${e.message}`);
+                }
+            }
+            throw new Error("Struktur respons kerangka konten tidak terduga.");
         }
         
         // --- DISPLAY LOGIC ---
@@ -723,21 +733,21 @@ Contoh struktur JSON yang diharapkan:
                  const card = document.createElement('div');
                  card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                  card.innerHTML = `
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                             <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                             </button>
-                             <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
-                             ${toneLabel}
-                             ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
-                        </div>
-                        <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
-                    </div>
-                    <div class="flex items-center gap-2 mt-2">
-                        <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
-                        <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
-                    </div>
+                     <div>
+                         <div class="flex items-center gap-3 mb-3">
+                              <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                              </button>
+                              <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                              ${toneLabel}
+                              ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
+                         </div>
+                         <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                     </div>
+                     <div class="flex items-center gap-2 mt-2">
+                         <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                         <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
+                     </div>
                  `;
                  resultsGrid.appendChild(card);
             });
@@ -764,17 +774,15 @@ Contoh struktur JSON yang diharapkan:
 
                 let displayHTML = ''; let editHTML = '';
 
-                 if (key === 'saran_audio') {
+                if (key === 'saran_audio') {
                     const audioList = data[key].map(audio => 
                         `<span class="audio-suggestion" data-title="${audio.title}" data-artist="${audio.artist || ''}">'${audio.title}' by ${audio.artist || 'Unknown'}</span>`
                     ).join('; ');
                     displayHTML = `<div class="pl-7"><p class="text-slate-200">${audioList}</p></div>`;
-                    // Edit view for audio can be simplified as it's less likely to be edited manually
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key].map(a => `${a.title} by ${a.artist}`).join(', ')}</textarea>`;
                 } else if (key === 'hashtags') {
                     const contentArray = Array.isArray(data[key]) ? data[key] : [data[key]];
                     const contentString = contentArray.join(', ');
-
                     const displayContent = contentArray.map(tag => `<span class="hashtag" data-tag="${tag}">#${tag}</span>`).join(' ');
                     
                     displayHTML = `<div class="pl-7"><div class="flex flex-wrap gap-2">${displayContent}</div></div>`;
@@ -786,11 +794,23 @@ Contoh struktur JSON yang diharapkan:
                     const item = data[key];
                     displayHTML = `<div class="pl-7 space-y-2">
                             <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
+                                <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
+                                <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
+                                <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
+                                <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
+                            </div>
+                            <hr class="border-slate-700 my-2">
                             <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
                             <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
                             <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
                         </div>`;
+                    
                     editHTML = `<div class="space-y-2">
+                            <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
+                            <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
+                            <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
+                            <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
                             <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
                             <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
                         </div>`;
@@ -803,7 +823,7 @@ Contoh struktur JSON yang diharapkan:
                             <div class="flex items-center gap-3">
                                 <button class="edit-section-btn p-1 text-slate-400 hover:text-white" title="Edit bagian ini"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>
                                 <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
                                         <path d="M13 0H6a2 2 0 0 0-2 2v1h1V2a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-2v1h2a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
                                         <path d="M2 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm7 11H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1z"/>
                                     </svg>
@@ -813,12 +833,12 @@ Contoh struktur JSON yang diharapkan:
                         ${displayHTML}
                     </div>
                     <div class="script-edit-view hidden">
-                         <h3 class="text-xl font-bold text-slate-100 mb-4">${sectionIcons[key]} Edit ${sectionTitles[key]}</h3>
-                         ${editHTML}
-                         <div class="flex gap-3 mt-4">
+                        <h3 class="text-xl font-bold text-slate-100 mb-4">${sectionIcons[key]} Edit ${sectionTitles[key]}</h3>
+                        ${editHTML}
+                        <div class="flex gap-3 mt-4">
                             <button class="save-edit-btn flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Simpan</button>
                             <button class="cancel-edit-btn flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700 transition-colors">Batal</button>
-                         </div>
+                        </div>
                     </div>`;
                 container.appendChild(sectionWrapper);
             });
@@ -1230,8 +1250,16 @@ Contoh struktur JSON yang diharapkan:
                     const sectionData = currentScriptData[sectionKey];
                     let textToCopy = '';
                     if (typeof sectionData === 'string') textToCopy = sectionData;
-                    else if (Array.isArray(sectionData)) textToCopy = isNaN(sectionData[0]) ? '#' + sectionData.join(' #') : sectionData.join(', ');
-                    else if (typeof sectionData === 'object' && sectionData !== null) textToCopy = `VISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}`;
+                    else if (Array.isArray(sectionData)) {
+                        if (sectionKey === 'saran_audio') {
+                           textToCopy = sectionData.map(a => `'${a.title}' by ${a.artist}`).join('; ');
+                        } else {
+                           textToCopy = '#' + sectionData.join(' #');
+                        }
+                    }
+                    else if (typeof sectionData === 'object' && sectionData !== null) {
+                        textToCopy = `Lokasi: ${sectionData.lokasi}\nProperti: ${sectionData.properti}\nPencahayaan: ${sectionData.pencahayaan}\nMood: ${sectionData.mood}\n\nVISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}\nSARAN SHOT: ${sectionData.saran_shot}`;
+                    }
                     fallbackCopy(textToCopy);
                 }
             }
@@ -1244,18 +1272,18 @@ Contoh struktur JSON yang diharapkan:
             const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
             sectionOrder.forEach(key => {
                  if(currentScriptData[key]) {
-                    fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
-                     const data = currentScriptData[key];
-                     if (key === 'saran_audio') {
-                        fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
-                     } else if (key === 'hashtags') {
-                        fullText += '#' + data.join(' #') + '\n\n';
-                     } else if (typeof data === 'string') { 
-                        fullText += data + '\n\n'; 
-                     } else if (typeof data === 'object') { 
-                        fullText += `Durasi: Detik ${data.durasi}\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
-                     }
-                }
+                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
+                      const data = currentScriptData[key];
+                      if (key === 'saran_audio') {
+                          fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                      } else if (key === 'hashtags') {
+                          fullText += '#' + data.join(' #') + '\n\n';
+                      } else if (typeof data === 'string') { 
+                          fullText += data + '\n\n'; 
+                      } else if (typeof data === 'object') { 
+                          fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                      }
+                 }
             });
             fallbackCopy(fullText);
         });
@@ -1277,7 +1305,7 @@ Contoh struktur JSON yang diharapkan:
                     } else if (typeof data === 'string') { 
                         htmlContent += `<p>${data.replace(/\n/g, '<br>')}</p>`; 
                     } else if (typeof data === 'object') { 
-                        htmlContent += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`; 
+                        htmlContent += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`; 
                     }
                 }
             });
@@ -1318,7 +1346,7 @@ Contoh struktur JSON yang diharapkan:
                     } else if (typeof data === 'string') { 
                         content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
                     } else if (typeof data === 'object') { 
-                        content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                        content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
                     }
                 }
             });
@@ -1410,4 +1438,4 @@ Contoh struktur JSON yang diharapkan:
     </script>
 </body>
 </html>
-
+````
