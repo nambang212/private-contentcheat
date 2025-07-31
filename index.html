@@ -31,6 +31,18 @@
             box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
         }
         select.modern-input option, .platform-select option, .status-select option { background: #0D1120; color: #E0E0E0; }
+        
+        /* Perbaikan UI/UX Dropdown Kalender */
+        .status-select-per-platform, .time-input {
+            background-color: #111827; /* Ganti ke warna lebih gelap */
+            color: #F9FAFB; /* Tulisan putih */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .status-select-per-platform option {
+            background: #1F2937;
+            color: #F9FAFB;
+        }
+
         .modern-btn {
             background: linear-gradient(90deg, #5F00D8, #A78BFA); border: none;
             transition: all 0.3s ease; box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4);
@@ -473,7 +485,6 @@
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
             
-            <!-- Perubahan 1: Posisi Ikon Menu untuk Mobile -->
             <div class="mt-6 flex justify-center items-center gap-2 md:absolute md:top-0 md:right-0 md:mt-0">
                 <button id="calendar-view-btn" title="Kalender Konten" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"><path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/></svg></button>
                 <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg></button>
@@ -1065,7 +1076,7 @@ Contoh struktur JSON yang diharapkan:
                         item.platforms = {};
                         const oldPlatform = item.platform || 'IG';
                         const oldStatus = item.status || 'Siap Upload';
-                        item.platforms[oldPlatform] = { status: oldStatus, time: '12:00' };
+                        item.platforms[oldPlatform] = { status: oldStatus, time: '' };
                     }
                 });
             });
@@ -1154,19 +1165,22 @@ Contoh struktur JSON yang diharapkan:
                     
                     let platformStatusesHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2">';
                     allPlatforms.forEach(platform => {
-                        const platformData = (item.platforms && item.platforms[platform]) ? item.platforms[platform] : { status: '-', time: '12:00' };
+                        const platformData = (item.platforms && item.platforms[platform]) ? item.platforms[platform] : { status: '-', time: '' };
                         const currentStatus = platformData.status;
                         const currentTime = platformData.time;
                         const selectOptions = statusOptions.map(s => `<option value="${s}" ${currentStatus === s ? 'selected' : ''}>${s}</option>`).join('');
                         
                         platformStatusesHTML += `
                             <div class="p-2 rounded-md bg-slate-900/50">
-                                <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 text-sm font-semibold">${platform}</label>
-                                <div class="flex items-center gap-2 mt-1">
+                                <div class="flex justify-between items-center mb-1">
+                                    <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 text-sm font-semibold">${platform}</label>
+                                    <label for="time-${dateStr}-${index}-${platform}" class="text-slate-400 text-xs">Jam Posting</label>
+                                </div>
+                                <div class="flex items-center gap-2">
                                     <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
                                         ${selectOptions}
                                     </select>
-                                    <input type="time" value="${currentTime}" id="time-${dateStr}-${index}-${platform}" class="time-input modern-input p-1 rounded text-xs w-24" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
+                                    <input type="time" value="${currentTime}" id="time-${dateStr}-${index}-${platform}" class="time-input p-1 rounded text-xs w-24" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
                                 </div>
                             </div>
                         `;
@@ -1618,7 +1632,6 @@ Contoh struktur JSON yang diharapkan:
                  document.getElementById('calendarModal').classList.add('visible');
              }
              
-             // Perubahan 2: Logika Tombol Export to Google Docs
              if (buttonId === 'copy-gdocs-btn') {
                  if (!currentScriptData) return;
                  let fullText = getFullScriptAsText();
@@ -1635,6 +1648,11 @@ Contoh struktur JSON yang diharapkan:
              
              if (buttonId === 'download-doc-btn') {
                 if (!currentScriptData) return;
+                
+                const topicValue = document.getElementById('topic').value.trim();
+                const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
+                const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
+
                 let content = `<h1>Kerangka Konten AI</h1>`;
                 const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
                 const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
@@ -1656,8 +1674,6 @@ Contoh struktur JSON yang diharapkan:
                 const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                const topicValue = document.getElementById('topic').value.trim().toUpperCase();
-                const fileName = `SCRIPT ${topicValue || 'KONTEN'}.doc`;
                 link.download = fileName;
                 document.body.appendChild(link);
                 link.click();
@@ -1720,12 +1736,12 @@ Contoh struktur JSON yang diharapkan:
                      ...currentScriptData,
                      id: Date.now(),
                      platforms: {
-                         'IG': { status: 'Siap Upload', time: '12:00' },
-                         'FB': { status: 'Siap Upload', time: '12:00' },
-                         'TikTok': { status: 'Siap Upload', time: '12:00' },
-                         'YouTube': { status: '-', time: '12:00' },
-                         'Shopee': { status: '-', time: '12:00' },
-                         'TokPed': { status: '-', time: '12:00' }
+                         'IG': { status: 'Siap Upload', time: '' },
+                         'FB': { status: 'Siap Upload', time: '' },
+                         'TikTok': { status: 'Siap Upload', time: '' },
+                         'YouTube': { status: '-', time: '' },
+                         'Shopee': { status: '-', time: '' },
+                         'TokPed': { status: '-', time: '' }
                      }
                  };
                  scheduledContent[selectedDateForScheduling].push(newItem);
@@ -1855,7 +1871,6 @@ Contoh struktur JSON yang diharapkan:
                     itemToMove = { item, originalDate: date, originalIndex: parseInt(index) };
                     renderCalendar(true); // Re-render in scheduling mode
                     
-                    // Perubahan 3: Tambahkan tombol Batal Pindah
                     const detailsContainer = document.getElementById('calendar-details');
                     detailsContainer.innerHTML = `
                         <p class="text-yellow-300 text-center mb-4">Pilih tanggal baru untuk memindahkan konten.</p>
@@ -1886,7 +1901,7 @@ Contoh struktur JSON yang diharapkan:
                         item.platforms = {};
                     }
                     if (!item.platforms[platform]) {
-                        item.platforms[platform] = { status: '-', time: '12:00' };
+                        item.platforms[platform] = { status: '-', time: '' };
                     }
 
                     if (target.matches('.status-select-per-platform')) {
