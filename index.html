@@ -1061,10 +1061,11 @@ Contoh struktur JSON yang diharapkan:
             // Migrasi data lama ke struktur baru
             Object.keys(loadedSchedule).forEach(date => {
                 loadedSchedule[date].forEach(item => {
-                    if (item.platform && item.status && !item.platforms) {
-                        item.platforms = { [item.platform]: item.status };
-                        delete item.platform;
-                        delete item.status;
+                    if (!item.platforms) {
+                        item.platforms = {};
+                        const oldPlatform = item.platform || 'IG';
+                        const oldStatus = item.status || 'Siap Upload';
+                        item.platforms[oldPlatform] = { status: oldStatus, time: '12:00' };
                     }
                 });
             });
@@ -1148,21 +1149,25 @@ Contoh struktur JSON yang diharapkan:
                 contentForDate.forEach((item, index) => {
                     const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
                     
-                    // Perubahan 4 & 5: Opsi status baru dan UI per platform
                     const statusOptions = ['-', 'Siap Upload', 'Proses Take Video', 'Proses Edit Video', 'Sudah Upload', 'Revisi', 'Proses Evaluasi'];
                     const allPlatforms = ['IG', 'FB', 'TikTok', 'YouTube', 'Shopee', 'TokPed'];
                     
-                    let platformStatusesHTML = '<div class="space-y-2 mt-2">';
+                    let platformStatusesHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2">';
                     allPlatforms.forEach(platform => {
-                        const currentStatus = (item.platforms && item.platforms[platform]) ? item.platforms[platform] : '-';
+                        const platformData = (item.platforms && item.platforms[platform]) ? item.platforms[platform] : { status: '-', time: '12:00' };
+                        const currentStatus = platformData.status;
+                        const currentTime = platformData.time;
                         const selectOptions = statusOptions.map(s => `<option value="${s}" ${currentStatus === s ? 'selected' : ''}>${s}</option>`).join('');
                         
                         platformStatusesHTML += `
-                            <div class="flex items-center justify-between gap-2 text-sm">
-                                <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 w-20">${platform}</label>
-                                <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
-                                    ${selectOptions}
-                                </select>
+                            <div class="p-2 rounded-md bg-slate-900/50">
+                                <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 text-sm font-semibold">${platform}</label>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
+                                        ${selectOptions}
+                                    </select>
+                                    <input type="time" value="${currentTime}" id="time-${dateStr}-${index}-${platform}" class="time-input modern-input p-1 rounded text-xs w-24" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
+                                </div>
                             </div>
                         `;
                     });
@@ -1171,7 +1176,7 @@ Contoh struktur JSON yang diharapkan:
                     const itemEl = document.createElement('div');
                     itemEl.className = 'p-3 bg-slate-800/50 rounded-lg mb-2';
                     itemEl.innerHTML = `
-                        <div class="flex justify-between items-start">
+                        <div class="flex justify-between items-start mb-2">
                              <p class="text-slate-200 flex-1 pr-4"><strong class="text-purple-300">#${index + 1}</strong> ${hookText.substring(0, 70)}...</p>
                              <div class="flex items-center gap-2">
                                  <button class="edit-schedule-btn p-1 text-slate-400 hover:text-white" data-date="${dateStr}" data-index="${index}" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zM14.247 3.36l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>
@@ -1509,7 +1514,7 @@ Contoh struktur JSON yang diharapkan:
                 scriptLoadingInterval = setInterval(() => {
                     scriptMessageIndex = (scriptMessageIndex + 1) % scriptLoadingMessages.length;
                     const loadingSpan = document.getElementById('script-loading-text');
-                    if (loadingSpan) loadingSpan.textContent = scriptLoadingMessages[scriptMessageIndex];
+                    if (loadingSpan) loadingSpan.textContent = scriptLoadingMessages[messageIndex];
                 }, 2000);
 
                 modal.classList.add('visible');
@@ -1715,8 +1720,12 @@ Contoh struktur JSON yang diharapkan:
                      ...currentScriptData,
                      id: Date.now(),
                      platforms: {
-                         'IG': 'Siap Upload', 'FB': 'Siap Upload', 'TikTok': 'Siap Upload', 
-                         'YouTube': '-', 'Shopee': '-', 'TokPed': '-'
+                         'IG': { status: 'Siap Upload', time: '12:00' },
+                         'FB': { status: 'Siap Upload', time: '12:00' },
+                         'TikTok': { status: 'Siap Upload', time: '12:00' },
+                         'YouTube': { status: '-', time: '12:00' },
+                         'Shopee': { status: '-', time: '12:00' },
+                         'TokPed': { status: '-', time: '12:00' }
                      }
                  };
                  scheduledContent[selectedDateForScheduling].push(newItem);
@@ -1870,15 +1879,25 @@ Contoh struktur JSON yang diharapkan:
 
             document.getElementById('calendar-details').addEventListener('change', (e) => {
                 const target = e.target;
-                if (target.matches('.status-select-per-platform')) {
+                if (target.matches('.status-select-per-platform') || target.matches('.time-input')) {
                     const { date, index, platform } = target.dataset;
                     const item = scheduledContent[date][index];
                     if (!item.platforms) {
                         item.platforms = {};
                     }
-                    item.platforms[platform] = target.value;
+                    if (!item.platforms[platform]) {
+                        item.platforms[platform] = { status: '-', time: '12:00' };
+                    }
+
+                    if (target.matches('.status-select-per-platform')) {
+                        item.platforms[platform].status = target.value;
+                    }
+                    if (target.matches('.time-input')) {
+                        item.platforms[platform].time = target.value;
+                    }
+
                     saveScheduledContent();
-                    showNotification(`Status untuk ${platform} diperbarui!`);
+                    showNotification(`Jadwal untuk ${platform} diperbarui!`);
                 }
             });
         });
