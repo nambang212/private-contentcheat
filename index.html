@@ -1107,7 +1107,9 @@ Contoh struktur JSON yang diharapkan:
             
             if (!isScheduling) {
                  document.getElementById('calendar-actions').style.display = 'none';
-                 showCalendarDetails(new Date().toISOString().split('T')[0]);
+                 const todayStr = new Date().toISOString().split('T')[0];
+                 const selectedDay = document.querySelector('.calendar-day.selected');
+                 showCalendarDetails(selectedDay ? selectedDay.dataset.date : todayStr);
             }
         }
 
@@ -1557,26 +1559,47 @@ Contoh struktur JSON yang diharapkan:
         });
         
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
-            if (!selectedDateForScheduling) {
-                showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
-                return;
+             if (itemToMove) {
+                // Logic for moving an existing item
+                if (!selectedDateForScheduling) {
+                    showNotification('Silakan pilih tanggal baru di kalender.', true);
+                    return;
+                }
+                // Add to new date
+                if (!scheduledContent[selectedDateForScheduling]) {
+                    scheduledContent[selectedDateForScheduling] = [];
+                }
+                scheduledContent[selectedDateForScheduling].push(itemToMove.item);
+                // Remove from old date
+                scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
+                if (scheduledContent[itemToMove.originalDate].length === 0) {
+                    delete scheduledContent[itemToMove.originalDate];
+                }
+                showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
+                itemToMove = null;
+            } else {
+                // Logic for scheduling a new item
+                if (!selectedDateForScheduling) {
+                    showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
+                    return;
+                }
+                if (!scheduledContent[selectedDateForScheduling]) {
+                    scheduledContent[selectedDateForScheduling] = [];
+                }
+                const newItem = {
+                    ...currentScriptData,
+                    id: Date.now(),
+                    platform: 'IG',
+                    status: 'Siap Upload'
+                };
+                scheduledContent[selectedDateForScheduling].push(newItem);
+                showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
+                document.getElementById('scriptModal').classList.remove('visible');
             }
-            if (!scheduledContent[selectedDateForScheduling]) {
-                scheduledContent[selectedDateForScheduling] = [];
-            }
-            // Add unique ID, default platform, and status to the new item
-            const newItem = {
-                ...currentScriptData,
-                id: Date.now(), // Unique ID for each content
-                platform: 'IG', // Default platform
-                status: 'Siap Upload' // Default status
-            };
-            scheduledContent[selectedDateForScheduling].push(newItem);
+            
             saveScheduledContent();
-            showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
             document.getElementById('calendarModal').classList.remove('visible');
-            document.getElementById('scriptModal').classList.remove('visible');
-            selectedDateForScheduling = null; // Reset selection
+            selectedDateForScheduling = null;
         });
 
 
