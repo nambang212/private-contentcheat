@@ -393,7 +393,7 @@
             <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-3">
                 <div id="script-buttons" class="sm:flex-row flex-col flex gap-3" style="display:none;">
                     <button id="schedule-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700 transition-colors">Jadwalkan</button>
-                    <button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Semua</button>
+                    <button id="copy-all-script-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Teks Polos</button>
                     <button id="download-doc-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download .doc</button>
                 </div>
                 <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
@@ -1175,6 +1175,38 @@ Contoh struktur JSON yang diharapkan:
             } else {
                 detailsContainer.innerHTML += `<p class="text-slate-400">Tidak ada jadwal untuk tanggal ini.</p>`;
             }
+        }
+
+        function showDeleteConfirmation(date, index) {
+            const customConfirmModal = document.createElement('div');
+            customConfirmModal.className = 'modal-overlay visible';
+            customConfirmModal.style.zIndex = '60'; // Ensure it's on top of other modals
+            customConfirmModal.innerHTML = `
+                <div class="modal-content !max-w-sm">
+                    <h3 class="text-xl font-bold text-white mb-4">Konfirmasi Hapus</h3>
+                    <p class="text-slate-300 mb-6">Anda yakin ingin menghapus jadwal konten ini?</p>
+                    <div class="flex gap-4">
+                        <button id="confirm-delete" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700">Ya, Hapus</button>
+                        <button id="cancel-delete" class="flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(customConfirmModal);
+
+            document.getElementById('confirm-delete').onclick = () => {
+                scheduledContent[date].splice(index, 1);
+                if (scheduledContent[date].length === 0) {
+                    delete scheduledContent[date];
+                }
+                saveScheduledContent();
+                showCalendarDetails(date);
+                renderCalendar(); // Re-render to update dot
+                showNotification('Jadwal berhasil dihapus.');
+                document.body.removeChild(customConfirmModal);
+            };
+            document.getElementById('cancel-delete').onclick = () => {
+                document.body.removeChild(customConfirmModal);
+            };
         }
 
 
