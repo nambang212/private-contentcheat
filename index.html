@@ -649,18 +649,30 @@
             setTimeout(() => { notification.classList.replace('opacity-100', 'opacity-0'); }, 5000); // Longer duration for important messages
         }
 
-        function fallbackCopy(text) {
-             const textarea = document.createElement('textarea');
-             textarea.value = text;
-             document.body.appendChild(textarea);
-             textarea.select();
-             try {
-                 document.execCommand('copy');
-                 showNotification('Berhasil disalin ke clipboard!');
-             } catch (err) {
-                 showNotification('Gagal menyalin teks.', true);
-             }
-             document.body.removeChild(textarea);
+        function fallbackCopy(text, isHtml = false) {
+            if (isHtml) {
+                const listener = (e) => {
+                    e.clipboardData.setData('text/html', text);
+                    e.clipboardData.setData('text/plain', text);
+                    e.preventDefault();
+                };
+                document.addEventListener('copy', listener);
+                document.execCommand('copy');
+                document.removeEventListener('copy', listener);
+                showNotification('Berhasil disalin untuk Google Docs!');
+            } else {
+                 const textarea = document.createElement('textarea');
+                 textarea.value = text;
+                 document.body.appendChild(textarea);
+                 textarea.select();
+                 try {
+                     document.execCommand('copy');
+                     showNotification('Berhasil disalin ke clipboard!');
+                 } catch (err) {
+                     showNotification('Gagal menyalin teks.', true);
+                 }
+                 document.body.removeChild(textarea);
+            }
         }
         
         // --- API CALLS ---
@@ -1556,6 +1568,28 @@ Contoh struktur JSON yang diharapkan:
                 renderCalendar(true); // Render in scheduling mode
                 document.getElementById('calendarModal').classList.add('visible');
              }
+             if (e.target.id === 'copy-gdocs-btn') {
+                if (!currentScriptData) return;
+                let content = `<h1>Kerangka Konten AI</h1>`;
+                const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
+                const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+                sectionOrder.forEach(key => {
+                    if(currentScriptData[key]) {
+                        content += `<h2>${sectionTitles[key]}</h2>`;
+                        const data = currentScriptData[key];
+                        if (key === 'saran_audio') {
+                            content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                        } else if (key === 'hashtags') {
+                             content += `<p>${'#' + data.join(' #')}</p>`;
+                        } else if (typeof data === 'string') { 
+                            content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                        } else if (typeof data === 'object') { 
+                            content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                        }
+                    }
+                });
+                fallbackCopy(content, true);
+             }
         });
         
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
@@ -1750,7 +1784,53 @@ Contoh struktur JSON yang diharapkan:
             window.scrollTo({top: 0, behavior: 'smooth'});
         });
 
-        document.addEventListener('DOMContentLoaded', checkLogin);
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLogin();
+
+            document.getElementById('calendar-details').addEventListener('click', (e) => {
+                const editBtn = e.target.closest('.edit-schedule-btn');
+                const moveBtn = e.target.closest('.move-schedule-btn');
+                const deleteBtn = e.target.closest('.delete-schedule-btn');
+
+                if (editBtn) {
+                    const { date, index } = editBtn.dataset;
+                    const item = scheduledContent[date][index];
+                    displayStructuredScript(item);
+                    document.getElementById('calendarModal').classList.remove('visible');
+                    document.getElementById('scriptModal').classList.add('visible');
+                }
+
+                if (moveBtn) {
+                    const { date, index } = moveBtn.dataset;
+                    const item = scheduledContent[date][index];
+                    itemToMove = { item, originalDate: date, originalIndex: index };
+                    renderCalendar(true); // Re-render in scheduling mode
+                    document.getElementById('calendar-details').innerHTML = `<p class="text-yellow-300 text-center">Pilih tanggal baru untuk memindahkan konten.</p>`;
+                }
+
+                if (deleteBtn) {
+                    const { date, index } = deleteBtn.dataset;
+                    showDeleteConfirmation(date, index);
+                }
+            });
+
+            document.getElementById('calendar-details').addEventListener('change', (e) => {
+                const target = e.target;
+                if (target.matches('.platform-select') || target.matches('.status-select')) {
+                    const { date, index } = target.dataset;
+                    const item = scheduledContent[date][index];
+                    if (target.matches('.platform-select')) {
+                        item.platform = target.value;
+                    }
+                    if (target.matches('.status-select')) {
+                        item.status = target.value;
+                    }
+                    saveScheduledContent();
+                    showCalendarDetails(date); // Refresh view to show updated status color
+                    showNotification('Perubahan disimpan!');
+                }
+            });
+        });
     </script>
 </body>
 </html>
