@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v71.1 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v71.2 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -261,6 +261,7 @@
 </head>
 <body class="antialiased">
 
+    <!-- Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
@@ -290,6 +291,7 @@
         </div>
     </div>
 
+    <!-- API Key Modal -->
     <div id="apiKeyModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4">
@@ -313,6 +315,7 @@
         </div>
     </div>
     
+    <!-- Tutorial Modal -->
     <div id="tutorialModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -325,6 +328,7 @@
         </div>
     </div>
     
+    <!-- Hook Explanation Modal -->
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -332,6 +336,7 @@
         </div>
     </div>
 
+    <!-- Pustaka Hook Modal -->
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -339,6 +344,7 @@
         </div>
     </div>
 
+    <!-- FAQ Modal -->
     <div id="faqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -378,6 +384,7 @@
         </div>
     </div>
 
+    <!-- API Key FAQ Modal -->
     <div id="apiKeyFaqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -398,6 +405,7 @@
         </div>
     </div>
     
+    <!-- Script Modal -->
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -414,6 +422,7 @@
         </div>
     </div>
 
+    <!-- Hashtag Modal -->
     <div id="hashtagModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -435,6 +444,7 @@
         </div>
     </div>
     
+    <!-- Audio Search Modal -->
     <div id="audioSearchModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -477,10 +487,11 @@
     </div>
 
 
+    <!-- Main App Container -->
     <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
         <header class="text-center mb-8 relative">
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.1</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.2</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -561,99 +572,54 @@
         </div>
     </div>
     
+    <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
         </svg>
     </button>
     
+    <!-- Notification Toast -->
     <div id="notification" class="fixed bottom-5 right-5 bg-green-600 text-white py-3 px-5 rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-500 z-50"></div>
 
     <script type="module">
-        // --- GLOBAL STATE ---
+        // --- GLOBAL STATE & CONSTANTS ---
         let userAPIKey = null;
         let lastGeneratedHooks = [];
         let favorites = [];
         let history = [];
         let scheduledContent = {};
-        let currentView = 'results'; // can be 'results', 'favorites', or 'history'
+        let currentView = 'results'; // 'results', 'favorites', or 'history'
         let currentScriptData = null;
         let uploadedImageBase64 = null;
         let calendarDate = new Date();
         let selectedDateForScheduling = null;
         let itemToMove = null; // To track item being moved in calendar
 
-
         const hookCategoryStyles = {
-            'Default': 'bg-gray-500/20 text-gray-300',
-            'Narasi': 'bg-purple-500/20 text-purple-300',
-            'Pertanyaan': 'bg-sky-500/20 text-sky-300',
-            'Sebelum & Sesudah': 'bg-teal-500/20 text-teal-300',
-            'Social Proof': 'bg-blue-500/20 text-blue-300',
-            'Janji & Manfaat': 'bg-amber-500/20 text-amber-300',
-            'How-To': 'bg-green-500/20 text-green-300',
-            'Kontroversial': 'bg-orange-500/20 text-orange-300',
-            'Negatif': 'bg-rose-500/20 text-rose-300',
-            'FOMO': 'bg-red-500/20 text-red-300',
-            'Penasaran': 'bg-indigo-500/20 text-indigo-300',
-            'Statistik': 'bg-pink-500/20 text-pink-300',
-            'Kutipan': 'bg-lime-500/20 text-lime-300',
-            'Panggilan Langsung': 'bg-cyan-500/20 text-cyan-300',
+            'Default': 'bg-gray-500/20 text-gray-300', 'Narasi': 'bg-purple-500/20 text-purple-300',
+            'Pertanyaan': 'bg-sky-500/20 text-sky-300', 'Sebelum & Sesudah': 'bg-teal-500/20 text-teal-300',
+            'Social Proof': 'bg-blue-500/20 text-blue-300', 'Janji & Manfaat': 'bg-amber-500/20 text-amber-300',
+            'How-To': 'bg-green-500/20 text-green-300', 'Kontroversial': 'bg-orange-500/20 text-orange-300',
+            'Negatif': 'bg-rose-500/20 text-rose-300', 'FOMO': 'bg-red-500/20 text-red-300',
+            'Penasaran': 'bg-indigo-500/20 text-indigo-300', 'Statistik': 'bg-pink-500/20 text-pink-300',
+            'Kutipan': 'bg-lime-500/20 text-lime-300', 'Panggilan Langsung': 'bg-cyan-500/20 text-cyan-300',
         };
 
         const hookExplanations = {
-            "Narasi": { 
-                desc: "Membangun hubungan emosional dengan membagikan pengalaman pribadi (struggle & success). Sangat relateable.",
-                efektif: "Personal Branding, Produk Solutif"
-            },
-            "Pertanyaan": {
-                desc: "Memicu interaksi dan membuat audiens merefleksikan masalah mereka sendiri. Mendorong komentar.",
-                efektif: "Semua Kategori"
-            },
-            "Sebelum & Sesudah": {
-                desc: "Menunjukkan transformasi nyata untuk membuktikan efektivitas produk/jasa. Sangat visual dan meyakinkan.",
-                efektif: "Produk Fisik, Jasa Skill, Kecantikan"
-            },
-            "Social Proof": {
-                desc: "Menggunakan bukti (testimoni, angka penjualan, ulasan) bahwa banyak orang lain telah percaya pada produk/jasa Anda.",
-                efektif: "Semua Kategori, terutama E-commerce"
-            },
-            "Janji & Manfaat": {
-                desc: "Memberikan janji nilai yang jelas dan langsung di awal video. Membuat audiens penasaran dengan hasilnya.",
-                efektif: "Jasa, Edukasi, Produk Solutif"
-            },
-            "How-To": {
-                desc: "Menawarkan tutorial atau cara melakukan sesuatu yang diinginkan oleh target audiens.",
-                efektif: "Konten Edukasi, DIY, Skill-based"
-            },
-            "Kontroversial": {
-                desc: "Menyatakan opini yang tidak umum atau berlawanan dengan kepercayaan populer untuk memancing perdebatan dan engagement.",
-                efektif: "Personal Branding, Konten Opini"
-            },
-            "Negatif": {
-                desc: "Menyoroti kesalahan umum atau hal-hal yang harus dihindari oleh audiens. Bermain dengan psikologi 'loss aversion'.",
-                efektif: "Konten Edukasi, Nasihat Keuangan/Kesehatan"
-            },
-            "FOMO": {
-                desc: "Fear Of Missing Out. Menciptakan urgensi atau kelangkaan, membuat audiens merasa harus bertindak sekarang.",
-                efektif: "Promo Terbatas, Produk Eksklusif, Event"
-            },
-            "Penasaran": {
-                desc: "Menciptakan 'kesenjangan informasi' yang membuat audiens harus menonton sampai akhir untuk tahu jawabannya.",
-                efektif: "Storytelling, Product Teaser, Vlog"
-            },
-            "Statistik": {
-                desc: "Menggunakan data, angka, atau fakta mengejutkan untuk membangun kredibilitas dan menarik perhatian.",
-                efektif: "Konten Informatif, Berita, Presentasi Bisnis"
-            },
-            "Kutipan": {
-                desc: "Memulai dengan kutipan yang kuat, relevan, atau inspiratif dari tokoh terkenal atau sumber terpercaya.",
-                efektif: "Konten Motivasi, Self-development"
-            },
-            "Panggilan Langsung": {
-                desc: "Secara langsung memanggil atau menyebut target audiens spesifik untuk membuat mereka merasa 'terpanggil'.",
-                efektif: "Niche Market, Konten Komunitas"
-            }
+            "Narasi": { desc: "Membangun hubungan emosional dengan membagikan pengalaman pribadi (struggle & success). Sangat relateable.", efektif: "Personal Branding, Produk Solutif" },
+            "Pertanyaan": { desc: "Memicu interaksi dan membuat audiens merefleksikan masalah mereka sendiri. Mendorong komentar.", efektif: "Semua Kategori" },
+            "Sebelum & Sesudah": { desc: "Menunjukkan transformasi nyata untuk membuktikan efektivitas produk/jasa. Sangat visual dan meyakinkan.", efektif: "Produk Fisik, Jasa Skill, Kecantikan" },
+            "Social Proof": { desc: "Menggunakan bukti (testimoni, angka penjualan, ulasan) bahwa banyak orang lain telah percaya pada produk/jasa Anda.", efektif: "Semua Kategori, terutama E-commerce" },
+            "Janji & Manfaat": { desc: "Memberikan janji nilai yang jelas dan langsung di awal video. Membuat audiens penasaran dengan hasilnya.", efektif: "Jasa, Edukasi, Produk Solutif" },
+            "How-To": { desc: "Menawarkan tutorial atau cara melakukan sesuatu yang diinginkan oleh target audiens.", efektif: "Konten Edukasi, DIY, Skill-based" },
+            "Kontroversial": { desc: "Menyatakan opini yang tidak umum atau berlawanan dengan kepercayaan populer untuk memancing perdebatan dan engagement.", efektif: "Personal Branding, Konten Opini" },
+            "Negatif": { desc: "Menyoroti kesalahan umum atau hal-hal yang harus dihindari oleh audiens. Bermain dengan psikologi 'loss aversion'.", efektif: "Konten Edukasi, Nasihat Keuangan/Kesehatan" },
+            "FOMO": { desc: "Fear Of Missing Out. Menciptakan urgensi atau kelangkaan, membuat audiens merasa harus bertindak sekarang.", efektif: "Promo Terbatas, Produk Eksklusif, Event" },
+            "Penasaran": { desc: "Menciptakan 'kesenjangan informasi' yang membuat audiens harus menonton sampai akhir untuk tahu jawabannya.", efektif: "Storytelling, Product Teaser, Vlog" },
+            "Statistik": { desc: "Menggunakan data, angka, atau fakta mengejutkan untuk membangun kredibilitas dan menarik perhatian.", efektif: "Konten Informatif, Berita, Presentasi Bisnis" },
+            "Kutipan": { desc: "Memulai dengan kutipan yang kuat, relevan, atau inspiratif dari tokoh terkenal atau sumber terpercaya.", efektif: "Konten Motivasi, Self-development" },
+            "Panggilan Langsung": { desc: "Secara langsung memanggil atau menyebut target audiens spesifik untuk membuat mereka merasa 'terpanggil'.", efektif: "Niche Market, Konten Komunitas" }
         };
         
         // --- UI UTILITIES ---
@@ -685,48 +651,34 @@
         async function callGeminiAPI(prompt, apiKey, imageBase64 = null, mimeType = null) {
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
             
-            let contents = [{
-                parts: [{ text: prompt }]
-            }];
+            let contents = [{ parts: [{ text: prompt }] }];
 
             if (imageBase64 && mimeType) {
-                contents[0].parts.push({
-                    inline_data: {
-                        mime_type: mimeType,
-                        data: imageBase64 
-                    }
-                });
+                contents[0].parts.push({ inline_data: { mime_type: mimeType, data: imageBase64 } });
             }
 
             const maxRetries = 3;
-            let delay = 1000; // Start with 1 second delay
+            let delay = 1000;
 
             for (let i = 0; i < maxRetries; i++) {
                 try {
                     const response = await fetch(API_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ contents })
                     });
 
-                    if (response.ok) {
-                        return await response.json(); // Success, return the result
-                    }
+                    if (response.ok) return await response.json();
 
                     const errorBody = await response.json();
                     console.error(`API Error (Attempt ${i + 1}):`, errorBody);
 
-                    // --- Handle specific, non-retriable errors ---
                     if (response.status === 400 && errorBody.error?.message.includes("API key not valid")) {
                         throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
                     }
                     if (response.status === 429) {
                         throw new Error("API_QUOTA_EXCEEDED");
                     }
-
-                    // --- Handle retriable server errors ---
                     if (response.status >= 500) { 
                         if (i < maxRetries - 1) {
                             console.log(`Server error. Retrying in ${delay / 1000}s...`);
@@ -737,27 +689,25 @@
                             throw new Error(`Sistem AI sedang sibuk (Status: ${response.status}). Coba lagi nanti.`);
                         }
                     }
-                    
                     throw new Error(errorBody.error?.message || `Terjadi kesalahan (Status: ${response.status}).`);
 
                 } catch (error) {
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                         throw error; 
+                          throw error; 
                      }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
                         delay *= 2;
                     } else {
                         if (error instanceof TypeError) {
-                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda atau coba nonaktifkan ekstensi browser (seperti AdBlock).");
+                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
                         }
-                        throw new Error("Gagal terhubung ke sistem AI setelah beberapa kali mencoba. Periksa koneksi internet Anda atau coba lagi nanti.");
+                        throw new Error("Gagal terhubung ke sistem AI setelah beberapa kali mencoba.");
                     }
                 }
             }
         }
-
 
         async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
              const allCategories = Object.keys(hookExplanations).join(", ");
@@ -826,7 +776,6 @@ Contoh struktur JSON yang diharapkan:
             const result = await callGeminiAPI(prompt, apiKey, imageBase64, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                 const rawText = result.candidates[0].content.parts[0].text;
-                // --- ROBUST JSON CLEANING ---
                 const jsonMatch = rawText.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
                     try {
@@ -869,7 +818,7 @@ Contoh struktur JSON yang diharapkan:
                 viewHistoryBtn.innerHTML = `🕒 Riwayat`;
             }
 
-            if (hooksToDisplay.length === 0) {
+            if (!hooksToDisplay || hooksToDisplay.length === 0) {
                 let emptyMessage = 'Generate ide untuk melihat hasilnya di sini.';
                 if(currentView === 'favorites') emptyMessage = 'Anda belum punya favorit. Tandai dengan ikon bintang!';
                 if(currentView === 'history') emptyMessage = 'Riwayat generate Anda masih kosong.';
@@ -884,22 +833,21 @@ Contoh struktur JSON yang diharapkan:
                 const card = document.createElement('div');
                 card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                 card.innerHTML = `
-                            <div>
-                                <div class="flex items-center gap-3 mb-3">
-                                    <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                                    </button>
-                                    <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
-                                    ${toneLabel}
-                                    ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
-                                </div>
-                                <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
-                            </div>
-                            <div class="flex items-center gap-2 mt-2">
-                                <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
-                                <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
-                            </div>
-                        `;
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                            </button>
+                            <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                            ${toneLabel}
+                            ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
+                        </div>
+                        <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                        <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
+                    </div>`;
                 resultsGrid.appendChild(card);
             });
         }
@@ -926,16 +874,13 @@ Contoh struktur JSON yang diharapkan:
                 let displayHTML = ''; let editHTML = '';
 
                 if (key === 'saran_audio') {
-                    const audioList = data[key].map(audio => 
-                        `<span class="audio-suggestion" data-title="${audio.title}" data-artist="${audio.artist || ''}">'${audio.title}' by ${audio.artist || 'Unknown'}</span>`
-                    ).join('; ');
+                    const audioList = data[key].map(audio => `<span class="audio-suggestion" data-title="${audio.title}" data-artist="${audio.artist || ''}">'${audio.title}' by ${audio.artist || 'Unknown'}</span>`).join('; ');
                     displayHTML = `<div class="pl-7"><p class="text-slate-200">${audioList}</p></div>`;
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${data[key].map(a => `${a.title} by ${a.artist}`).join(', ')}</textarea>`;
                 } else if (key === 'hashtags') {
                     const contentArray = Array.isArray(data[key]) ? data[key] : [data[key]];
                     const contentString = contentArray.join(', ');
                     const displayContent = contentArray.map(tag => `<span class="hashtag" data-tag="${tag}">#${tag}</span>`).join(' ');
-                    
                     displayHTML = `<div class="pl-7"><div class="flex flex-wrap gap-2">${displayContent}</div></div>`;
                     editHTML = `<textarea class="w-full h-24 p-2 rounded-md edit-textarea">${contentString}</textarea>`;
                 } else if (key === 'caption') {
@@ -944,27 +889,26 @@ Contoh struktur JSON yang diharapkan:
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
                     const item = data[key];
                     displayHTML = `<div class="pl-7 space-y-2">
-                                     <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
-                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
-                                         <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
-                                         <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
-                                         <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
-                                         <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
-                                     </div>
-                                     <hr class="border-slate-700 my-2">
-                                     <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
-                                     <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
-                                     <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
-                                 </div>`;
-                    
+                        <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
+                            <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
+                            <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
+                            <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
+                            <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
+                        </div>
+                        <hr class="border-slate-700 my-2">
+                        <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
+                        <p class="text-slate-300">🎤 <strong class="font-medium text-slate-100/80">NARASI:</strong> ${item.narasi || ''}</p>
+                        <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
+                    </div>`;
                     editHTML = `<div class="space-y-2">
-                                     <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
-                                     <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
-                                     <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
-                                     <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
-                                     <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
-                                     <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
-                                 </div>`;
+                        <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
+                        <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
+                        <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
+                        <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
+                        <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                        <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                    </div>`;
                 }
 
                 sectionWrapper.innerHTML = `
@@ -973,12 +917,7 @@ Contoh struktur JSON yang diharapkan:
                             <h3 class="text-lg font-bold text-slate-100 ${isAudioSection ? 'text-xl' : ''}">${sectionIcons[key]} ${sectionTitles[key]}</h3>
                             <div class="flex items-center gap-3">
                                 <button class="edit-section-btn p-1 text-slate-400 hover:text-white" title="Edit bagian ini"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>
-                                <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
-                                        <path d="M13 0H6a2 2 0 0 0-2 2v1h1V2a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-2v1h2a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                        <path d="M2 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm7 11H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1z"/>
-                                    </svg>
-                                </button>
+                                <button class="copy-section-btn p-1 text-slate-400 hover:text-white" title="Salin bagian ini"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16"><path d="M13 0H6a2 2 0 0 0-2 2v1h1V2a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-2v1h2a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/><path d="M2 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm7 11H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1z"/></svg></button>
                             </div>
                         </div>
                         ${displayHTML}
@@ -997,7 +936,7 @@ Contoh struktur JSON yang diharapkan:
             document.getElementById('script-disclaimer').style.display = 'block';
         }
         
-        // --- FAVORITES, HISTORY, SCHEDULE LOGIC ---
+        // --- DATA MANAGEMENT (Favorites, History, Schedule) ---
         function toggleFavorite(hookData) {
             const index = favorites.findIndex(fav => fav.hook === hookData.hook);
             if (index > -1) { favorites.splice(index, 1); showNotification('Dihapus dari favorit!'); } 
@@ -1040,8 +979,7 @@ Contoh struktur JSON yang diharapkan:
                         <button id="confirm-delete-history" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700">Ya, Hapus</button>
                         <button id="cancel-delete-history" class="flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal</button>
                     </div>
-                </div>
-            `;
+                </div>`;
             document.body.appendChild(customConfirmModal);
 
             document.getElementById('confirm-delete-history').onclick = () => {
@@ -1066,10 +1004,8 @@ Contoh struktur JSON yang diharapkan:
             }
         }
 
-        // --- CALENDAR LOGIC ---
         function loadScheduledContent() {
             const loadedSchedule = JSON.parse(localStorage.getItem('contentCheatSchedule')) || {};
-            // Migrasi data lama ke struktur baru
             Object.keys(loadedSchedule).forEach(date => {
                 loadedSchedule[date].forEach(item => {
                     if (!item.platforms) {
@@ -1087,6 +1023,8 @@ Contoh struktur JSON yang diharapkan:
         function saveScheduledContent() {
             localStorage.setItem('contentCheatSchedule', JSON.stringify(scheduledContent));
         }
+        
+        // --- CALENDAR LOGIC ---
         function renderCalendar(isScheduling = false) {
             const year = calendarDate.getFullYear();
             const month = calendarDate.getMonth();
@@ -1159,7 +1097,6 @@ Contoh struktur JSON yang diharapkan:
             if (contentForDate && contentForDate.length > 0) {
                 contentForDate.forEach((item, index) => {
                     const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
-                    
                     const statusOptions = ['-', 'Siap Upload', 'Proses Take Video', 'Proses Edit Video', 'Sudah Upload', 'Revisi', 'Proses Evaluasi'];
                     const allPlatforms = ['IG', 'FB', 'TikTok', 'YouTube', 'Shopee', 'TokPed'];
                     
@@ -1176,11 +1113,8 @@ Contoh struktur JSON yang diharapkan:
                                     <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 text-sm font-semibold">${platform}</label>
                                     <input type="time" value="${currentTime}" id="time-${dateStr}-${index}-${platform}" class="time-input p-1 rounded text-xs w-24" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
                                 </div>
-                                <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs mt-1" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
-                                    ${selectOptions}
-                                </select>
-                            </div>
-                        `;
+                                <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs mt-1" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">${selectOptions}</select>
+                            </div>`;
                     });
                     platformStatusesHTML += '</div>';
 
@@ -1195,8 +1129,7 @@ Contoh struktur JSON yang diharapkan:
                                  <button class="delete-schedule-btn p-1 text-slate-400 hover:text-red-400" data-date="${dateStr}" data-index="${index}" title="Hapus"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>
                              </div>
                         </div>
-                        ${platformStatusesHTML}
-                    `;
+                        ${platformStatusesHTML}`;
                     detailsContainer.appendChild(itemEl);
                 });
             } else {
@@ -1207,7 +1140,7 @@ Contoh struktur JSON yang diharapkan:
         function showDeleteConfirmation(date, index) {
             const customConfirmModal = document.createElement('div');
             customConfirmModal.className = 'modal-overlay visible';
-            customConfirmModal.style.zIndex = '60'; // Ensure it's on top of other modals
+            customConfirmModal.style.zIndex = '60';
             customConfirmModal.innerHTML = `
                 <div class="modal-content !max-w-sm">
                     <h3 class="text-xl font-bold text-white mb-4">Konfirmasi Hapus</h3>
@@ -1216,8 +1149,7 @@ Contoh struktur JSON yang diharapkan:
                         <button id="confirm-delete" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700">Ya, Hapus</button>
                         <button id="cancel-delete" class="flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal</button>
                     </div>
-                </div>
-            `;
+                </div>`;
             document.body.appendChild(customConfirmModal);
 
             document.getElementById('confirm-delete').onclick = () => {
@@ -1227,7 +1159,7 @@ Contoh struktur JSON yang diharapkan:
                 }
                 saveScheduledContent();
                 showCalendarDetails(date);
-                renderCalendar(); // Re-render to update dot
+                renderCalendar();
                 showNotification('Jadwal berhasil dihapus.');
                 document.body.removeChild(customConfirmModal);
             };
@@ -1235,7 +1167,6 @@ Contoh struktur JSON yang diharapkan:
                 document.body.removeChild(customConfirmModal);
             };
         }
-
 
         // --- MODAL & EXPLANATION LOGIC ---
         function showHookExplanation(category) {
@@ -1291,9 +1222,7 @@ Contoh struktur JSON yang diharapkan:
                     counterEl.classList.toggle('text-red-400', quota < 20); counterEl.classList.toggle('text-green-400', quota >= 20);
                 }
                 const generateBtn = document.getElementById('generateBtn');
-                if (generateBtn) {
-                    generateBtn.disabled = quota <= 0;
-                }
+                if (generateBtn) generateBtn.disabled = quota <= 0;
             }
         };
 
@@ -1336,7 +1265,6 @@ Contoh struktur JSON yang diharapkan:
              btn.addEventListener('click', (e) => { 
                  e.stopPropagation();
                  const modal = btn.closest('.modal-overlay');
-
                  if (modal.id === 'apiKeyModal' && !localStorage.getItem('userGeminiApiKey')) {
                      sessionStorage.removeItem('isLoggedIn');
                      modal.classList.remove('visible');
@@ -1367,9 +1295,7 @@ Contoh struktur JSON yang diharapkan:
             } else {
                 errorMsg.style.display = 'block';
                 loginModalContent.classList.add('shake');
-                setTimeout(() => {
-                    loginModalContent.classList.remove('shake');
-                }, 820);
+                setTimeout(() => loginModalContent.classList.remove('shake'), 820);
             }
         });
 
@@ -1396,19 +1322,16 @@ Contoh struktur JSON yang diharapkan:
         
         document.getElementById('togglePasswordVisibility').addEventListener('click', () => {
             const passwordInput = document.getElementById('password');
-            const eyeShow = document.getElementById('eye-show');
-            const eyeHide = document.getElementById('eye-hide');
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            eyeShow.classList.toggle('hidden');
-            eyeHide.classList.toggle('hidden');
+            document.getElementById('eye-show').classList.toggle('hidden');
+            document.getElementById('eye-hide').classList.toggle('hidden');
         });
 
-        document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => { document.getElementById('tutorialModal').classList.add('visible'); });
-        document.getElementById('pustaka-hook-btn').addEventListener('click', () => { document.getElementById('pustakaHookModal').classList.add('visible'); });
-        document.getElementById('faq-btn').addEventListener('click', () => { document.getElementById('faqModal').classList.add('visible'); });
-        document.getElementById('apiKeyFaqBtn').addEventListener('click', () => { document.getElementById('apiKeyFaqModal').classList.add('visible'); });
-        
+        document.getElementById('howToGetApiKeyBtn').addEventListener('click', () => document.getElementById('tutorialModal').classList.add('visible'));
+        document.getElementById('pustaka-hook-btn').addEventListener('click', () => document.getElementById('pustakaHookModal').classList.add('visible'));
+        document.getElementById('faq-btn').addEventListener('click', () => document.getElementById('faqModal').classList.add('visible'));
+        document.getElementById('apiKeyFaqBtn').addEventListener('click', () => document.getElementById('apiKeyFaqModal').classList.add('visible'));
         document.getElementById('openTutorialFromFaq').addEventListener('click', () => {
             document.getElementById('apiKeyFaqModal').classList.remove('visible');
             document.getElementById('tutorialModal').classList.add('visible');
@@ -1417,11 +1340,11 @@ Contoh struktur JSON yang diharapkan:
         let loadingInterval;
         document.getElementById('generateBtn').addEventListener('click', async () => {
             if (quotaManager.getQuotaData().quotaLeft <= 0) { 
-                showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
+                showNotification('Maaf, kuota generate harian Anda sudah habis.', true); 
                 return; 
             }
             const topic = document.getElementById('topic').value.trim();
-            if (!topic) { showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true); return; }
+            if (!topic) { showNotification('Mohon isi Produk / Jasa Anda.', true); return; }
             
             const generateBtn = document.getElementById('generateBtn');
             generateBtn.disabled = true;
@@ -1437,15 +1360,13 @@ Contoh struktur JSON yang diharapkan:
             }, 2000);
 
             try {
-                const hooks = await generateAIHooks(
-                    topic, 
+                const hooks = await generateAIHooks( topic, 
                     document.getElementById('audience').value.trim(), 
                     document.getElementById('details').value.trim(), 
                     document.getElementById('hook-type').value, 
                     document.getElementById('hook-count').value,
                     document.getElementById('tone-of-voice').value,
-                    userAPIKey
-                );
+                    userAPIKey );
                 quotaManager.decrementQuota();
                 lastGeneratedHooks = hooks;
                 currentView = 'results';
@@ -1479,10 +1400,7 @@ Contoh struktur JSON yang diharapkan:
         });
 
         document.getElementById('results-header').addEventListener('click', (e) => {
-            const clearHistoryBtn = e.target.closest('#clear-history-btn');
-            if (clearHistoryBtn) {
-                clearHistory();
-            }
+            if (e.target.closest('#clear-history-btn')) clearHistory();
         });
         
         document.getElementById('results-grid').addEventListener('click', async (e) => {
@@ -1497,16 +1415,12 @@ Contoh struktur JSON yang diharapkan:
             } else if (categoryBtn) {
                 showHookExplanation(categoryBtn.dataset.category);
             } else if (favBtn) {
-                toggleFavorite({ 
-                    hook: favBtn.dataset.hook, 
-                    category: favBtn.dataset.category,
-                    tone: favBtn.dataset.tone
-                });
+                toggleFavorite({ hook: favBtn.dataset.hook, category: favBtn.dataset.category, tone: favBtn.dataset.tone });
             } else if (copyBtn) {
                 fallbackCopy(copyBtn.dataset.hook);
             } else if (scriptBtn) {
                 if (quotaManager.getQuotaData().quotaLeft <= 0) { 
-                    showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
+                    showNotification('Maaf, kuota generate harian Anda sudah habis.', true); 
                     return; 
                 }
                 const hookText = scriptBtn.dataset.hook;
@@ -1525,14 +1439,16 @@ Contoh struktur JSON yang diharapkan:
                 scriptLoadingInterval = setInterval(() => {
                     scriptMessageIndex = (scriptMessageIndex + 1) % scriptLoadingMessages.length;
                     const loadingSpan = document.getElementById('script-loading-text');
-                    if (loadingSpan) loadingSpan.textContent = scriptLoadingMessages[messageIndex];
+                    if (loadingSpan) loadingSpan.textContent = scriptLoadingMessages[scriptMessageIndex];
                 }, 2000);
 
                 modal.classList.add('visible');
                 
                 try {
+                    const topicForScript = document.getElementById('topic').value.trim(); // Get topic before generating
                     const scriptData = await generateAIScript(hookText, userAPIKey, uploadedImageBase64);
                     quotaManager.decrementQuota();
+                    scriptData.topic = topicForScript; // Store the topic with the script data
                     displayStructuredScript(scriptData);
                 } catch (error) {
                     console.error('Script Generation Error:', error);
@@ -1594,8 +1510,7 @@ Contoh struktur JSON yang diharapkan:
                             } else {
                                 currentScriptData[sectionKey] = mainTextarea.value.split(',').map(item => item.trim()); 
                             }
-                        } 
-                        else { currentScriptData[sectionKey] = mainTextarea.value; }
+                        } else { currentScriptData[sectionKey] = mainTextarea.value; }
                     }
                     displayStructuredScript(currentScriptData);
                     showNotification('Perubahan berhasil disimpan!', false);
@@ -1611,8 +1526,7 @@ Contoh struktur JSON yang diharapkan:
                         } else {
                            textToCopy = '#' + sectionData.join(' #');
                         }
-                    }
-                    else if (typeof sectionData === 'object' && sectionData !== null) {
+                    } else if (typeof sectionData === 'object' && sectionData !== null) {
                         textToCopy = `Lokasi: ${sectionData.lokasi}\nProperti: ${sectionData.properti}\nPencahayaan: ${sectionData.pencahayaan}\nMood: ${sectionData.mood}\n\nVISUAL: ${sectionData.visual}\nNARASI: ${sectionData.narasi}\nSARAN SHOT: ${sectionData.saran_shot}`;
                     }
                     fallbackCopy(textToCopy);
@@ -1625,28 +1539,23 @@ Contoh struktur JSON yang diharapkan:
              if (buttonId === 'schedule-btn') {
                  if (!currentScriptData) return;
                  calendarDate = new Date();
-                 renderCalendar(true); // Render in scheduling mode
+                 renderCalendar(true);
                  document.getElementById('calendarModal').classList.add('visible');
              }
-             
              if (buttonId === 'copy-gdocs-btn') {
                  if (!currentScriptData) return;
                  let fullText = getFullScriptAsText();
                  fallbackCopy(fullText, 'Teks disalin! Buka Google Docs dan paste (Ctrl+V).');
-                 setTimeout(() => {
-                    window.open('https://docs.new', '_blank');
-                 }, 100);
+                 setTimeout(() => window.open('https://docs.new', '_blank'), 100);
              }
-
              if (buttonId === 'copy-all-script-btn') {
                  if (!currentScriptData) return;
                  fallbackCopy(getFullScriptAsText());
              }
-             
              if (buttonId === 'download-doc-btn') {
                 if (!currentScriptData) return;
                 
-                const topicValue = document.getElementById('topic').value.trim();
+                const topicValue = currentScriptData.topic || document.getElementById('topic').value.trim();
                 const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
                 const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
 
@@ -1688,13 +1597,13 @@ Contoh struktur JSON yang diharapkan:
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
                      if (key === 'saran_audio') {
-                          fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                         fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
                      } else if (key === 'hashtags') {
-                          fullText += '#' + data.join(' #') + '\n\n';
+                         fullText += '#' + data.join(' #') + '\n\n';
                      } else if (typeof data === 'string') { 
-                          fullText += data + '\n\n'; 
+                         fullText += data + '\n\n'; 
                      } else if (typeof data === 'object') { 
-                          fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                         fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
                      }
                 }
             });
@@ -1703,77 +1612,44 @@ Contoh struktur JSON yang diharapkan:
 
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
              if (itemToMove) {
-                 // Logic for moving an existing item
-                 if (!selectedDateForScheduling) {
-                     showNotification('Silakan pilih tanggal baru di kalender.', true);
-                     return;
-                 }
-                 // Add to new date
-                 if (!scheduledContent[selectedDateForScheduling]) {
-                     scheduledContent[selectedDateForScheduling] = [];
-                 }
+                 if (!selectedDateForScheduling) { showNotification('Silakan pilih tanggal baru di kalender.', true); return; }
+                 if (!scheduledContent[selectedDateForScheduling]) scheduledContent[selectedDateForScheduling] = [];
                  scheduledContent[selectedDateForScheduling].push(itemToMove.item);
-                 // Remove from old date
                  scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
-                 if (scheduledContent[itemToMove.originalDate].length === 0) {
-                     delete scheduledContent[itemToMove.originalDate];
-                 }
+                 if (scheduledContent[itemToMove.originalDate].length === 0) delete scheduledContent[itemToMove.originalDate];
                  showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
                  itemToMove = null;
              } else {
-                 // Logic for scheduling a new item
-                 if (!selectedDateForScheduling) {
-                     showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
-                     return;
-                 }
-                 if (!scheduledContent[selectedDateForScheduling]) {
-                     scheduledContent[selectedDateForScheduling] = [];
-                 }
-                 const newItem = {
-                     ...currentScriptData,
-                     id: Date.now(),
-                     platforms: {
-                         'IG': { status: 'Siap Upload', time: '' },
-                         'FB': { status: 'Siap Upload', time: '' },
-                         'TikTok': { status: 'Siap Upload', time: '' },
-                         'YouTube': { status: '-', time: '' },
-                         'Shopee': { status: '-', time: '' },
-                         'TokPed': { status: '-', time: '' }
-                     }
-                 };
+                 if (!selectedDateForScheduling) { showNotification('Silakan pilih tanggal di kalender.', true); return; }
+                 if (!scheduledContent[selectedDateForScheduling]) scheduledContent[selectedDateForScheduling] = [];
+                 const newItem = { ...currentScriptData, id: Date.now(), platforms: { 'IG': { status: 'Siap Upload', time: '' }, 'FB': { status: 'Siap Upload', time: '' }, 'TikTok': { status: 'Siap Upload', time: '' }, 'YouTube': { status: '-', time: '' }, 'Shopee': { status: '-', time: '' }, 'TokPed': { status: '-', time: '' } } };
                  scheduledContent[selectedDateForScheduling].push(newItem);
                  showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
                  document.getElementById('scriptModal').classList.remove('visible');
              }
-             
              saveScheduledContent();
              document.getElementById('calendarModal').classList.remove('visible');
              selectedDateForScheduling = null;
         });
 
-
-        // Calendar View Listeners
         document.getElementById('calendar-view-btn').addEventListener('click', () => {
             calendarDate = new Date();
-            renderCalendar(false); // Render in view-only mode
+            renderCalendar(false);
             document.getElementById('calendarModal').classList.add('visible');
         });
 
         document.getElementById('prev-month-btn').addEventListener('click', () => {
             calendarDate.setMonth(calendarDate.getMonth() - 1);
-            const isScheduling = document.getElementById('calendar-actions').style.display === 'block';
-            renderCalendar(isScheduling);
+            renderCalendar(document.getElementById('calendar-actions').style.display === 'block');
         });
 
         document.getElementById('next-month-btn').addEventListener('click', () => {
             calendarDate.setMonth(calendarDate.getMonth() + 1);
-            const isScheduling = document.getElementById('calendar-actions').style.display === 'block';
-            renderCalendar(isScheduling);
+            renderCalendar(document.getElementById('calendar-actions').style.display === 'block');
         });
 
-
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-        window.onscroll = function() {
+        window.onscroll = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 scrollToTopBtn.style.display = "flex";
             } else {
@@ -1799,10 +1675,8 @@ Contoh struktur JSON yang diharapkan:
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.fillStyle = "#FFFFFF";
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    canvas.width = img.width; canvas.height = img.height;
+                    ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0);
                     uploadedImageBase64 = canvas.toDataURL('image/jpeg').split(',')[1];
                     imagePreview.src = 'data:image/jpeg;base64,' + uploadedImageBase64;
@@ -1816,34 +1690,23 @@ Contoh struktur JSON yang diharapkan:
         imageUploadInput.addEventListener('change', (event) => handleFile(event.target.files[0]));
         
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            uploadLabel.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-            }, false);
+            uploadLabel.addEventListener(eventName, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
         });
-
         ['dragenter', 'dragover'].forEach(eventName => {
             uploadLabel.addEventListener(eventName, () => uploadLabel.classList.add('dragover'), false);
         });
-
         ['dragleave', 'drop'].forEach(eventName => {
             uploadLabel.addEventListener(eventName, () => uploadLabel.classList.remove('dragover'), false);
         });
-
-        uploadLabel.addEventListener('drop', (e) => {
-            handleFile(e.dataTransfer.files[0]);
-        }, false);
+        uploadLabel.addEventListener('drop', (e) => handleFile(e.dataTransfer.files[0]), false);
         
         removeImageBtn.addEventListener('click', () => {
             uploadedImageBase64 = null;
-            imageUploadInput.value = ''; // Reset file input
+            imageUploadInput.value = '';
             imagePreviewContainer.classList.add('hidden');
         });
 
-
-        scrollToTopBtn.addEventListener('click', function() {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
+        scrollToTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
         document.addEventListener('DOMContentLoaded', () => {
             checkLogin();
@@ -1861,20 +1724,14 @@ Contoh struktur JSON yang diharapkan:
                     document.getElementById('calendarModal').classList.remove('visible');
                     document.getElementById('scriptModal').classList.add('visible');
                 }
-
                 if (moveBtn) {
                     const { date, index } = moveBtn.dataset;
-                    const item = scheduledContent[date][index];
-                    itemToMove = { item, originalDate: date, originalIndex: parseInt(index) };
-                    renderCalendar(true); // Re-render in scheduling mode
-                    
-                    const detailsContainer = document.getElementById('calendar-details');
-                    detailsContainer.innerHTML = `
+                    itemToMove = { item: scheduledContent[date][index], originalDate: date, originalIndex: parseInt(index) };
+                    renderCalendar(true);
+                    document.getElementById('calendar-details').innerHTML = `
                         <p class="text-yellow-300 text-center mb-4">Pilih tanggal baru untuk memindahkan konten.</p>
-                        <button id="cancel-move-btn" class="w-full text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal Pindah</button>
-                    `;
+                        <button id="cancel-move-btn" class="w-full text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal Pindah</button>`;
                 }
-                
                 if (cancelMoveBtn) {
                     const originalDate = itemToMove.originalDate;
                     itemToMove = null;
@@ -1882,7 +1739,6 @@ Contoh struktur JSON yang diharapkan:
                     showCalendarDetails(originalDate);
                     showNotification('Pemindahan jadwal dibatalkan.');
                 }
-
                 if (deleteBtn) {
                     const { date, index } = deleteBtn.dataset;
                     showDeleteConfirmation(date, index);
@@ -1891,22 +1747,14 @@ Contoh struktur JSON yang diharapkan:
 
             document.getElementById('calendar-details').addEventListener('change', (e) => {
                 const target = e.target;
-                if (target.matches('.status-select-per-platform') || target.matches('.time-input')) {
+                if (target.matches('.status-select-per-platform, .time-input')) {
                     const { date, index, platform } = target.dataset;
                     const item = scheduledContent[date][index];
-                    if (!item.platforms) {
-                        item.platforms = {};
-                    }
-                    if (!item.platforms[platform]) {
-                        item.platforms[platform] = { status: '-', time: '' };
-                    }
+                    if (!item.platforms) item.platforms = {};
+                    if (!item.platforms[platform]) item.platforms[platform] = { status: '-', time: '' };
 
-                    if (target.matches('.status-select-per-platform')) {
-                        item.platforms[platform].status = target.value;
-                    }
-                    if (target.matches('.time-input')) {
-                        item.platforms[platform].time = target.value;
-                    }
+                    if (target.matches('.status-select-per-platform')) item.platforms[platform].status = target.value;
+                    if (target.matches('.time-input')) item.platforms[platform].time = target.value;
 
                     saveScheduledContent();
                     showNotification(`Jadwal untuk ${platform} diperbarui!`);
