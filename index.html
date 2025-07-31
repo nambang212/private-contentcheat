@@ -22,15 +22,15 @@
             border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        .modern-input, .modern-input-group, .edit-textarea {
+        .modern-input, .modern-input-group, .edit-textarea, .platform-select, .status-select {
             background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
-        .modern-input:focus, .edit-textarea:focus {
+        .modern-input:focus, .edit-textarea:focus, .platform-select:focus, .status-select:focus {
             outline: none; border-color: rgba(167, 139, 250, 0.8);
             box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
         }
-        select.modern-input option { background: #0D1120; color: #E0E0E0; }
+        select.modern-input option, .platform-select option, .status-select option { background: #0D1120; color: #E0E0E0; }
         .modern-btn {
             background: linear-gradient(90deg, #5F00D8, #A78BFA); border: none;
             transition: all 0.3s ease; box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4);
@@ -238,6 +238,12 @@
             padding: 1rem;
             margin-top: 1rem;
             min-height: 100px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -770,10 +776,9 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
         }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
-            let prompt = `HANYA KEMBALIKAN OBJEK JSON YANG VALID. JANGAN TAMBAHKAN TEKS ATAU MARKDOWN LAINNYA.
-Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
+            let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
             
-            const mimeType = 'image/jpeg'; // We convert all images to JPEG
+            const mimeType = 'image/jpeg';
 
             prompt += `\n\nHook: "${hookText}"
 Produk/Jasa: "${document.getElementById('topic').value}"
@@ -802,13 +807,17 @@ Contoh struktur JSON yang diharapkan:
             const result = await callGeminiAPI(prompt, apiKey, imageBase64, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                 const rawText = result.candidates[0].content.parts[0].text;
-                const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                try {
-                    return JSON.parse(cleanedText);
-                } catch (e) {
-                    console.error("JSON Parsing Error for script. Raw text:", cleanedText, e);
-                    throw new Error(`Gagal memproses kerangka: ${e.message}`);
+                // --- ROBUST JSON CLEANING ---
+                const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    try {
+                        return JSON.parse(jsonMatch[0]);
+                    } catch (e) {
+                        console.error("JSON Parsing Error after robust cleaning. Cleaned text:", jsonMatch[0], e);
+                        throw new Error(`Gagal memproses kerangka: Respons AI tidak valid.`);
+                    }
                 }
+                throw new Error("Tidak ditemukan format JSON yang valid dalam respons AI.");
             }
             throw new Error("Struktur respons kerangka konten tidak terduga.");
         }
@@ -1076,7 +1085,7 @@ Contoh struktur JSON yang diharapkan:
                     dayEl.classList.add('today');
                 }
                 
-                if (scheduledContent[dateStr]) {
+                if (scheduledContent[dateStr] && scheduledContent[dateStr].length > 0) {
                     const dot = document.createElement('div');
                     dot.className = 'scheduled-dot';
                     dayEl.appendChild(dot);
@@ -1107,17 +1116,49 @@ Contoh struktur JSON yang diharapkan:
             if(dayEl) dayEl.classList.add('selected');
 
             const detailsContainer = document.getElementById('calendar-details');
-            const content = scheduledContent[dateStr];
-            if (content && content.length > 0) {
-                detailsContainer.innerHTML = `<h4 class="font-bold text-lg mb-2">Jadwal untuk ${dateStr}</h4>`;
-                content.forEach((item, index) => {
+            const contentForDate = scheduledContent[dateStr];
+            
+            const formatDate = (ds) => new Date(ds + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            detailsContainer.innerHTML = `<h4 class="font-bold text-lg mb-2">Jadwal untuk ${formatDate(dateStr)}</h4>`;
+
+            if (contentForDate && contentForDate.length > 0) {
+                contentForDate.forEach((item, index) => {
                     const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
-                    detailsContainer.innerHTML += `<div class="p-2 bg-slate-800/50 rounded-lg mb-2">
-                        <p class="text-slate-200">${index + 1}. ${hookText.substring(0, 50)}...</p>
-                    </div>`;
+                    const platformOptions = ['IG', 'FB', 'TikTok', 'YouTube', 'Shopee', 'TokPed'].map(p => `<option value="${p}" ${item.platform === p ? 'selected' : ''}>${p}</option>`).join('');
+                    const statusOptions = ['Siap Upload', 'Sudah Upload', 'Revisi', 'Proses Evaluasi'].map(s => `<option value="${s}" ${item.status === s ? 'selected' : ''}>${s}</option>`).join('');
+                    
+                    const statusColors = {
+                        'Siap Upload': 'bg-green-500',
+                        'Sudah Upload': 'bg-blue-500',
+                        'Revisi': 'bg-yellow-500',
+                        'Proses Evaluasi': 'bg-purple-500',
+                    };
+                    const statusColor = statusColors[item.status] || 'bg-gray-500';
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'p-3 bg-slate-800/50 rounded-lg mb-2 space-y-3';
+                    itemEl.innerHTML = `
+                        <div class="flex justify-between items-start">
+                             <p class="text-slate-200 flex-1 pr-4"><strong class="text-purple-300">#${index + 1}</strong> ${hookText.substring(0, 70)}...</p>
+                             <div class="flex items-center gap-2">
+                                <button class="edit-schedule-btn p-1 text-slate-400 hover:text-white" data-date="${dateStr}" data-index="${index}" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zM14.247 3.36l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>
+                                <button class="move-schedule-btn p-1 text-slate-400 hover:text-white" data-date="${dateStr}" data-index="${index}" title="Pindah Tanggal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg></button>
+                                <button class="delete-schedule-btn p-1 text-slate-400 hover:text-red-400" data-date="${dateStr}" data-index="${index}" title="Hapus"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>
+                             </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <select class="platform-select w-full p-1 rounded text-xs" data-date="${dateStr}" data-index="${index}">${platformOptions}</select>
+                            <select class="status-select w-full p-1 rounded text-xs" data-date="${dateStr}" data-index="${index}"><option value="" disabled>Pilih Status</option>${statusOptions}</select>
+                        </div>
+                         <div class="flex items-center text-xs text-slate-300">
+                            <div class="status-dot ${statusColor}"></div>
+                            <span>Status: ${item.status || 'Belum diatur'}</span>
+                        </div>
+                    `;
+                    detailsContainer.appendChild(itemEl);
                 });
             } else {
-                detailsContainer.innerHTML = `<p class="text-slate-400">Tidak ada jadwal untuk tanggal ${dateStr}.</p>`;
+                detailsContainer.innerHTML += `<p class="text-slate-400">Tidak ada jadwal untuk tanggal ini.</p>`;
             }
         }
 
@@ -1522,7 +1563,14 @@ Contoh struktur JSON yang diharapkan:
             if (!scheduledContent[selectedDateForScheduling]) {
                 scheduledContent[selectedDateForScheduling] = [];
             }
-            scheduledContent[selectedDateForScheduling].push(currentScriptData);
+            // Add unique ID, default platform, and status to the new item
+            const newItem = {
+                ...currentScriptData,
+                id: Date.now(), // Unique ID for each content
+                platform: 'IG', // Default platform
+                status: 'Siap Upload' // Default status
+            };
+            scheduledContent[selectedDateForScheduling].push(newItem);
             saveScheduledContent();
             showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
             document.getElementById('calendarModal').classList.remove('visible');
