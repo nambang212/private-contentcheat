@@ -450,18 +450,9 @@
                 <div id="calendar-details" class="mt-4">
                     <p class="text-slate-400">Pilih tanggal untuk melihat jadwal konten.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Date Picker Modal -->
-    <div id="datePickerModal" class="modal-overlay">
-        <div class="modal-content !max-w-sm">
-            <h3 class="text-xl font-bold text-white mb-4">Pilih Tanggal</h3>
-            <input type="date" id="schedule-date-input" class="w-full p-2 rounded-lg modern-input mb-4">
-            <div class="flex gap-4">
-                <button id="save-schedule-btn" class="flex-1 text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal</button>
-                <button class="close-modal-btn flex-1 text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal</button>
+                 <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
+                    <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
+                </div>
             </div>
         </div>
     </div>
@@ -568,6 +559,8 @@
         let currentScriptData = null;
         let uploadedImageBase64 = null;
         let calendarDate = new Date();
+        let selectedDateForScheduling = null;
+
 
         const hookCategoryStyles = {
             'Default': 'bg-gray-500/20 text-gray-300',
@@ -646,7 +639,7 @@
             const notification = document.getElementById('notification');
             notification.textContent = message;
             notification.className = `fixed bottom-5 right-5 text-white py-3 px-5 rounded-lg shadow-lg opacity-100 transform translate-y-0 transition-all duration-500 z-50 ${isError ? 'bg-red-600' : 'bg-green-600'}`;
-            setTimeout(() => { notification.classList.replace('opacity-100', 'opacity-0'); }, 3000);
+            setTimeout(() => { notification.classList.replace('opacity-100', 'opacity-0'); }, 5000); // Longer duration for important messages
         }
 
         function fallbackCopy(text) {
@@ -705,37 +698,35 @@
                         throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
                     }
                     if (response.status === 429) {
-                         // This specific error means the user's personal quota is exceeded, not a temporary overload.
                         throw new Error("API_QUOTA_EXCEEDED");
                     }
 
                     // --- Handle retriable server errors ---
-                    if (response.status >= 500) { // Server errors (500, 503, etc.) are often temporary
+                    if (response.status >= 500) { 
                         if (i < maxRetries - 1) {
                             console.log(`Server error. Retrying in ${delay / 1000}s...`);
                             await new Promise(resolve => setTimeout(resolve, delay));
-                            delay *= 2; // Exponential backoff
-                            continue; // Go to the next iteration of the loop
+                            delay *= 2; 
+                            continue; 
                         } else {
-                            // Throw error after the last retry fails
                             throw new Error(`Sistem AI sedang sibuk (Status: ${response.status}). Coba lagi nanti.`);
                         }
                     }
                     
-                    // For other client-side errors that are not handled above
                     throw new Error(errorBody.error?.message || `Terjadi kesalahan (Status: ${response.status}).`);
 
                 } catch (error) {
-                    // This catches network errors or errors thrown from the block above
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                        throw error; // Re-throw specific errors immediately without retrying
+                        throw error; 
                     }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
                         delay *= 2;
                     } else {
-                        // After all retries, throw a final error
+                        if (error instanceof TypeError) {
+                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda atau coba nonaktifkan ekstensi browser (seperti AdBlock).");
+                        }
                         throw new Error("Gagal terhubung ke sistem AI setelah beberapa kali mencoba. Periksa koneksi internet Anda atau coba lagi nanti.");
                     }
                 }
@@ -779,7 +770,8 @@ Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "
         }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
-            let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
+            let prompt = `HANYA KEMBALIKAN OBJEK JSON YANG VALID. JANGAN TAMBAHKAN TEKS ATAU MARKDOWN LAINNYA.
+Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
             
             const mimeType = 'image/jpeg'; // We convert all images to JPEG
 
@@ -788,7 +780,7 @@ Produk/Jasa: "${document.getElementById('topic').value}"
 
 ATURAN WAJIB:
 1.  **Struktur Output**: Respons HARUS dalam format JSON yang valid dan HANYA JSON. Pastikan JSON tidak terpotong dan valid sepenuhnya.
-2.  **Konten JSON**: JSON harus memiliki kunci-kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
+2.  **Konten JSON**: JSON harus memiliki kunci- kunci berikut: "saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", dan "hashtags".
 3.  **Detail Setiap Bagian**: Untuk "hook_scene", "masalah", "solusi", dan "cta", masing-masing harus berupa objek yang berisi: "durasi", "estimasi", "visual", "narasi", "saran_shot", dan WAJIB ada "lokasi", "properti", "pencahayaan", dan "mood".
 4.  **KONSISTENSI SCENE**: Pastikan "lokasi", "properti", "pencahayaan", dan "mood" untuk setiap scene saling berhubungan dan menciptakan alur cerita yang logis. Jika tidak ada perubahan signifikan, pertahankan lokasi yang sama di beberapa scene awal (contoh: hook dan masalah terjadi di lokasi yang sama).
 5.  **Saran Audio**: "saran_audio" HARUS berupa array berisi objek, dengan setiap objek memiliki kunci "title" dan "artist". Contoh: [{"title": "Espresso", "artist": "Sabrina Carpenter"}]. Berikan 2-3 saran.
@@ -1053,7 +1045,7 @@ Contoh struktur JSON yang diharapkan:
         function saveScheduledContent() {
             localStorage.setItem('contentCheatSchedule', JSON.stringify(scheduledContent));
         }
-        function renderCalendar() {
+        function renderCalendar(isScheduling = false) {
             const year = calendarDate.getFullYear();
             const month = calendarDate.getMonth();
             const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -1076,7 +1068,7 @@ Contoh struktur JSON yang diharapkan:
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day';
-                dayEl.textContent = i;
+                dayEl.innerHTML = `<span>${i}</span>`;
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                 dayEl.dataset.date = dateStr;
 
@@ -1090,8 +1082,22 @@ Contoh struktur JSON yang diharapkan:
                     dayEl.appendChild(dot);
                 }
                 
-                dayEl.addEventListener('click', () => showCalendarDetails(dateStr));
+                dayEl.addEventListener('click', () => {
+                    if (isScheduling) {
+                        selectedDateForScheduling = dateStr;
+                        document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
+                        dayEl.classList.add('selected');
+                        document.getElementById('calendar-actions').style.display = 'block';
+                    } else {
+                        showCalendarDetails(dateStr);
+                    }
+                });
                 grid.appendChild(dayEl);
+            }
+            
+            if (!isScheduling) {
+                 document.getElementById('calendar-actions').style.display = 'none';
+                 showCalendarDetails(new Date().toISOString().split('T')[0]);
             }
         }
 
@@ -1105,7 +1111,6 @@ Contoh struktur JSON yang diharapkan:
             if (content && content.length > 0) {
                 detailsContainer.innerHTML = `<h4 class="font-bold text-lg mb-2">Jadwal untuk ${dateStr}</h4>`;
                 content.forEach((item, index) => {
-                    // Assuming the hook text is in hook_scene.narasi
                     const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
                     detailsContainer.innerHTML += `<div class="p-2 bg-slate-800/50 rounded-lg mb-2">
                         <p class="text-slate-200">${index + 1}. ${hookText.substring(0, 50)}...</p>
@@ -1337,7 +1342,7 @@ Contoh struktur JSON yang diharapkan:
                     localStorage.removeItem('userGeminiApiKey'); 
                     checkApiKey();
                 } else if (error.message === "API_QUOTA_EXCEEDED") {
-                    showNotification("Kuota API Key Anda habis. Coba lagi besok atau gunakan kunci lain.", true);
+                    showNotification("Kuota API Key Anda habis (60 permintaan/menit). Beri jeda 1 menit.", true);
                 } else {
                     showNotification(error.message, true);
                 }
@@ -1418,7 +1423,7 @@ Contoh struktur JSON yang diharapkan:
                     console.error('Script Generation Error:', error);
                     let errorMessage = `Gagal membuat kerangka: ${error.message}`;
                     if (error.message === "API_QUOTA_EXCEEDED") {
-                        errorMessage = "Kuota API Key Anda untuk hari ini sudah habis. Coba lagi besok.";
+                        errorMessage = "Kuota API Key Anda habis (60 permintaan/menit). Beri jeda 1 menit.";
                     }
                     resultContainer.innerHTML = `<p class="text-red-400 text-center">${errorMessage}</p>`;
                 } finally {
@@ -1503,26 +1508,26 @@ Contoh struktur JSON yang diharapkan:
         document.getElementById('script-buttons').addEventListener('click', (e) => {
              if (e.target.id === 'schedule-btn') {
                 if (!currentScriptData) return;
-                document.getElementById('datePickerModal').classList.add('visible');
-                document.getElementById('schedule-date-input').valueAsDate = new Date();
+                calendarDate = new Date();
+                renderCalendar(true); // Render in scheduling mode
+                document.getElementById('calendarModal').classList.add('visible');
              }
         });
-
+        
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
-            const dateInput = document.getElementById('schedule-date-input');
-            const selectedDate = dateInput.value;
-            if (!selectedDate) {
-                showNotification('Silakan pilih tanggal terlebih dahulu.', true);
+            if (!selectedDateForScheduling) {
+                showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
                 return;
             }
-            if (!scheduledContent[selectedDate]) {
-                scheduledContent[selectedDate] = [];
+            if (!scheduledContent[selectedDateForScheduling]) {
+                scheduledContent[selectedDateForScheduling] = [];
             }
-            scheduledContent[selectedDate].push(currentScriptData);
+            scheduledContent[selectedDateForScheduling].push(currentScriptData);
             saveScheduledContent();
-            showNotification(`Konten berhasil dijadwalkan untuk ${selectedDate}!`);
-            document.getElementById('datePickerModal').classList.remove('visible');
+            showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
+            document.getElementById('calendarModal').classList.remove('visible');
             document.getElementById('scriptModal').classList.remove('visible');
+            selectedDateForScheduling = null; // Reset selection
         });
 
 
@@ -1583,18 +1588,20 @@ Contoh struktur JSON yang diharapkan:
         // Calendar View Listeners
         document.getElementById('calendar-view-btn').addEventListener('click', () => {
             calendarDate = new Date();
-            renderCalendar();
+            renderCalendar(false); // Render in view-only mode
             document.getElementById('calendarModal').classList.add('visible');
         });
 
         document.getElementById('prev-month-btn').addEventListener('click', () => {
             calendarDate.setMonth(calendarDate.getMonth() - 1);
-            renderCalendar();
+            const isScheduling = document.getElementById('calendar-actions').style.display === 'block';
+            renderCalendar(isScheduling);
         });
 
         document.getElementById('next-month-btn').addEventListener('click', () => {
             calendarDate.setMonth(calendarDate.getMonth() + 1);
-            renderCalendar();
+            const isScheduling = document.getElementById('calendar-actions').style.display === 'block';
+            renderCalendar(isScheduling);
         });
 
 
