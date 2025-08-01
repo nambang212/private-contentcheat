@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v71.2 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v71.3 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +32,9 @@
         }
         select.modern-input option, .platform-select option, .status-select option { background: #0D1120; color: #E0E0E0; }
         
-        /* Perbaikan UI/UX Dropdown Kalender */
         .status-select-per-platform, .time-input {
-            background-color: #111827; /* Ganti ke warna lebih gelap */
-            color: #F9FAFB; /* Tulisan putih */
+            background-color: #111827;
+            color: #F9FAFB;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .status-select-per-platform option {
@@ -138,12 +137,12 @@
             padding: 1rem;
             border-radius: 0.75rem;
         }
-        .result-card-copy-btn {
+        .result-card-copy-btn, .result-card-develop-btn {
             background-color: #4b5563;
             color: #f3f4f6;
             transition: background-color 0.2s;
         }
-        .result-card-copy-btn:hover { background-color: #6b7280; }
+        .result-card-copy-btn:hover, .result-card-develop-btn:hover { background-color: #6b7280; }
         .result-card-script-btn {
             background: linear-gradient(90deg, #5F00D8, #A78BFA);
             color: white;
@@ -198,7 +197,6 @@
         .file-upload-btn:hover, .file-upload-btn.dragover {
             border-color: rgba(167, 139, 250, 0.8);
         }
-        /* --- Calendar Styles --- */
         #calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -261,6 +259,7 @@
 </head>
 <body class="antialiased">
 
+    <!-- Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
@@ -290,6 +289,7 @@
         </div>
     </div>
 
+    <!-- API Key Modal -->
     <div id="apiKeyModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4">
@@ -313,6 +313,7 @@
         </div>
     </div>
     
+    <!-- Tutorial Modal -->
     <div id="tutorialModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -325,6 +326,7 @@
         </div>
     </div>
     
+    <!-- Hook Explanation Modal -->
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -332,6 +334,7 @@
         </div>
     </div>
 
+    <!-- Pustaka Hook Modal -->
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -339,6 +342,7 @@
         </div>
     </div>
 
+    <!-- FAQ Modal -->
     <div id="faqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -378,6 +382,7 @@
         </div>
     </div>
 
+    <!-- API Key FAQ Modal -->
     <div id="apiKeyFaqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -398,6 +403,7 @@
         </div>
     </div>
     
+    <!-- Script Modal -->
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -414,6 +420,7 @@
         </div>
     </div>
 
+    <!-- Hashtag Modal -->
     <div id="hashtagModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -435,13 +442,14 @@
         </div>
     </div>
     
+    <!-- Audio Search Modal -->
     <div id="audioSearchModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div class="text-slate-300 mb-4">Dengarkan atau cari audio ini di platform berikut:</div>
             <div class="space-y-3">
                 <a id="youtube-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="flex-shrink-0"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22-1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="flex-shrink-0"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22 1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"></path></svg>
                     Dengarkan di YouTube
                 </a>
                  <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
@@ -480,7 +488,7 @@
     <div id="app-container" class="container mx-auto max-w-4xl p-4 md:p-8" style="display: none;">
         <header class="text-center mb-8 relative">
             <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">CONTENT CHEAT</h1>
-            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.2</p>
+            <p class="text-slate-500 mt-1 text-sm font-semibold">v71.1</p>
             <p class="text-slate-400 mt-2 text-lg">Buat Ide Kontenmu dengan Sekali Klik</p>
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
@@ -655,16 +663,6 @@
                 efektif: "Niche Market, Konten Komunitas"
             }
         };
-
-        // --- NEW: Data untuk Platform Styles ---
-        const platformStyles = {
-            'IG': { name: 'Instagram', color: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 2.882a5.138 5.138 0 1 1 0 10.276A5.138 5.138 0 0 1 8 2.882zM8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264zm4.39-1.442a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/></svg>'},
-            'FB': { name: 'Facebook', color: 'bg-blue-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>'},
-            'TikTok': { name: 'TikTok', color: 'bg-black', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg>'},
-            'YouTube': { name: 'YouTube', color: 'bg-red-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22-1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008.105.022.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"/></svg>'},
-            'Shopee': { name: 'Shopee', color: 'bg-orange-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.319 1.674c-.233.51-.385 1.1-.433 1.737C.772 4.25.75 5.025.75 6.5a14.2 14.2 0 0 0 .324 2.846c.154.67.427 1.34.787 1.913.322.518.724.96 1.19 1.332.464.37.973.68 1.503.923.53.242 1.087.423 1.65.54.636.128 1.3.197 1.975.203h.038c.676-.006 1.338-.075 1.975-.204.563-.116 1.12-.297 1.65-.54.53-.242 1.04-.553 1.504-.923.465-.372.867-.814 1.19-1.332.36-.573.633-1.243.787-1.913A14.2 14.2 0 0 0 15.25 6.5c0-1.475-.022-2.25-.137-3.089-.048-.637-.2-1.227-.433-1.737-.253-.55-.615-1.03-1.045-1.41-1.2-.97-.99-1.12-3.134-1.226C9.15.111 8.802.11 8.5.11h-.03c-.302 0-.65.002-1.97.108-2.144.106-1.935.257-3.135 1.226-.43.38-.792.86-1.045 1.41zM8.5 12.1a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2zM12.982 5.118a.8.8 0 0 1 .44.254.8.8 0 0 1 .253.442.79.79 0 0 1-.095.53c-.106.2-.284.34-.495.426a.9.9 0 0 1-.582.022.78.78 0 0 1-.466-.34c-.13-.195-.19-.43-.16-.653a.77.77 0 0 1 .23-.526.78.78 0 0 1 .425-.262.88.88 0 0 1 .45-.013zM4.14 7.633a.8.8 0 1 1-1.32-.88.8.8 0 0 1 1.32.88z"/></svg>'},
-            'TokPed': { name: 'Tokopedia', color: 'bg-green-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12.871 3.36a.44.44 0 0 1,.437.45l-.423 4.228a.45.45 0 0 1-.437.45H3.552a.45.45 0 0 1-.437-.45L2.692 3.81a.44.44 0 0 1 .437-.45h9.742zm-3.64 1.328a.45.45 0 0 1 .448.437v4.228a.45.45 0 1 1-.9 0V5.125a.45.45 0 0 1 .452-.437zM5.385 4.688a.45.45 0 0 1 .449.437v4.228a.45.45 0 1 1-.9 0V5.125a.45.45 0 0 1 .451-.437z"/><path d="M14.6 2.451a.6.6 0 0 0-.53-.55l-1.782-.446a.6.6 0 0 0-.58.128L8 4.693 4.3.583A.6.6 0 0 0 3.72.455l-1.783.446a.6.6 0 0 0-.53.55L0 8.832a.6.6 0 0 0 .584.658l1.76.22a.6.6 0 0 0 .616-.56L3.92 5.4l4.038 3.56a.6.6 0 0 0 .684 0L12.08 5.4l.96 3.75a.6.6 0 0 0 .616.56l1.76-.22a.6.6 0 0 0 .584-.658L14.6 2.451z"/></svg>'}
-        };
         
         // --- UI UTILITIES ---
         function showNotification(message, isError = false, duration = 3000) {
@@ -753,7 +751,7 @@
                 } catch (error) {
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                          throw error; 
+                         throw error; 
                      }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
@@ -894,22 +892,22 @@ Contoh struktur JSON yang diharapkan:
                 const card = document.createElement('div');
                 card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                 card.innerHTML = `
-                                <div>
-                                    <div class="flex items-center gap-3 mb-3">
-                                        <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                                        </button>
-                                        <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
-                                        ${toneLabel}
-                                        ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
-                                    </div>
-                                    <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                            <div>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                                    </button>
+                                    <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                                    ${toneLabel}
+                                    ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
                                 </div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
-                                    <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
-                                </div>
-                                `;
+                                <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                                <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
+                            </div>
+                        `;
                 resultsGrid.appendChild(card);
             });
         }
@@ -954,27 +952,27 @@ Contoh struktur JSON yang diharapkan:
                 } else if (typeof data[key] === 'object' && data[key] !== null) {
                     const item = data[key];
                     displayHTML = `<div class="pl-7 space-y-2">
-                                         <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
-                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
-                                             <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
-                                             <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
-                                             <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
-                                             <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
-                                         </div>
-                                         <hr class="border-slate-700 my-2">
-                                         <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
-                                         <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
-                                         <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
-                                     </div>`;
+                                     <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
+                                         <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
+                                         <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
+                                         <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
+                                         <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
+                                     </div>
+                                     <hr class="border-slate-700 my-2">
+                                     <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
+                                     <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
+                                     <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
+                                 </div>`;
                     
                     editHTML = `<div class="space-y-2">
-                                         <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
-                                         <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
-                                         <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
-                                         <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
-                                         <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
-                                         <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
-                                     </div>`;
+                                     <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
+                                     <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
+                                     <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
+                                     <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
+                                     <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                                     <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                                 </div>`;
                 }
 
                 sectionWrapper.innerHTML = `
@@ -1155,7 +1153,6 @@ Contoh struktur JSON yang diharapkan:
             }
         }
 
-        // --- UPDATED: showCalendarDetails function ---
         function showCalendarDetails(dateStr) {
             document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
             const dayEl = document.querySelector(`.calendar-day[data-date="${dateStr}"]`);
@@ -1171,40 +1168,20 @@ Contoh struktur JSON yang diharapkan:
                 contentForDate.forEach((item, index) => {
                     const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
                     
-                    // TASK 3: Correctly order the status options
-                    const statusOptions = ['-', 'Proses Take Video', 'Proses Edit Video', 'Revisi', 'Siap Upload', 'Sudah Upload', 'Proses Evaluasi'];
+                    const statusOptions = ['-', 'Siap Upload', 'Proses Take Video', 'Proses Edit Video', 'Sudah Upload', 'Revisi', 'Proses Evaluasi'];
                     const allPlatforms = ['IG', 'FB', 'TikTok', 'YouTube', 'Shopee', 'TokPed'];
                     
-                    // TASK 1: Add "Jam Posting & Status" title with clock icon
-                    let platformStatusesHTML = `
-                        <div class="flex items-center gap-2 mt-3 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill text-slate-400" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>
-                            <h5 class="font-semibold text-slate-300">Jam Posting & Status</h5>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-                    `;
-
+                    let platformStatusesHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2">';
                     allPlatforms.forEach(platform => {
                         const platformData = (item.platforms && item.platforms[platform]) ? item.platforms[platform] : { status: '-', time: '' };
                         const currentStatus = platformData.status;
                         const currentTime = platformData.time;
                         const selectOptions = statusOptions.map(s => `<option value="${s}" ${currentStatus === s ? 'selected' : ''}>${s}</option>`).join('');
                         
-                        // TASK 2: Change platform label display
-                        const platformInfo = platformStyles[platform] || { name: platform, color: 'bg-gray-500', logo: '' };
-                        const platformLabelHTML = `
-                            <div class="flex items-center gap-2 text-white">
-                                <span class="flex items-center justify-center w-6 h-6 rounded-md ${platformInfo.color}">
-                                    ${platformInfo.logo}
-                                </span>
-                                <span class="font-semibold text-sm">${platformInfo.name}</span>
-                            </div>
-                        `;
-
                         platformStatusesHTML += `
-                            <div class="p-2 rounded-lg bg-slate-900/50 border border-slate-700/50">
-                                <div class="flex justify-between items-center mb-2">
-                                    ${platformLabelHTML}
+                            <div class="p-2 rounded-md bg-slate-900/50">
+                                <div class="flex justify-between items-center mb-1">
+                                    <label for="status-${dateStr}-${index}-${platform}" class="text-slate-300 text-sm font-semibold">${platform}</label>
                                     <input type="time" value="${currentTime}" id="time-${dateStr}-${index}-${platform}" class="time-input p-1 rounded text-xs w-24" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
                                 </div>
                                 <select id="status-${dateStr}-${index}-${platform}" class="status-select-per-platform w-full p-1 rounded text-xs mt-1" data-date="${dateStr}" data-index="${index}" data-platform="${platform}">
@@ -1213,7 +1190,7 @@ Contoh struktur JSON yang diharapkan:
                             </div>
                         `;
                     });
-                    platformStatusesHTML += '</div>'; // Close grid
+                    platformStatusesHTML += '</div>';
 
                     const itemEl = document.createElement('div');
                     itemEl.className = 'p-3 bg-slate-800/50 rounded-lg mb-2';
@@ -1675,37 +1652,37 @@ Contoh struktur JSON yang diharapkan:
              }
              
              if (buttonId === 'download-doc-btn') {
-                 if (!currentScriptData) return;
+                if (!currentScriptData) return;
                 
-                 const topicValue = document.getElementById('topic').value.trim();
-                 const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
-                 const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
+                const topicValue = document.getElementById('topic').value.trim();
+                const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
+                const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
 
-                 let content = `<h1>Kerangka Konten AI</h1>`;
-                 const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
-                 const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
-                 sectionOrder.forEach(key => {
-                     if(currentScriptData[key]) {
-                         content += `<h2>${sectionTitles[key]}</h2>`;
-                         const data = currentScriptData[key];
-                         if (key === 'saran_audio') {
-                             content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
-                         } else if (key === 'hashtags') {
-                              content += `<p>${'#' + data.join(' #')}</p>`;
-                         } else if (typeof data === 'string') { 
-                             content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
-                         } else if (typeof data === 'object') { 
-                             content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
-                         }
-                     }
-                 });
-                 const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
-                 const link = document.createElement('a');
-                 link.href = URL.createObjectURL(blob);
-                 link.download = fileName;
-                 document.body.appendChild(link);
-                 link.click();
-                 document.body.removeChild(link);
+                let content = `<h1>Kerangka Konten AI</h1>`;
+                const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
+                const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+                sectionOrder.forEach(key => {
+                    if(currentScriptData[key]) {
+                        content += `<h2>${sectionTitles[key]}</h2>`;
+                        const data = currentScriptData[key];
+                        if (key === 'saran_audio') {
+                            content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                        } else if (key === 'hashtags') {
+                             content += `<p>${'#' + data.join(' #')}</p>`;
+                        } else if (typeof data === 'string') { 
+                            content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                        } else if (typeof data === 'object') { 
+                            content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                        }
+                    }
+                });
+                const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
              }
         });
         
@@ -1719,13 +1696,13 @@ Contoh struktur JSON yang diharapkan:
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
                      if (key === 'saran_audio') {
-                         fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                          fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
                      } else if (key === 'hashtags') {
-                         fullText += '#' + data.join(' #') + '\n\n';
+                          fullText += '#' + data.join(' #') + '\n\n';
                      } else if (typeof data === 'string') { 
-                         fullText += data + '\n\n'; 
+                          fullText += data + '\n\n'; 
                      } else if (typeof data === 'object') { 
-                         fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                          fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
                      }
                 }
             });
