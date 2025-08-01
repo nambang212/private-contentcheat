@@ -478,7 +478,6 @@
                     <p class="text-slate-400">Pilih tanggal untuk melihat jadwal konten.</p>
                 </div>
             </div>
-             <!-- PERBAIKAN UX: Tombol ini dipindahkan ke luar modal-body agar tidak ikut ter-scroll -->
             <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
                 <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
             </div>
@@ -1139,8 +1138,6 @@ Contoh struktur JSON yang diharapkan:
                         document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                         dayEl.classList.add('selected');
                         document.getElementById('calendar-actions').style.display = 'block';
-                        // PERBAIKAN UX: Tampilkan detail tanggal yang dipilih saat menjadwalkan
-                        showSchedulingDetails(dateStr);
                     } else {
                         showCalendarDetails(dateStr);
                     }
@@ -1153,14 +1150,6 @@ Contoh struktur JSON yang diharapkan:
                  const todayStr = new Date().toISOString().split('T')[0];
                  const selectedDay = document.querySelector('.calendar-day.selected');
                  showCalendarDetails(selectedDay ? selectedDay.dataset.date : todayStr);
-            } else {
-                // Saat mode scheduling, pastikan detail awal ditampilkan jika ada tanggal yang sudah dipilih
-                if(selectedDateForScheduling) {
-                    showSchedulingDetails(selectedDateForScheduling);
-                } else {
-                    const detailsContainer = document.getElementById('calendar-details');
-                    detailsContainer.innerHTML = `<p class="text-center text-slate-400 p-4">Pilih tanggal di kalender untuk menjadwalkan konten ini.</p>`;
-                }
             }
         }
 
@@ -1221,28 +1210,6 @@ Contoh struktur JSON yang diharapkan:
             } else {
                 detailsContainer.innerHTML += `<p class="text-slate-400">Tidak ada jadwal untuk tanggal ini.</p>`;
             }
-        }
-
-        // PERBAIKAN UX: Fungsi baru untuk menampilkan detail saat mode scheduling
-        function showSchedulingDetails(dateStr) {
-            const detailsContainer = document.getElementById('calendar-details');
-            const contentForDate = scheduledContent[dateStr] || [];
-            const formatDate = (ds) => new Date(ds + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', month: 'long', day: 'numeric' });
-            
-            let contentHTML = `<h4 class="font-bold text-lg mb-2">Menjadwalkan untuk ${formatDate(dateStr)}</h4>`;
-            
-            if (contentForDate.length > 0) {
-                contentHTML += `<p class="text-sm text-slate-400 mb-2">Sudah ada ${contentForDate.length} konten terjadwal di tanggal ini:</p>`;
-                contentHTML += '<ul class="list-disc list-inside text-slate-500 text-xs">';
-                contentForDate.forEach(item => {
-                    const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
-                    contentHTML += `<li>${hookText.substring(0, 50)}...</li>`;
-                });
-                contentHTML += '</ul>';
-            } else {
-                contentHTML += `<p class="text-sm text-slate-400">Belum ada jadwal di tanggal ini.</p>`;
-            }
-            detailsContainer.innerHTML = contentHTML;
         }
 
         function showDeleteConfirmation(date, index) {
