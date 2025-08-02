@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTENT CHEAT v71.5 (BYOK) © Brata Hanggara Putra</title>
+    <title>CONTENT CHEAT v71.6 (BYOK) © Brata Hanggara Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,6 +211,9 @@
             font-weight: 600;
             color: #9ca3af;
         }
+        .calendar-header-day.sunday {
+            color: #f87171;
+        }
         .calendar-day {
             background-color: rgba(255,255,255,0.05);
             cursor: pointer;
@@ -220,6 +223,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
+            position: relative;
+        }
+        .calendar-day .date-number.holiday {
+            color: #f87171;
         }
         .calendar-day:hover {
             background-color: rgba(255,255,255,0.1);
@@ -254,6 +261,27 @@
             height: 10px;
             border-radius: 50%;
             margin-right: 8px;
+        }
+        .holiday-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1f2937;
+            color: #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            pointer-events: none;
+            margin-bottom: 5px;
+        }
+        .calendar-day:hover .holiday-tooltip {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
@@ -1137,8 +1165,6 @@ Contoh struktur JSON yang diharapkan:
                         document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                         dayEl.classList.add('selected');
                         document.getElementById('calendar-actions').style.display = 'block';
-                        // MODIFIED: Call showCalendarDetails even in scheduling mode to show existing content
-                        showCalendarDetails(dateStr);
                     } else {
                         showCalendarDetails(dateStr);
                     }
