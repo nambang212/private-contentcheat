@@ -259,6 +259,7 @@
 </head>
 <body class="antialiased">
 
+    <!-- Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
@@ -288,6 +289,7 @@
         </div>
     </div>
 
+    <!-- API Key Modal -->
     <div id="apiKeyModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4">
@@ -311,6 +313,7 @@
         </div>
     </div>
     
+    <!-- Tutorial Modal -->
     <div id="tutorialModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -323,6 +326,7 @@
         </div>
     </div>
     
+    <!-- Hook Explanation Modal -->
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -330,6 +334,7 @@
         </div>
     </div>
 
+    <!-- Pustaka Hook Modal -->
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -337,6 +342,7 @@
         </div>
     </div>
 
+    <!-- FAQ Modal -->
     <div id="faqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -376,6 +382,7 @@
         </div>
     </div>
 
+    <!-- API Key FAQ Modal -->
     <div id="apiKeyFaqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -396,6 +403,7 @@
         </div>
     </div>
     
+    <!-- Script Modal -->
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -406,14 +414,13 @@
                     <button id="copy-all-script-btn" class="text-white font-bold py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Salin Teks</button>
                     <button id="copy-gdocs-btn" class="text-white font-bold py-2 px-4 rounded-lg bg-sky-600 hover:bg-sky-700 transition-colors">Export Docs</button>
                     <button id="download-doc-btn" class="text-white font-bold py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700 transition-colors">Download</button>
-                    <!-- MODIFIED: Added cancel edit button for calendar flow -->
-                    <button id="cancel-edit-schedule-btn" class="hidden text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700 transition-colors col-span-2 sm:col-span-4">Batal Edit & Kembali ke Kalender</button>
                 </div>
                 <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
             </div>
         </div>
     </div>
 
+    <!-- Hashtag Modal -->
     <div id="hashtagModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -435,6 +442,7 @@
         </div>
     </div>
     
+    <!-- Audio Search Modal -->
     <div id="audioSearchModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -452,6 +460,7 @@
         </div>
     </div>
 
+    <!-- Calendar Modal -->
     <div id="calendarModal" class="modal-overlay">
         <div class="modal-content !max-w-4xl">
             <div class="flex justify-between items-center mb-4">
@@ -460,17 +469,17 @@
             </div>
             <div class="modal-body">
                 <div class="flex justify-between items-center mb-4">
-                    <button id="prev-month-btn" class="p-2 rounded-full hover:bg-slate-700"><</button>
+                    <button id="prev-month-btn" class="p-2 rounded-full hover:bg-slate-700">&lt;</button>
                     <h3 id="month-year-header" class="text-xl font-bold"></h3>
-                    <button id="next-month-btn" class="p-2 rounded-full hover:bg-slate-700">></button>
+                    <button id="next-month-btn" class="p-2 rounded-full hover:bg-slate-700">&gt;</button>
                 </div>
                 <div id="calendar-grid"></div>
-                <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
-                    <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
-                </div>
                 <div id="calendar-details" class="mt-4">
                     <p class="text-slate-400">Pilih tanggal untuk melihat jadwal konten.</p>
                 </div>
+            </div>
+            <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
+                <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
             </div>
         </div>
     </div>
@@ -484,7 +493,6 @@
             <a href="https://www.instagram.com/brata_putra/" target="_blank" class="text-purple-300 hover:text-purple-200 transition-colors mt-2 inline-block">© Brata Hanggara Putra</a>
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
             
-            <!-- MODIFIED: Updated icons for header buttons -->
             <div class="mt-6 flex justify-center items-center gap-2 md:absolute md:top-0 md:right-0 md:mt-0">
                 <button id="calendar-view-btn" title="Kalender Konten" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-calendar2-event-fill" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM2 9.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/></svg></button>
                 <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16"><path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/></svg></button>
@@ -503,7 +511,7 @@
                     <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
                     <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
                 </div>
-                <div>
+                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">4. Unggah Referensi Visual (Opsional)</label>
                     <div id="image-upload-container">
                         <label for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
@@ -518,7 +526,7 @@
                     </div>
                 </div>
 
-                <div>
+                 <div>
                     <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Jenis Hasil (Opsional)</label>
                     <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
@@ -576,15 +584,13 @@
         let favorites = [];
         let history = [];
         let scheduledContent = {};
-        let currentView = 'results';
+        let currentView = 'results'; // can be 'results', 'favorites', or 'history'
         let currentScriptData = null;
         let uploadedImageBase64 = null;
         let calendarDate = new Date();
         let selectedDateForScheduling = null;
-        let itemToMove = null;
-        // MODIFIED: Added flags for calendar edit flow
-        let isEditingFromCalendar = false;
-        let lastCalendarDateViewed = null;
+        let itemToMove = null; // To track item being moved in calendar
+
 
         const hookCategoryStyles = {
             'Default': 'bg-gray-500/20 text-gray-300',
@@ -658,16 +664,6 @@
             }
         };
         
-        // MODIFIED: Updated platform logos to be more accurate
-        const platformStyles = {
-            'IG': { name: 'Instagram', color: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 2.882a5.138 5.138 0 1 1 0 10.276A5.138 5.138 0 0 1 8 2.882zM8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264zm4.39-1.442a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/></svg>'},
-            'FB': { name: 'Facebook', color: 'bg-blue-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>'},
-            'TikTok': { name: 'TikTok', color: 'bg-black', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg>'},
-            'YouTube': { name: 'YouTube', color: 'bg-red-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22-1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"/></svg>'},
-            'Shopee': { name: 'Shopee', color: 'bg-orange-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.5 2.5H3.5A1.5 1.5 0 0 0 2 4v9a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 14 13V4a1.5 1.5 0 0 0-1.5-1.5zM9.05 11H6.95L5.6 7.95h3.8L8.05 11h1zm.4-4.05h-2.9l.6-1.9h1.7l.6 1.9z"/></svg>'},
-            'TokPed': { name: 'Tokopedia', color: 'bg-green-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M21.9 8.9c-.3-2.1-2.1-3.7-4.2-3.9h-1.1c-1.8 0-3.4 1.2-4 2.9c-.6-1.7-2.2-2.9-4-2.9H7.5C5.4 5.2 3.6 6.8 3.3 8.9c-.3 2.5 1.4 4.8 3.7 5.4c.5.1 1 .2 1.5.2c1.2 0 2.3-.6 3-1.6c.7 1 1.8 1.6 3 1.6c.5 0 1-.1 1.5-.2c2.3-.6 4-2.9 3.7-5.4zm-13.2 3.5c-.3 0-.6-.1-.9-.2c-1.5-.4-2.6-2-2.3-3.6c.2-1.3 1.4-2.3 2.8-2.3h.8c1.1 0 2.1.7 2.5 1.7c.1.3.4.5.7.5s.6-.2.7-.5c.4-1 1.4-1.7 2.5-1.7h.8c1.4 0 2.6 1.1 2.8 2.3c.3 1.6-.8 3.2-2.3 3.6c-.3.1-.6.2-.9.2c-1.1 0-2-.7-2.5-1.6c-.1-.3-.4-.5-.7-.5s-.6.2-.7.5c-.5.9-1.4 1.6-2.5 1.6z"/></svg>'}
-        };
-
         // --- UI UTILITIES ---
         function showNotification(message, isError = false, duration = 3000) {
             const notification = document.getElementById('notification');
@@ -711,7 +707,7 @@
             }
 
             const maxRetries = 3;
-            let delay = 1000;
+            let delay = 1000; // Start with 1 second delay
 
             for (let i = 0; i < maxRetries; i++) {
                 try {
@@ -724,12 +720,13 @@
                     });
 
                     if (response.ok) {
-                        return await response.json();
+                        return await response.json(); // Success, return the result
                     }
 
                     const errorBody = await response.json();
                     console.error(`API Error (Attempt ${i + 1}):`, errorBody);
 
+                    // --- Handle specific, non-retriable errors ---
                     if (response.status === 400 && errorBody.error?.message.includes("API key not valid")) {
                         throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
                     }
@@ -737,6 +734,7 @@
                         throw new Error("API_QUOTA_EXCEEDED");
                     }
 
+                    // --- Handle retriable server errors ---
                     if (response.status >= 500) { 
                         if (i < maxRetries - 1) {
                             console.log(`Server error. Retrying in ${delay / 1000}s...`);
@@ -753,7 +751,7 @@
                 } catch (error) {
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                          throw error; 
+                         throw error; 
                      }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
@@ -770,9 +768,9 @@
 
 
         async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
-              const allCategories = Object.keys(hookExplanations).join(", ");
-              const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
-              const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
+             const allCategories = Object.keys(hookExplanations).join(", ");
+             const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
+             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
 ATURAN:
 1. **WAJIB SINGKAT!** (di bawah 12 kata).
 2. Gunakan bahasa Indonesia sehari-hari.
@@ -788,21 +786,21 @@ DATA:
 
 Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). 
 Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "Storytelling"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan", "tone": "Santai"}]`;
-              const result = await callGeminiAPI(prompt, apiKey);
-              if (result.candidates?.[0]?.content?.parts?.[0]) {
-                  const rawText = result.candidates[0].content.parts[0].text;
-                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                  try {
-                      const parsed = JSON.parse(cleanedText);
-                      addToHistory(parsed);
-                      return parsed;
-                  } catch (e) {
-                      console.error("JSON Parsing Error. Raw text:", cleanedText);
-                      throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
-                  }
-              }
-              throw new Error("Struktur respons AI tidak terduga.");
-         }
+             const result = await callGeminiAPI(prompt, apiKey);
+             if (result.candidates?.[0]?.content?.parts?.[0]) {
+                 const rawText = result.candidates[0].content.parts[0].text;
+                 const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                 try {
+                     const parsed = JSON.parse(cleanedText);
+                     addToHistory(parsed);
+                     return parsed;
+                 } catch (e) {
+                     console.error("JSON Parsing Error. Raw text:", cleanedText);
+                     throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
+                 }
+             }
+             throw new Error("Struktur respons AI tidak terduga.");
+        }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
             let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
@@ -836,6 +834,7 @@ Contoh struktur JSON yang diharapkan:
             const result = await callGeminiAPI(prompt, apiKey, imageBase64, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                 const rawText = result.candidates[0].content.parts[0].text;
+                // --- ROBUST JSON CLEANING ---
                 const jsonMatch = rawText.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
                     try {
@@ -893,22 +892,22 @@ Contoh struktur JSON yang diharapkan:
                 const card = document.createElement('div');
                 card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
                 card.innerHTML = `
-                                <div>
-                                    <div class="flex items-center gap-3 mb-3">
-                                        <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                                        </button>
-                                        <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
-                                        ${toneLabel}
-                                        ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
-                                    </div>
-                                    <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                            <div>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                                    </button>
+                                    <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                                    ${toneLabel}
+                                    ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
                                 </div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
-                                    <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
-                                </div>
-                                `;
+                                <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                                <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
+                            </div>
+                        `;
                 resultsGrid.appendChild(card);
             });
         }
@@ -1485,7 +1484,7 @@ Contoh struktur JSON yang diharapkan:
             } finally {
                 clearInterval(loadingInterval);
                 generateBtn.disabled = quotaManager.getQuotaData().quotaLeft <= 0;
-                generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg> Generate Konten!';
+                generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!';
             }
         });
 
@@ -1530,13 +1529,6 @@ Contoh struktur JSON yang diharapkan:
                     showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
                     return; 
                 }
-                
-                // MODIFIED: Hide cancel button when opening from main grid
-                isEditingFromCalendar = false;
-                document.getElementById('cancel-edit-schedule-btn').classList.add('hidden');
-                document.getElementById('schedule-btn').classList.remove('hidden');
-
-
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
                 const resultContainer = document.getElementById('script-result-container');
@@ -1648,35 +1640,13 @@ Contoh struktur JSON yang diharapkan:
             }
         });
 
-        // MODIFIED: Added listener for the new cancel edit button
-        document.getElementById('cancel-edit-schedule-btn').addEventListener('click', () => {
-            document.getElementById('scriptModal').classList.remove('visible');
-            showNotification('Pengeditan dibatalkan.');
-            document.getElementById('calendarModal').classList.add('visible');
-            renderCalendar(false);
-            showCalendarDetails(lastCalendarDateViewed);
-        });
-
         document.getElementById('script-buttons').addEventListener('click', (e) => {
              const buttonId = e.target.id;
              if (buttonId === 'schedule-btn') {
                  if (!currentScriptData) return;
-                 // MODIFIED: If editing from calendar, save changes directly. Otherwise, open scheduler.
-                 if (isEditingFromCalendar) {
-                     const originalItem = scheduledContent[lastCalendarDateViewed][currentScriptData.originalIndex];
-                     const updatedItem = { ...originalItem, ...currentScriptData };
-                     delete updatedItem.originalIndex;
-                     scheduledContent[lastCalendarDateViewed][originalItem.originalIndex] = updatedItem;
-                     saveScheduledContent();
-                     showNotification('Jadwal berhasil diperbarui!');
-                     document.getElementById('scriptModal').classList.remove('visible');
-                     document.getElementById('calendarModal').classList.add('visible');
-                     showCalendarDetails(lastCalendarDateViewed);
-                 } else {
-                     calendarDate = new Date();
-                     renderCalendar(true);
-                     document.getElementById('calendarModal').classList.add('visible');
-                 }
+                 calendarDate = new Date();
+                 renderCalendar(true); // Render in scheduling mode
+                 document.getElementById('calendarModal').classList.add('visible');
              }
              
              if (buttonId === 'copy-gdocs-btn') {
@@ -1684,7 +1654,7 @@ Contoh struktur JSON yang diharapkan:
                  let fullText = getFullScriptAsText();
                  fallbackCopy(fullText, 'Teks disalin! Buka Google Docs dan paste (Ctrl+V).');
                  setTimeout(() => {
-                     window.open('https://docs.new', '_blank');
+                    window.open('https://docs.new', '_blank');
                  }, 100);
              }
 
@@ -1694,37 +1664,37 @@ Contoh struktur JSON yang diharapkan:
              }
              
              if (buttonId === 'download-doc-btn') {
-                 if (!currentScriptData) return;
+                if (!currentScriptData) return;
                 
-                 const topicValue = document.getElementById('topic').value.trim();
-                 const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
-                 const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
+                const topicValue = document.getElementById('topic').value.trim();
+                const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
+                const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
 
-                 let content = `<h1>Kerangka Konten AI</h1>`;
-                 const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
-                 const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
-                 sectionOrder.forEach(key => {
-                     if(currentScriptData[key]) {
-                         content += `<h2>${sectionTitles[key]}</h2>`;
-                         const data = currentScriptData[key];
-                         if (key === 'saran_audio') {
-                             content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
-                         } else if (key === 'hashtags') {
-                              content += `<p>${'#' + data.join(' #')}</p>`;
-                         } else if (typeof data === 'string') { 
-                             content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
-                         } else if (typeof data === 'object') { 
-                             content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
-                         }
-                     }
-                 });
-                 const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
-                 const link = document.createElement('a');
-                 link.href = URL.createObjectURL(blob);
-                 link.download = fileName;
-                 document.body.appendChild(link);
-                 link.click();
-                 document.body.removeChild(link);
+                let content = `<h1>Kerangka Konten AI</h1>`;
+                const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
+                const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+                sectionOrder.forEach(key => {
+                    if(currentScriptData[key]) {
+                        content += `<h2>${sectionTitles[key]}</h2>`;
+                        const data = currentScriptData[key];
+                        if (key === 'saran_audio') {
+                            content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                        } else if (key === 'hashtags') {
+                             content += `<p>${'#' + data.join(' #')}</p>`;
+                        } else if (typeof data === 'string') { 
+                            content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                        } else if (typeof data === 'object') { 
+                            content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                        }
+                    }
+                });
+                const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
              }
         });
         
@@ -1738,13 +1708,13 @@ Contoh struktur JSON yang diharapkan:
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
                      if (key === 'saran_audio') {
-                         fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                          fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
                      } else if (key === 'hashtags') {
-                         fullText += '#' + data.join(' #') + '\n\n';
+                          fullText += '#' + data.join(' #') + '\n\n';
                      } else if (typeof data === 'string') { 
-                         fullText += data + '\n\n'; 
+                          fullText += data + '\n\n'; 
                      } else if (typeof data === 'object') { 
-                         fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                          fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
                      }
                 }
             });
@@ -1752,62 +1722,60 @@ Contoh struktur JSON yang diharapkan:
         }
 
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
-              if (itemToMove) {
-                  if (!selectedDateForScheduling) {
-                      showNotification('Silakan pilih tanggal baru di kalender.', true);
-                      return;
-                  }
-                  if (!scheduledContent[selectedDateForScheduling]) {
-                      scheduledContent[selectedDateForScheduling] = [];
-                  }
-                  scheduledContent[selectedDateForScheduling].push(itemToMove.item);
-                  scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
-                  if (scheduledContent[itemToMove.originalDate].length === 0) {
-                      delete scheduledContent[itemToMove.originalDate];
-                  }
-                  showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
-                  itemToMove = null;
-              } else {
-                  if (!selectedDateForScheduling) {
-                      showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
-                      return;
-                  }
-                  if (!scheduledContent[selectedDateForScheduling]) {
-                      scheduledContent[selectedDateForScheduling] = [];
-                  }
-                  const newItem = {
-                      ...currentScriptData,
-                      id: Date.now(),
-                      platforms: {
-                          'IG': { status: 'Siap Upload', time: '' },
-                          'FB': { status: 'Siap Upload', time: '' },
-                          'TikTok': { status: 'Siap Upload', time: '' },
-                          'YouTube': { status: '-', time: '' },
-                          'Shopee': { status: '-', time: '' },
-                          'TokPed': { status: '-', time: '' }
-                      }
-                  };
-                  scheduledContent[selectedDateForScheduling].push(newItem);
-                  showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
-              }
-              
-              const dateToFocus = selectedDateForScheduling;
-              saveScheduledContent();
-              document.getElementById('calendarModal').classList.remove('visible');
-              document.getElementById('scriptModal').classList.remove('visible');
-              
-              // MODIFIED: Re-open calendar and focus on the correct date
-              document.getElementById('calendar-view-btn').click(); 
-              setTimeout(() => {
-                  showCalendarDetails(dateToFocus);
-              }, 100);
-              
-              selectedDateForScheduling = null;
+             if (itemToMove) {
+                 // Logic for moving an existing item
+                 if (!selectedDateForScheduling) {
+                     showNotification('Silakan pilih tanggal baru di kalender.', true);
+                     return;
+                 }
+                 // Add to new date
+                 if (!scheduledContent[selectedDateForScheduling]) {
+                     scheduledContent[selectedDateForScheduling] = [];
+                 }
+                 scheduledContent[selectedDateForScheduling].push(itemToMove.item);
+                 // Remove from old date
+                 scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
+                 if (scheduledContent[itemToMove.originalDate].length === 0) {
+                     delete scheduledContent[itemToMove.originalDate];
+                 }
+                 showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
+                 itemToMove = null;
+             } else {
+                 // Logic for scheduling a new item
+                 if (!selectedDateForScheduling) {
+                     showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
+                     return;
+                 }
+                 if (!scheduledContent[selectedDateForScheduling]) {
+                     scheduledContent[selectedDateForScheduling] = [];
+                 }
+                 const newItem = {
+                     ...currentScriptData,
+                     id: Date.now(),
+                     platforms: {
+                         'IG': { status: 'Siap Upload', time: '' },
+                         'FB': { status: 'Siap Upload', time: '' },
+                         'TikTok': { status: 'Siap Upload', time: '' },
+                         'YouTube': { status: '-', time: '' },
+                         'Shopee': { status: '-', time: '' },
+                         'TokPed': { status: '-', time: '' }
+                     }
+                 };
+                 scheduledContent[selectedDateForScheduling].push(newItem);
+                 showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
+                 document.getElementById('scriptModal').classList.remove('visible');
+             }
+             
+             saveScheduledContent();
+             document.getElementById('calendarModal').classList.remove('visible');
+             selectedDateForScheduling = null;
         });
 
+
+        // Calendar View Listeners
         document.getElementById('calendar-view-btn').addEventListener('click', () => {
             calendarDate = new Date();
-            renderCalendar(false);
+            renderCalendar(false); // Render in view-only mode
             document.getElementById('calendarModal').classList.add('visible');
         });
 
@@ -1823,6 +1791,7 @@ Contoh struktur JSON yang diharapkan:
             renderCalendar(isScheduling);
         });
 
+
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         window.onscroll = function() {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -1831,121 +1800,139 @@ Contoh struktur JSON yang diharapkan:
                 scrollToTopBtn.style.display = "none";
             }
         };
-        scrollToTopBtn.addEventListener('click', () => { window.scrollTo({top: 0}); });
         
-        // MODIFIED: Moved Image Upload handling to its own section for clarity
-        // --- IMAGE UPLOAD LOGIC ---
-        const imageUploadContainer = document.getElementById('image-upload-container');
         const imageUploadInput = document.getElementById('image-upload');
+        const imageUploadContainer = document.getElementById('image-upload-container');
         const imagePreviewContainer = document.getElementById('image-preview-container');
         const imagePreview = document.getElementById('image-preview');
         const removeImageBtn = document.getElementById('remove-image-btn');
-
-        imageUploadContainer.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            imageUploadContainer.querySelector('label').classList.add('dragover');
-        });
-        imageUploadContainer.addEventListener('dragleave', () => {
-            imageUploadContainer.querySelector('label').classList.remove('dragover');
-        });
-        imageUploadContainer.addEventListener('drop', (e) => {
-            e.preventDefault();
-            imageUploadContainer.querySelector('label').classList.remove('dragover');
-            if (e.dataTransfer.files.length) {
-                handleFile(e.dataTransfer.files[0]);
-            }
-        });
-        imageUploadInput.addEventListener('change', (e) => {
-            if (e.target.files.length) {
-                handleFile(e.target.files[0]);
-            }
-        });
-        removeImageBtn.addEventListener('click', () => {
-            uploadedImageBase64 = null;
-            imageUploadInput.value = ''; // Reset file input
-            imagePreview.src = '';
-            imagePreviewContainer.classList.add('hidden');
-            imageUploadContainer.classList.remove('hidden');
-        });
+        const uploadLabel = imageUploadContainer.querySelector('label');
 
         function handleFile(file) {
-            if (!file.type.startsWith('image/')) {
-                showNotification('Hanya file gambar yang didukung.', true);
+            if (!file || !file.type.startsWith('image/')) {
+                showNotification('Hanya file gambar yang diizinkan.', true);
                 return;
             }
             const reader = new FileReader();
-            reader.onloadend = () => {
-                uploadedImageBase64 = reader.result.split(',')[1];
-                imagePreview.src = reader.result;
-                imagePreviewContainer.classList.remove('hidden');
-                imageUploadContainer.classList.add('hidden');
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    uploadedImageBase64 = canvas.toDataURL('image/jpeg').split(',')[1];
+                    imagePreview.src = 'data:image/jpeg;base64,' + uploadedImageBase64;
+                    imagePreviewContainer.classList.remove('hidden');
+                };
+                img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
 
-        // --- CALENDAR DETAILS EVENT DELEGATION ---
-        document.getElementById('calendar-details').addEventListener('change', (e) => {
-            const target = e.target;
-            if (target.matches('.status-select-per-platform, .time-input')) {
-                const { date, index, platform } = target.dataset;
-                const item = scheduledContent[date][index];
-
-                if (!item.platforms[platform]) {
-                    item.platforms[platform] = { status: '-', time: '' };
-                }
-
-                if (target.matches('.status-select-per-platform')) {
-                    item.platforms[platform].status = target.value;
-                } else {
-                    item.platforms[platform].time = target.value;
-                }
-                
-                saveScheduledContent();
-                showNotification(`Status untuk ${platformStyles[platform].name} diperbarui!`);
-            }
-        });
+        imageUploadInput.addEventListener('change', (event) => handleFile(event.target.files[0]));
         
-        document.getElementById('calendar-details').addEventListener('click', (e) => {
-            const editBtn = e.target.closest('.edit-schedule-btn');
-            const deleteBtn = e.target.closest('.delete-schedule-btn');
-            const moveBtn = e.target.closest('.move-schedule-btn');
-            
-            if (editBtn) {
-                const { date, index } = editBtn.dataset;
-                const itemToEdit = scheduledContent[date][index];
-                
-                // MODIFIED: Set flags and data for editing from calendar
-                isEditingFromCalendar = true;
-                lastCalendarDateViewed = date;
-                currentScriptData = { ...itemToEdit, originalIndex: parseInt(index) };
-                
-                displayStructuredScript(currentScriptData);
-                
-                // MODIFIED: Adjust buttons in script modal for editing flow
-                document.getElementById('cancel-edit-schedule-btn').classList.remove('hidden');
-                document.getElementById('schedule-btn').textContent = "Simpan Perubahan";
-                
-                document.getElementById('calendarModal').classList.remove('visible');
-                document.getElementById('scriptModal').classList.add('visible');
-            }
-            
-            if (deleteBtn) {
-                showDeleteConfirmation(deleteBtn.dataset.date, parseInt(deleteBtn.dataset.index));
-            }
-
-            if (moveBtn) {
-                const { date, index } = moveBtn.dataset;
-                itemToMove = { item: scheduledContent[date][index], originalDate: date, originalIndex: parseInt(index) };
-                
-                renderCalendar(true); // Re-render calendar in scheduling mode
-                document.getElementById('save-schedule-btn').textContent = 'Pindahkan Konten ke Tanggal Ini';
-                showNotification('Pilih tanggal baru di kalender untuk memindahkan konten.');
-            }
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
         });
 
-        // --- INIT ---
-        checkLogin();
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, () => uploadLabel.classList.add('dragover'), false);
+        });
 
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, () => uploadLabel.classList.remove('dragover'), false);
+        });
+
+        uploadLabel.addEventListener('drop', (e) => {
+            handleFile(e.dataTransfer.files[0]);
+        }, false);
+        
+        removeImageBtn.addEventListener('click', () => {
+            uploadedImageBase64 = null;
+            imageUploadInput.value = ''; // Reset file input
+            imagePreviewContainer.classList.add('hidden');
+        });
+
+
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLogin();
+
+            document.getElementById('calendar-details').addEventListener('click', (e) => {
+                const editBtn = e.target.closest('.edit-schedule-btn');
+                const moveBtn = e.target.closest('.move-schedule-btn');
+                const deleteBtn = e.target.closest('.delete-schedule-btn');
+                const cancelMoveBtn = e.target.closest('#cancel-move-btn');
+
+                if (editBtn) {
+                    const { date, index } = editBtn.dataset;
+                    const item = scheduledContent[date][index];
+                    displayStructuredScript(item);
+                    document.getElementById('calendarModal').classList.remove('visible');
+                    document.getElementById('scriptModal').classList.add('visible');
+                }
+
+                if (moveBtn) {
+                    const { date, index } = moveBtn.dataset;
+                    const item = scheduledContent[date][index];
+                    itemToMove = { item, originalDate: date, originalIndex: parseInt(index) };
+                    renderCalendar(true); // Re-render in scheduling mode
+                    
+                    const detailsContainer = document.getElementById('calendar-details');
+                    detailsContainer.innerHTML = `
+                        <p class="text-yellow-300 text-center mb-4">Pilih tanggal baru untuk memindahkan konten.</p>
+                        <button id="cancel-move-btn" class="w-full text-slate-300 font-bold py-2 px-4 rounded-lg bg-slate-600 hover:bg-slate-700">Batal Pindah</button>
+                    `;
+                }
+                
+                if (cancelMoveBtn) {
+                    const originalDate = itemToMove.originalDate;
+                    itemToMove = null;
+                    renderCalendar(false);
+                    showCalendarDetails(originalDate);
+                    showNotification('Pemindahan jadwal dibatalkan.');
+                }
+
+                if (deleteBtn) {
+                    const { date, index } = deleteBtn.dataset;
+                    showDeleteConfirmation(date, index);
+                }
+            });
+
+            document.getElementById('calendar-details').addEventListener('change', (e) => {
+                const target = e.target;
+                if (target.matches('.status-select-per-platform') || target.matches('.time-input')) {
+                    const { date, index, platform } = target.dataset;
+                    const item = scheduledContent[date][index];
+                    if (!item.platforms) {
+                        item.platforms = {};
+                    }
+                    if (!item.platforms[platform]) {
+                        item.platforms[platform] = { status: '-', time: '' };
+                    }
+
+                    if (target.matches('.status-select-per-platform')) {
+                        item.platforms[platform].status = target.value;
+                    }
+                    if (target.matches('.time-input')) {
+                        item.platforms[platform].time = target.value;
+                    }
+
+                    saveScheduledContent();
+                    showNotification(`Jadwal untuk ${platform} diperbarui!`);
+                }
+            });
+        });
     </script>
 </body>
 </html>
