@@ -41,11 +41,9 @@
             background: #1F2937;
             color: #F9FAFB;
         }
-        /* MODIFIED: Make clock icon white */
         input[type="time"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
         }
-
         .modern-btn {
             background: linear-gradient(90deg, #5F00D8, #A78BFA); border: none;
             transition: all 0.3s ease; box-shadow: 0 4px 15px 0 rgba(167, 139, 250, 0.4);
@@ -288,6 +286,50 @@
             opacity: 1;
             visibility: visible;
         }
+        
+        /* --- Penyesuaian untuk Layar Mobile --- */
+        @media (max-width: 640px) {
+          /* Mengecilkan modal pada layar kecil agar lebih pas */
+          #calendarModal .modal-content {
+            padding: 1rem;
+            max-height: 95vh; /* Sedikit lebih tinggi untuk layar vertikal */
+          }
+        
+          /* Mengecilkan jarak antar sel kalender */
+          #calendar-grid {
+            gap: 2px;
+          }
+        
+          /* Mengecilkan setiap sel hari di kalender */
+          .calendar-day, .calendar-header-day {
+            padding: 4px;
+            font-size: 0.8rem; /* Ukuran font tanggal lebih kecil */
+          }
+          
+          .calendar-day {
+            min-height: 65px; /* Mengurangi tinggi minimum sel */
+          }
+        
+          /* Mengecilkan header hari (Sen, Sel, Rab, dst.) */
+          .calendar-header-day {
+            font-size: 0.75rem;
+          }
+        
+          /* Mengecilkan titik penanda jadwal */
+          .scheduled-dot {
+            width: 6px;
+            height: 6px;
+            margin-top: 2px;
+          }
+        
+          /* Mengecilkan font di panel detail jadwal */
+          #calendar-details h4 {
+              font-size: 1.1rem;
+          }
+          #calendar-details p, #calendar-details button, #calendar-details select {
+              font-size: 0.9rem;
+          }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -435,7 +477,7 @@
             <div id="script-result-container" class="modal-body space-y-5"></div>
             <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-3">
                 <div id="script-buttons" class="grid grid-cols-2 sm:grid-cols-4 gap-3" style="display:none;">
-                    </div>
+                </div>
                 <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
             </div>
         </div>
@@ -620,6 +662,7 @@
         let calendarDate = new Date();
         let selectedDateForScheduling = null;
         let itemToMove = null; // To track item being moved in calendar
+        let isEditingFromCalendar = false; // To track if script modal is opened from calendar
 
         // --- NEW: Holiday Data ---
         const holidays = {
@@ -660,152 +703,6 @@
             "2026-08-17": "Hari Kemerdekaan RI",
             "2026-09-25": "Maulid Nabi Muhammad SAW",
             "2026-12-25": "Hari Raya Natal",
-            "2027-01-01": "Tahun Baru 2027 Masehi",
-            "2027-01-26": "Isra Mikraj Nabi Muhammad SAW",
-            "2027-02-06": "Tahun Baru Imlek 2578 Kongzili",
-            "2027-03-08": "Hari Suci Nyepi Tahun Baru Saka 1949",
-            "2027-03-11": "Idul Fitri 1448 H",
-            "2027-03-12": "Idul Fitri 1448 H",
-            "2027-03-26": "Wafat Isa Almasih",
-            "2027-05-01": "Hari Buruh Internasional",
-            "2027-05-06": "Kenaikan Isa Almasih",
-            "2027-05-17": "Idul Adha 1448 H",
-            "2027-05-24": "Hari Raya Waisak",
-            "2027-06-01": "Hari Lahir Pancasila",
-            "2027-06-05": "Tahun Baru Islam 1449 H",
-            "2027-08-17": "Hari Kemerdekaan RI",
-            "2027-09-14": "Maulid Nabi Muhammad SAW",
-            "2027-12-25": "Hari Raya Natal",
-            "2028-01-01": "Tahun Baru 2028 Masehi",
-            "2028-01-15": "Isra Mikraj Nabi Muhammad SAW",
-            "2028-01-26": "Tahun Baru Imlek 2579 Kongzili",
-            "2028-02-29": "Idul Fitri 1449 H",
-            "2028-03-01": "Idul Fitri 1449 H",
-            "2028-03-26": "Hari Suci Nyepi Tahun Baru Saka 1950",
-            "2028-04-14": "Wafat Isa Almasih",
-            "2028-05-01": "Hari Buruh Internasional",
-            "2028-05-06": "Idul Adha 1449 H",
-            "2028-05-12": "Hari Raya Waisak",
-            "2028-05-25": "Kenaikan Isa Almasih",
-            "2028-05-26": "Tahun Baru Islam 1450 H",
-            "2028-06-01": "Hari Lahir Pancasila",
-            "2028-08-17": "Hari Kemerdekaan RI",
-            "2028-09-03": "Maulid Nabi Muhammad SAW",
-            "2028-12-25": "Hari Raya Natal",
-            "2029-01-01": "Tahun Baru 2029 Masehi",
-            "2029-01-04": "Isra Mikraj Nabi Muhammad SAW",
-            "2029-02-13": "Tahun Baru Imlek 2580 Kongzili",
-            "2029-02-17": "Idul Fitri 1450 H",
-            "2029-02-18": "Idul Fitri 1450 H",
-            "2029-03-16": "Hari Suci Nyepi Tahun Baru Saka 1951",
-            "2029-03-30": "Wafat Isa Almasih",
-            "2029-04-26": "Idul Adha 1450 H",
-            "2029-05-01": "Hari Buruh Internasional",
-            "2029-05-10": "Kenaikan Isa Almasih",
-            "2029-05-15": "Tahun Baru Islam 1451 H",
-            "2029-06-01": "Hari Lahir Pancasila",
-            "2029-06-01": "Hari Raya Waisak",
-            "2029-08-17": "Hari Kemerdekaan RI",
-            "2029-08-23": "Maulid Nabi Muhammad SAW",
-            "2029-12-25": "Hari Raya Natal",
-            "2030-01-01": "Tahun Baru 2030 Masehi",
-            "2030-01-24": "Isra Mikraj Nabi Muhammad SAW",
-            "2030-02-03": "Tahun Baru Imlek 2581 Kongzili",
-            "2030-02-06": "Idul Fitri 1451 H",
-            "2030-02-07": "Idul Fitri 1451 H",
-            "2030-03-05": "Hari Suci Nyepi Tahun Baru Saka 1952",
-            "2030-04-15": "Idul Adha 1451 H",
-            "2030-04-19": "Wafat Isa Almasih",
-            "2030-05-01": "Hari Buruh Internasional",
-            "2030-05-04": "Tahun Baru Islam 1452 H",
-            "2030-05-20": "Hari Raya Waisak",
-            "2030-05-30": "Kenaikan Isa Almasih",
-            "2030-06-01": "Hari Lahir Pancasila",
-            "2030-08-12": "Maulid Nabi Muhammad SAW",
-            "2030-08-17": "Hari Kemerdekaan RI",
-            "2030-12-25": "Hari Raya Natal",
-            "2031-01-01": "Tahun Baru 2031 Masehi",
-            "2031-01-13": "Isra Mikraj Nabi Muhammad SAW",
-            "2031-01-23": "Tahun Baru Imlek 2582 Kongzili",
-            "2031-01-27": "Idul Fitri 1452 H",
-            "2031-01-28": "Idul Fitri 1452 H",
-            "2031-03-24": "Hari Suci Nyepi Tahun Baru Saka 1953",
-            "2031-04-04": "Idul Adha 1452 H",
-            "2031-04-11": "Wafat Isa Almasih",
-            "2031-04-24": "Tahun Baru Islam 1453 H",
-            "2031-05-01": "Hari Buruh Internasional",
-            "2031-05-09": "Hari Raya Waisak",
-            "2031-05-22": "Kenaikan Isa Almasih",
-            "2031-06-01": "Hari Lahir Pancasila",
-            "2031-08-02": "Maulid Nabi Muhammad SAW",
-            "2031-08-17": "Hari Kemerdekaan RI",
-            "2031-12-25": "Hari Raya Natal",
-            "2032-01-01": "Tahun Baru 2032 Masehi",
-            "2032-01-02": "Isra Mikraj Nabi Muhammad SAW",
-            "2032-01-15": "Idul Fitri 1453 H",
-            "2032-01-16": "Idul Fitri 1453 H",
-            "2032-02-11": "Tahun Baru Imlek 2583 Kongzili",
-            "2032-03-12": "Hari Suci Nyepi Tahun Baru Saka 1954",
-            "2032-03-24": "Idul Adha 1453 H",
-            "2032-03-26": "Wafat Isa Almasih",
-            "2032-04-12": "Tahun Baru Islam 1454 H",
-            "2032-05-01": "Hari Buruh Internasional",
-            "2032-05-13": "Kenaikan Isa Almasih",
-            "2032-05-28": "Hari Raya Waisak",
-            "2032-06-01": "Hari Lahir Pancasila",
-            "2032-07-21": "Maulid Nabi Muhammad SAW",
-            "2032-08-17": "Hari Kemerdekaan RI",
-            "2032-12-05": "Isra Mikraj Nabi Muhammad SAW",
-            "2032-12-25": "Hari Raya Natal",
-            "2033-01-01": "Tahun Baru 2033 Masehi",
-            "2033-01-04": "Idul Fitri 1454 H",
-            "2033-01-05": "Idul Fitri 1454 H",
-            "2033-01-31": "Tahun Baru Imlek 2584 Kongzili",
-            "2033-03-02": "Hari Suci Nyepi Tahun Baru Saka 1955",
-            "2033-03-14": "Idul Adha 1454 H",
-            "2033-04-01": "Tahun Baru Islam 1455 H",
-            "2033-04-15": "Wafat Isa Almasih",
-            "2033-05-01": "Hari Buruh Internasional",
-            "2033-05-17": "Hari Raya Waisak",
-            "2033-05-26": "Kenaikan Isa Almasih",
-            "2033-06-01": "Hari Lahir Pancasila",
-            "2033-07-10": "Maulid Nabi Muhammad SAW",
-            "2033-08-17": "Hari Kemerdekaan RI",
-            "2033-11-23": "Isra Mikraj Nabi Muhammad SAW",
-            "2033-12-24": "Idul Fitri 1455 H",
-            "2033-12-25": "Idul Fitri 1455 H & Natal",
-            "2034-01-01": "Tahun Baru Masehi",
-            "2034-02-19": "Tahun Baru Imlek 2585 Kongzili",
-            "2034-03-03": "Idul Adha 1455 H",
-            "2034-03-21": "Tahun Baru Islam 1456 H",
-            "2034-03-21": "Hari Suci Nyepi Tahun Baru Saka 1956",
-            "2034-04-07": "Wafat Isa Almasih",
-            "2034-05-01": "Hari Buruh Internasional",
-            "2034-05-06": "Hari Raya Waisak",
-            "2034-05-18": "Kenaikan Isa Almasih",
-            "2034-05-30": "Maulid Nabi Muhammad SAW",
-            "2034-06-01": "Hari Lahir Pancasila",
-            "2034-08-17": "Hari Kemerdekaan RI",
-            "2034-11-12": "Isra Mikraj Nabi Muhammad SAW",
-            "2034-12-13": "Idul Fitri 1456 H",
-            "2034-12-14": "Idul Fitri 1456 H",
-            "2034-12-25": "Hari Raya Natal",
-            "2035-01-01": "Tahun Baru Masehi",
-            "2035-02-08": "Tahun Baru Imlek 2586 Kongzili",
-            "2035-02-21": "Idul Adha 1456 H",
-            "2035-03-10": "Tahun Baru Islam 1457 H",
-            "2035-03-11": "Hari Suci Nyepi Tahun Baru Saka 1957",
-            "2035-03-23": "Wafat Isa Almasih",
-            "2035-05-01": "Hari Buruh Internasional",
-            "2035-05-01": "Isra Mikraj Nabi Muhammad SAW",
-            "2035-05-03": "Kenaikan Isa Almasih",
-            "2035-05-20": "Maulid Nabi Muhammad SAW",
-            "2035-05-25": "Hari Raya Waisak",
-            "2035-06-01": "Hari Lahir Pancasila",
-            "2035-08-17": "Hari Kemerdekaan RI",
-            "2035-12-02": "Idul Fitri 1457 H",
-            "2035-12-03": "Idul Fitri 1457 H",
-            "2035-12-25": "Hari Raya Natal"
         };
 
 
@@ -976,7 +873,7 @@
                         delay *= 2;
                     } else {
                         if (error instanceof TypeError) {
-                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
+                               throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
                         }
                         throw new Error("Gagal terhubung ke sistem AI. Coba lagi nanti.");
                     }
@@ -986,9 +883,9 @@
 
 
         async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
-              const allCategories = Object.keys(hookExplanations).join(", ");
-              const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
-              const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
+             const allCategories = Object.keys(hookExplanations).join(", ");
+             const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
+             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
 ATURAN:
 1. **WAJIB SINGKAT!** (di bawah 12 kata).
 2. Gunakan bahasa Indonesia sehari-hari.
@@ -1004,20 +901,20 @@ DATA:
 
 Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). 
 Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "Storytelling"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan", "tone": "Santai"}]`;
-              const result = await callGeminiAPI(prompt, apiKey);
-              if (result.candidates?.[0]?.content?.parts?.[0]) {
-                  const rawText = result.candidates[0].content.parts[0].text;
-                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                  try {
-                      const parsed = JSON.parse(cleanedText);
-                      addToHistory(parsed);
-                      return parsed;
-                  } catch (e) {
-                      console.error("JSON Parsing Error. Raw text:", cleanedText);
-                      throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
-                  }
-              }
-              throw new Error("Struktur respons AI tidak terduga.");
+             const result = await callGeminiAPI(prompt, apiKey);
+             if (result.candidates?.[0]?.content?.parts?.[0]) {
+                 const rawText = result.candidates[0].content.parts[0].text;
+                 const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                 try {
+                     const parsed = JSON.parse(cleanedText);
+                     addToHistory(parsed);
+                     return parsed;
+                 } catch (e) {
+                     console.error("JSON Parsing Error. Raw text:", cleanedText);
+                     throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
+                 }
+             }
+             throw new Error("Struktur respons AI tidak terduga.");
         }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
@@ -1219,7 +1116,7 @@ Contoh struktur JSON yang diharapkan:
                 container.appendChild(sectionWrapper);
             });
             
-            // --- FIX: Dynamically add script action buttons ---
+            // --- Dynamically add script action buttons ---
             const scriptButtonsContainer = document.getElementById('script-buttons');
             scriptButtonsContainer.innerHTML = `
                 <button id="copy-gdocs-btn" class="result-card-develop-btn text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" title="Salin script dan buka Google Docs di tab baru">
@@ -1239,6 +1136,30 @@ Contoh struktur JSON yang diharapkan:
                     <span>Salin</span>
                 </button>
             `;
+
+            // **MODIFICATION FOR POINT 2**: Add "Batal Edit" button if coming from calendar
+            if (isEditingFromCalendar) {
+                const cancelEditBtn = document.createElement('button');
+                cancelEditBtn.id = 'cancel-edit-from-calendar-btn';
+                cancelEditBtn.className = 'result-card-develop-btn text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2 bg-rose-500/80 hover:bg-rose-600/80';
+                cancelEditBtn.title = 'Batal edit dan kembali ke kalender';
+                cancelEditBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span>Batal Edit</span>
+                `;
+                scriptButtonsContainer.appendChild(cancelEditBtn);
+                // Adjust grid for 5 columns on larger screens
+                scriptButtonsContainer.classList.remove('sm:grid-cols-4');
+                scriptButtonsContainer.classList.add('sm:grid-cols-5');
+            } else {
+                // Ensure grid is set to 4 columns if not editing from calendar
+                scriptButtonsContainer.classList.remove('sm:grid-cols-5');
+                scriptButtonsContainer.classList.add('sm:grid-cols-4');
+            }
+
             scriptButtonsContainer.style.display = 'grid';
             document.getElementById('script-disclaimer').style.display = 'block';
         }
@@ -1362,13 +1283,11 @@ Contoh struktur JSON yang diharapkan:
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                 dayEl.dataset.date = dateStr;
 
-                // MODIFIED: Check for holiday and Sunday
                 const isHoliday = !!holidays[dateStr];
                 const isSunday = new Date(year, month, i).getDay() === 0;
                 
                 dayEl.innerHTML = `<span class="date-number ${isHoliday || isSunday ? 'holiday' : ''}">${i}</span>`;
                 
-                // MODIFIED: Add tooltip for holidays
                 if (isHoliday) {
                     const tooltip = document.createElement('div');
                     tooltip.className = 'holiday-tooltip';
@@ -1387,11 +1306,25 @@ Contoh struktur JSON yang diharapkan:
                 }
                 
                 dayEl.addEventListener('click', () => {
+                    // **MODIFICATION FOR POINT 3**
                     if (isScheduling) {
                         selectedDateForScheduling = dateStr;
                         document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                         dayEl.classList.add('selected');
                         document.getElementById('calendar-actions').style.display = 'block';
+
+                        // Update the details pane to reflect the selection
+                        const detailsContainer = document.getElementById('calendar-details');
+                        const formatDate = (ds) => new Date(ds + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                        let detailText = `<h4 class="font-bold text-lg mb-2">Akan menjadwalkan untuk ${formatDate(dateStr)}</h4>`;
+                        
+                        const contentForDate = scheduledContent[dateStr];
+                        if (!contentForDate || contentForDate.length === 0) {
+                            detailText += `<p class="text-slate-400">Belum ada jadwal lain di tanggal ini.</p>`;
+                        } else {
+                            detailText += `<p class="text-slate-300">Sudah ada ${contentForDate.length} konten terjadwal di tanggal ini.</p>`;
+                        }
+                        detailsContainer.innerHTML = detailText;
                     } else {
                         showCalendarDetails(dateStr);
                     }
@@ -1480,7 +1413,6 @@ Contoh struktur JSON yang diharapkan:
                     detailsContainer.appendChild(itemEl);
                 });
             } else {
-                // MODIFIED: Changed empty schedule text
                 detailsContainer.innerHTML += `<p class="text-slate-400">Belum ada jadwal konten.</p>`;
             }
         }
@@ -1786,6 +1718,10 @@ Contoh struktur JSON yang diharapkan:
                     showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true); 
                     return; 
                 }
+                
+                // **MODIFICATION FOR POINT 2**: Reset flag for new script generation
+                isEditingFromCalendar = false;
+                
                 const hookText = scriptBtn.dataset.hook;
                 const modal = document.getElementById('scriptModal');
                 const resultContainer = document.getElementById('script-result-container');
@@ -1841,8 +1777,8 @@ Contoh struktur JSON yang diharapkan:
                 const artist = audioSpan.dataset.artist;
                 const fullQuery = `${title} ${artist}`;
                 document.getElementById('audio-title').textContent = `'${title}' by ${artist}`;
-                document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(fullQuery)}`;
-                document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/${encodeURIComponent(fullQuery)}`;
+                document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=$${encodeURIComponent(fullQuery)}`;
+                document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/$${encodeURIComponent(fullQuery)}`;
                 document.getElementById('audioSearchModal').classList.add('visible');
             } else if (wrapper) {
                 const editBtn = e.target.closest('.edit-section-btn');
@@ -1902,7 +1838,12 @@ Contoh struktur JSON yang diharapkan:
              if (buttonId === 'schedule-btn') {
                  if (!currentScriptData) return;
                  calendarDate = new Date();
-                 renderCalendar(true);
+                 
+                 // **MODIFICATION FOR POINT 3**: Reset details pane when opening for scheduling
+                 renderCalendar(true); 
+                 const detailsContainer = document.getElementById('calendar-details');
+                 detailsContainer.innerHTML = `<p class="text-slate-400 text-center py-4">Silakan pilih tanggal untuk menjadwalkan konten ini.</p>`;
+                 
                  document.getElementById('calendarModal').classList.add('visible');
              }
              
@@ -1937,7 +1878,7 @@ Contoh struktur JSON yang diharapkan:
                          if (key === 'saran_audio') {
                              content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
                          } else if (key === 'hashtags') {
-                              content += `<p>${'#' + data.join(' #')}</p>`;
+                             content += `<p>${'#' + data.join(' #')}</p>`;
                          } else if (typeof data === 'string') { 
                              content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
                          } else if (typeof data === 'object') { 
@@ -1953,6 +1894,14 @@ Contoh struktur JSON yang diharapkan:
                  link.click();
                  document.body.removeChild(link);
              }
+
+             // **MODIFICATION FOR POINT 2**: Handle "Batal Edit" click
+             if (buttonId === 'cancel-edit-from-calendar-btn') {
+                 document.getElementById('scriptModal').classList.remove('visible');
+                 document.getElementById('calendarModal').classList.add('visible');
+                 showNotification('Pengeditan dibatalkan.');
+                 isEditingFromCalendar = false; // Reset the flag
+             }
         });
         
         function getFullScriptAsText() {
@@ -1965,13 +1914,13 @@ Contoh struktur JSON yang diharapkan:
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
                      if (key === 'saran_audio') {
-                        fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                         fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
                      } else if (key === 'hashtags') {
-                        fullText += '#' + data.join(' #') + '\n\n';
+                         fullText += '#' + data.join(' #') + '\n\n';
                      } else if (typeof data === 'string') { 
-                        fullText += data + '\n\n'; 
+                         fullText += data + '\n\n'; 
                      } else if (typeof data === 'object') { 
-                        fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                         fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
                      }
                 }
             });
@@ -2126,6 +2075,10 @@ Contoh struktur JSON yang diharapkan:
                 if (editBtn) {
                     const { date, index } = editBtn.dataset;
                     const item = scheduledContent[date][index];
+                    
+                    // **MODIFICATION FOR POINT 2**: Set flag when editing from calendar
+                    isEditingFromCalendar = true;
+                    
                     displayStructuredScript(item);
                     document.getElementById('calendarModal').classList.remove('visible');
                     document.getElementById('scriptModal').classList.add('visible');
