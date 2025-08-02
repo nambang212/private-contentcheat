@@ -474,12 +474,12 @@
                     <button id="next-month-btn" class="p-2 rounded-full hover:bg-slate-700">&gt;</button>
                 </div>
                 <div id="calendar-grid"></div>
+                <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
+                    <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
+                </div>
                 <div id="calendar-details" class="mt-4">
                     <p class="text-slate-400">Pilih tanggal untuk melihat jadwal konten.</p>
                 </div>
-            </div>
-            <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
-                <button id="save-schedule-btn" class="w-full text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700">Simpan Jadwal untuk Tanggal Terpilih</button>
             </div>
         </div>
     </div>
@@ -494,9 +494,9 @@
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
             
             <div class="mt-6 flex justify-center items-center gap-2 md:absolute md:top-0 md:right-0 md:mt-0">
-                <button id="calendar-view-btn" title="Kalender Konten" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-calendar2-event-fill" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM2 9.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/></svg></button>
-                <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16"><path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/></svg></button>
-                <button id="faq-btn" title="FAQ" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-patch-question-fill" viewBox="0 0 16 16"><path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm1.6-1.6a1.6 1.6 0 1 0-3.2 0 1.6 1.6 0 0 0 3.2 0z"/></svg></button>
+                <button id="calendar-view-btn" title="Kalender Konten" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg></button>
+                <button id="pustaka-hook-btn" title="Pustaka Hook" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-journal-richtext" viewBox="0 0 16 16"><path d="M7.5 3.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V7.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V7.02s1.54-1.274 1.639-1.33zM8 5.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5z"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/></svg></button>
+                <button id="faq-btn" title="FAQ" class="p-2 text-slate-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c.645.002 1.154-.457 1.154-.943 0-.529-.51-.94-1.154-.94-.644 0-1.15.411-1.15.94 0 .486.506.941 1.15.94z"/></svg></button>
             </div>
 
             <div class="mt-6 info-box"><p class="text-slate-300">Sisa kuota generate hari ini: <strong id="quota-counter" class="text-xl text-green-400">200</strong></p><p class="text-xs text-slate-500 mt-1">Kuota direset setiap hari. <button id="changeApiKey" class="text-purple-400 hover:underline">Ganti API Key</button></p></div>
@@ -664,6 +664,15 @@
             }
         };
         
+        const platformStyles = {
+            'IG': { name: 'Instagram', color: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 2.882a5.138 5.138 0 1 1 0 10.276A5.138 5.138 0 0 1 8 2.882zM8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264zm4.39-1.442a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/></svg>'},
+            'FB': { name: 'Facebook', color: 'bg-blue-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>'},
+            'TikTok': { name: 'TikTok', color: 'bg-black', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg>'},
+            'YouTube': { name: 'YouTube', color: 'bg-red-600', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22-1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"/></svg>'},
+            'Shopee': { name: 'Shopee', color: 'bg-orange-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.319 1.674c-.233.51-.385 1.1-.433 1.737C.772 4.25.75 5.025.75 6.5a14.2 14.2 0 0 0 .324 2.846c.154.67.427 1.34.787 1.913.322.518.724.96 1.19 1.332.464.37.973.68 1.503.923.53.242 1.087.423 1.65.54.636.128 1.3.197 1.975.203h.038c.676-.006 1.338-.075 1.975-.204.563-.116 1.12-.297 1.65-.54.53-.242 1.04-.553 1.504-.923.465-.372.867-.814 1.19-1.332.36-.573.633-1.243.787-1.913A14.2 14.2 0 0 0 15.25 6.5c0-1.475-.022-2.25-.137-3.089-.048-.637-.2-1.227-.433-1.737-.253-.55-.615-1.03-1.045-1.41-1.2-.97-.99-1.12-3.134-1.226C9.15.111 8.802.11 8.5.11h-.03c-.302 0-.65.002-1.97.108-2.144.106-1.935.257-3.135 1.226-.43.38-.792.86-1.045 1.41zM8.5 12.1a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2zM12.982 5.118a.8.8 0 0 1 .44.254.8.8 0 0 1 .253.442.79.79 0 0 1-.095.53c-.106.2-.284.34-.495.426a.9.9 0 0 1-.582.022.78.78 0 0 1-.466-.34c-.13-.195-.19-.43-.16-.653a.77.77 0 0 1 .23-.526.78.78 0 0 1 .425-.262.88.88 0 0 1 .45-.013zM4.14 7.633a.8.8 0 1 1-1.32-.88.8.8 0 0 1 1.32.88z"/></svg>'},
+            'TokPed': { name: 'Tokopedia', color: 'bg-green-500', logo: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12.871 3.36a.44.44 0 0 1,.437.45l-.423 4.228a.45.45 0 0 1-.437.45H3.552a.45.45 0 0 1-.437-.45L2.692 3.81a.44.44 0 0 1 .437-.45h9.742zm-3.64 1.328a.45.45 0 0 1 .448.437v4.228a.45.45 0 1 1-.9 0V5.125a.45.45 0 0 1 .452-.437zM5.385 4.688a.45.45 0 0 1 .449.437v4.228a.45.45 0 1 1-.9 0V5.125a.45.45 0 0 1 .451-.437z"/><path d="M14.6 2.451a.6.6 0 0 0-.53-.55l-1.782-.446a.6.6 0 0 0-.58.128L8 4.693 4.3.583A.6.6 0 0 0 3.72.455l-1.783.446a.6.6 0 0 0-.53.55L0 8.832a.6.6 0 0 0 .584.658l1.76.22a.6.6 0 0 0 .616-.56L3.92 5.4l4.038 3.56a.6.6 0 0 0 .684 0L12.08 5.4l.96 3.75a.6.6 0 0 0 .616.56l1.76-.22a.6.6 0 0 0 .584-.658L14.6 2.451z"/></svg>'}
+        };
+
         // --- UI UTILITIES ---
         function showNotification(message, isError = false, duration = 3000) {
             const notification = document.getElementById('notification');
@@ -707,37 +716,29 @@
             }
 
             const maxRetries = 3;
-            let delay = 1000; // Start with 1 second delay
+            let delay = 1000;
 
             for (let i = 0; i < maxRetries; i++) {
                 try {
                     const response = await fetch(API_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ contents })
                     });
 
-                    if (response.ok) {
-                        return await response.json(); // Success, return the result
-                    }
+                    if (response.ok) return await response.json();
 
                     const errorBody = await response.json();
                     console.error(`API Error (Attempt ${i + 1}):`, errorBody);
 
-                    // --- Handle specific, non-retriable errors ---
                     if (response.status === 400 && errorBody.error?.message.includes("API key not valid")) {
                         throw new Error("API Key tidak valid. Mohon periksa kembali atau ganti dengan yang baru.");
                     }
                     if (response.status === 429) {
                         throw new Error("API_QUOTA_EXCEEDED");
                     }
-
-                    // --- Handle retriable server errors ---
                     if (response.status >= 500) { 
                         if (i < maxRetries - 1) {
-                            console.log(`Server error. Retrying in ${delay / 1000}s...`);
                             await new Promise(resolve => setTimeout(resolve, delay));
                             delay *= 2; 
                             continue; 
@@ -751,16 +752,16 @@
                 } catch (error) {
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                         throw error; 
+                          throw error; 
                      }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
                         delay *= 2;
                     } else {
                         if (error instanceof TypeError) {
-                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda atau coba nonaktifkan ekstensi browser (seperti AdBlock).");
+                             throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
                         }
-                        throw new Error("Gagal terhubung ke sistem AI setelah beberapa kali mencoba. Periksa koneksi internet Anda atau coba lagi nanti.");
+                        throw new Error("Gagal terhubung ke sistem AI. Coba lagi nanti.");
                     }
                 }
             }
@@ -834,7 +835,6 @@ Contoh struktur JSON yang diharapkan:
             const result = await callGeminiAPI(prompt, apiKey, imageBase64, mimeType);
             if (result.candidates?.[0]?.content?.parts?.[0]) {
                 const rawText = result.candidates[0].content.parts[0].text;
-                // --- ROBUST JSON CLEANING ---
                 const jsonMatch = rawText.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
                     try {
@@ -1137,6 +1137,11 @@ Contoh struktur JSON yang diharapkan:
                         document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                         dayEl.classList.add('selected');
                         document.getElementById('calendar-actions').style.display = 'block';
+                        // MODIFIED: Clear details and show scheduling message
+                        const detailsContainer = document.getElementById('calendar-details');
+                        const formatDate = (ds) => new Date(ds + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
+                        detailsContainer.innerHTML = `<p class="text-center text-slate-400 p-4">Anda akan menjadwalkan konten untuk <br><strong class="text-purple-300">${formatDate(dateStr)}</strong>.</p>`;
+
                     } else {
                         showCalendarDetails(dateStr);
                     }
@@ -1645,7 +1650,7 @@ Contoh struktur JSON yang diharapkan:
              if (buttonId === 'schedule-btn') {
                  if (!currentScriptData) return;
                  calendarDate = new Date();
-                 renderCalendar(true); // Render in scheduling mode
+                 renderCalendar(true);
                  document.getElementById('calendarModal').classList.add('visible');
              }
              
@@ -1723,17 +1728,14 @@ Contoh struktur JSON yang diharapkan:
 
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
              if (itemToMove) {
-                 // Logic for moving an existing item
                  if (!selectedDateForScheduling) {
                      showNotification('Silakan pilih tanggal baru di kalender.', true);
                      return;
                  }
-                 // Add to new date
                  if (!scheduledContent[selectedDateForScheduling]) {
                      scheduledContent[selectedDateForScheduling] = [];
                  }
                  scheduledContent[selectedDateForScheduling].push(itemToMove.item);
-                 // Remove from old date
                  scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
                  if (scheduledContent[itemToMove.originalDate].length === 0) {
                      delete scheduledContent[itemToMove.originalDate];
@@ -1741,7 +1743,6 @@ Contoh struktur JSON yang diharapkan:
                  showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
                  itemToMove = null;
              } else {
-                 // Logic for scheduling a new item
                  if (!selectedDateForScheduling) {
                      showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
                      return;
@@ -1771,11 +1772,9 @@ Contoh struktur JSON yang diharapkan:
              selectedDateForScheduling = null;
         });
 
-
-        // Calendar View Listeners
         document.getElementById('calendar-view-btn').addEventListener('click', () => {
             calendarDate = new Date();
-            renderCalendar(false); // Render in view-only mode
+            renderCalendar(false);
             document.getElementById('calendarModal').classList.add('visible');
         });
 
@@ -1790,7 +1789,6 @@ Contoh struktur JSON yang diharapkan:
             const isScheduling = document.getElementById('calendar-actions').style.display === 'block';
             renderCalendar(isScheduling);
         });
-
 
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         window.onscroll = function() {
@@ -1856,10 +1854,9 @@ Contoh struktur JSON yang diharapkan:
         
         removeImageBtn.addEventListener('click', () => {
             uploadedImageBase64 = null;
-            imageUploadInput.value = ''; // Reset file input
+            imageUploadInput.value = '';
             imagePreviewContainer.classList.add('hidden');
         });
-
 
         scrollToTopBtn.addEventListener('click', function() {
             window.scrollTo({top: 0, behavior: 'smooth'});
@@ -1886,7 +1883,7 @@ Contoh struktur JSON yang diharapkan:
                     const { date, index } = moveBtn.dataset;
                     const item = scheduledContent[date][index];
                     itemToMove = { item, originalDate: date, originalIndex: parseInt(index) };
-                    renderCalendar(true); // Re-render in scheduling mode
+                    renderCalendar(true);
                     
                     const detailsContainer = document.getElementById('calendar-details');
                     detailsContainer.innerHTML = `
