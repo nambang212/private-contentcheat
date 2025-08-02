@@ -282,6 +282,7 @@
             transition: opacity 0.2s, visibility 0.2s;
             pointer-events: none;
             margin-bottom: 5px;
+            z-index: 10;
         }
         .calendar-day:hover .holiday-tooltip {
             opacity: 1;
@@ -291,7 +292,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <h2 class="text-2xl font-bold text-center text-white mb-2">Akses Terbatas</h2>
@@ -321,7 +321,6 @@
         </div>
     </div>
 
-    <!-- API Key Modal -->
     <div id="apiKeyModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4">
@@ -345,7 +344,6 @@
         </div>
     </div>
     
-    <!-- Tutorial Modal -->
     <div id="tutorialModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">Cara Mudah Mendapatkan Kunci API</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -358,7 +356,6 @@
         </div>
     </div>
     
-    <!-- Hook Explanation Modal -->
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -366,7 +363,6 @@
         </div>
     </div>
 
-    <!-- Pustaka Hook Modal -->
     <div id="pustakaHookModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">📚 Pustaka Strategi Hook</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -374,7 +370,6 @@
         </div>
     </div>
 
-    <!-- FAQ Modal -->
     <div id="faqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">ℹ️ Tanya Jawab (FAQ)</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -414,7 +409,6 @@
         </div>
     </div>
 
-    <!-- API Key FAQ Modal -->
     <div id="apiKeyFaqModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold text-purple-400">❓ Tanya Jawab API Key</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -435,21 +429,18 @@
         </div>
     </div>
     
-    <!-- Script Modal -->
     <div id="scriptModal" class="modal-overlay">
         <div class="modal-content !max-w-2xl">
             <div class="flex justify-between items-center mb-4"><h2 class="kerangka-konten-title">✨ Kerangka Konten AI</h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
             <div id="script-result-container" class="modal-body space-y-5"></div>
             <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-3">
                 <div id="script-buttons" class="grid grid-cols-2 sm:grid-cols-4 gap-3" style="display:none;">
-                    <!-- Buttons are dynamically added here by JS -->
-                </div>
+                    </div>
                 <p id="script-disclaimer" class="text-xs text-slate-500 text-center italic" style="display:none;">*bisa disesuaikan sendiri menurut kebutuhan Anda</p>
             </div>
         </div>
     </div>
 
-    <!-- Hashtag Modal -->
     <div id="hashtagModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="hashtag-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -471,7 +462,6 @@
         </div>
     </div>
     
-    <!-- Audio Search Modal -->
     <div id="audioSearchModal" class="modal-overlay">
         <div class="modal-content !max-w-md">
             <div class="flex justify-between items-center mb-4"><h2 id="audio-title" class="text-xl font-bold text-white"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -489,7 +479,6 @@
         </div>
     </div>
 
-    <!-- Calendar Modal -->
     <div id="calendarModal" class="modal-overlay">
         <div class="modal-content !max-w-4xl">
             <div class="flex justify-between items-center mb-4">
@@ -498,9 +487,9 @@
             </div>
             <div class="modal-body">
                 <div class="flex justify-between items-center mb-4">
-                    <button id="prev-month-btn" class="p-2 rounded-full hover:bg-slate-700">&lt;</button>
+                    <button id="prev-month-btn" class="p-2 rounded-full hover:bg-slate-700"><</button>
                     <h3 id="month-year-header" class="text-xl font-bold"></h3>
-                    <button id="next-month-btn" class="p-2 rounded-full hover:bg-slate-700">&gt;</button>
+                    <button id="next-month-btn" class="p-2 rounded-full hover:bg-slate-700">></button>
                 </div>
                 <div id="calendar-grid"></div>
                 <div id="calendar-actions" class="mt-4 pt-4 border-t border-slate-700/50" style="display: none;">
@@ -523,7 +512,6 @@
             <p class="text-red-500 font-bold mt-2 text-sm tracking-wider">DILARANG MENJUAL KEMBALI TOOLS INI TANPA SEIZIN PENGEMBANG!</p>
             
             <div class="mt-6 flex justify-center items-center gap-2 md:absolute md:top-0 md:right-0 md:mt-0">
-                <!-- === ICONS UPDATED HERE === -->
                 <button id="calendar-view-btn" title="Kalender Konten" class="p-2 text-slate-400 hover:text-purple-400 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0h18M12 12.75h.008v.008H12v-.008Z" />
@@ -569,7 +557,7 @@
                 </div>
 
                  <div>
-                    <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Jenis Hasil (Opsional)</label>
+                    <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Jenis Hook (Opsional)</label>
                     <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
                     </select>
@@ -632,6 +620,193 @@
         let calendarDate = new Date();
         let selectedDateForScheduling = null;
         let itemToMove = null; // To track item being moved in calendar
+
+        // --- NEW: Holiday Data ---
+        const holidays = {
+            "2025-01-01": "Tahun Baru 2025 Masehi",
+            "2025-01-27": "Isra Mikraj Nabi Muhammad SAW",
+            "2025-01-29": "Tahun Baru Imlek 2576 Kongzili",
+            "2025-03-29": "Hari Suci Nyepi Tahun Baru Saka 1947",
+            "2025-03-31": "Cuti Bersama Idul Fitri 1446 H",
+            "2025-04-01": "Idul Fitri 1446 H",
+            "2025-04-02": "Idul Fitri 1446 H",
+            "2025-04-03": "Cuti Bersama Idul Fitri 1446 H",
+            "2025-04-04": "Cuti Bersama Idul Fitri 1446 H",
+            "2025-05-01": "Hari Buruh Internasional",
+            "2025-05-15": "Kenaikan Isa Almasih",
+            "2025-05-26": "Cuti Bersama Hari Raya Waisak",
+            "2025-06-01": "Hari Lahir Pancasila",
+            "2025-06-06": "Idul Adha 1446 H",
+            "2025-06-26": "Tahun Baru Islam 1447 H",
+            "2025-08-17": "Hari Kemerdekaan RI",
+            "2025-09-05": "Maulid Nabi Muhammad SAW",
+            "2025-12-25": "Hari Raya Natal",
+            "2025-12-26": "Cuti Bersama Natal",
+            "2026-01-01": "Tahun Baru 2026 Masehi",
+            "2026-01-17": "Tahun Baru Imlek 2577 Kongzili",
+            "2026-02-06": "Isra Mikraj Nabi Muhammad SAW",
+            "2026-03-19": "Hari Suci Nyepi Tahun Baru Saka 1948",
+            "2026-03-20": "Cuti Bersama Idul Fitri 1447 H",
+            "2026-03-21": "Idul Fitri 1447 H",
+            "2026-03-22": "Idul Fitri 1447 H",
+            "2026-03-23": "Cuti Bersama Idul Fitri 1447 H",
+            "2026-04-03": "Wafat Isa Almasih",
+            "2026-05-01": "Hari Buruh Internasional",
+            "2026-05-14": "Kenaikan Isa Almasih",
+            "2026-05-15": "Cuti Bersama Hari Raya Waisak",
+            "2026-05-27": "Idul Adha 1447 H",
+            "2026-06-01": "Hari Lahir Pancasila",
+            "2026-06-16": "Tahun Baru Islam 1448 H",
+            "2026-08-17": "Hari Kemerdekaan RI",
+            "2026-09-25": "Maulid Nabi Muhammad SAW",
+            "2026-12-25": "Hari Raya Natal",
+            "2027-01-01": "Tahun Baru 2027 Masehi",
+            "2027-01-26": "Isra Mikraj Nabi Muhammad SAW",
+            "2027-02-06": "Tahun Baru Imlek 2578 Kongzili",
+            "2027-03-08": "Hari Suci Nyepi Tahun Baru Saka 1949",
+            "2027-03-11": "Idul Fitri 1448 H",
+            "2027-03-12": "Idul Fitri 1448 H",
+            "2027-03-26": "Wafat Isa Almasih",
+            "2027-05-01": "Hari Buruh Internasional",
+            "2027-05-06": "Kenaikan Isa Almasih",
+            "2027-05-17": "Idul Adha 1448 H",
+            "2027-05-24": "Hari Raya Waisak",
+            "2027-06-01": "Hari Lahir Pancasila",
+            "2027-06-05": "Tahun Baru Islam 1449 H",
+            "2027-08-17": "Hari Kemerdekaan RI",
+            "2027-09-14": "Maulid Nabi Muhammad SAW",
+            "2027-12-25": "Hari Raya Natal",
+            "2028-01-01": "Tahun Baru 2028 Masehi",
+            "2028-01-15": "Isra Mikraj Nabi Muhammad SAW",
+            "2028-01-26": "Tahun Baru Imlek 2579 Kongzili",
+            "2028-02-29": "Idul Fitri 1449 H",
+            "2028-03-01": "Idul Fitri 1449 H",
+            "2028-03-26": "Hari Suci Nyepi Tahun Baru Saka 1950",
+            "2028-04-14": "Wafat Isa Almasih",
+            "2028-05-01": "Hari Buruh Internasional",
+            "2028-05-06": "Idul Adha 1449 H",
+            "2028-05-12": "Hari Raya Waisak",
+            "2028-05-25": "Kenaikan Isa Almasih",
+            "2028-05-26": "Tahun Baru Islam 1450 H",
+            "2028-06-01": "Hari Lahir Pancasila",
+            "2028-08-17": "Hari Kemerdekaan RI",
+            "2028-09-03": "Maulid Nabi Muhammad SAW",
+            "2028-12-25": "Hari Raya Natal",
+            "2029-01-01": "Tahun Baru 2029 Masehi",
+            "2029-01-04": "Isra Mikraj Nabi Muhammad SAW",
+            "2029-02-13": "Tahun Baru Imlek 2580 Kongzili",
+            "2029-02-17": "Idul Fitri 1450 H",
+            "2029-02-18": "Idul Fitri 1450 H",
+            "2029-03-16": "Hari Suci Nyepi Tahun Baru Saka 1951",
+            "2029-03-30": "Wafat Isa Almasih",
+            "2029-04-26": "Idul Adha 1450 H",
+            "2029-05-01": "Hari Buruh Internasional",
+            "2029-05-10": "Kenaikan Isa Almasih",
+            "2029-05-15": "Tahun Baru Islam 1451 H",
+            "2029-06-01": "Hari Lahir Pancasila",
+            "2029-06-01": "Hari Raya Waisak",
+            "2029-08-17": "Hari Kemerdekaan RI",
+            "2029-08-23": "Maulid Nabi Muhammad SAW",
+            "2029-12-25": "Hari Raya Natal",
+            "2030-01-01": "Tahun Baru 2030 Masehi",
+            "2030-01-24": "Isra Mikraj Nabi Muhammad SAW",
+            "2030-02-03": "Tahun Baru Imlek 2581 Kongzili",
+            "2030-02-06": "Idul Fitri 1451 H",
+            "2030-02-07": "Idul Fitri 1451 H",
+            "2030-03-05": "Hari Suci Nyepi Tahun Baru Saka 1952",
+            "2030-04-15": "Idul Adha 1451 H",
+            "2030-04-19": "Wafat Isa Almasih",
+            "2030-05-01": "Hari Buruh Internasional",
+            "2030-05-04": "Tahun Baru Islam 1452 H",
+            "2030-05-20": "Hari Raya Waisak",
+            "2030-05-30": "Kenaikan Isa Almasih",
+            "2030-06-01": "Hari Lahir Pancasila",
+            "2030-08-12": "Maulid Nabi Muhammad SAW",
+            "2030-08-17": "Hari Kemerdekaan RI",
+            "2030-12-25": "Hari Raya Natal",
+            "2031-01-01": "Tahun Baru 2031 Masehi",
+            "2031-01-13": "Isra Mikraj Nabi Muhammad SAW",
+            "2031-01-23": "Tahun Baru Imlek 2582 Kongzili",
+            "2031-01-27": "Idul Fitri 1452 H",
+            "2031-01-28": "Idul Fitri 1452 H",
+            "2031-03-24": "Hari Suci Nyepi Tahun Baru Saka 1953",
+            "2031-04-04": "Idul Adha 1452 H",
+            "2031-04-11": "Wafat Isa Almasih",
+            "2031-04-24": "Tahun Baru Islam 1453 H",
+            "2031-05-01": "Hari Buruh Internasional",
+            "2031-05-09": "Hari Raya Waisak",
+            "2031-05-22": "Kenaikan Isa Almasih",
+            "2031-06-01": "Hari Lahir Pancasila",
+            "2031-08-02": "Maulid Nabi Muhammad SAW",
+            "2031-08-17": "Hari Kemerdekaan RI",
+            "2031-12-25": "Hari Raya Natal",
+            "2032-01-01": "Tahun Baru 2032 Masehi",
+            "2032-01-02": "Isra Mikraj Nabi Muhammad SAW",
+            "2032-01-15": "Idul Fitri 1453 H",
+            "2032-01-16": "Idul Fitri 1453 H",
+            "2032-02-11": "Tahun Baru Imlek 2583 Kongzili",
+            "2032-03-12": "Hari Suci Nyepi Tahun Baru Saka 1954",
+            "2032-03-24": "Idul Adha 1453 H",
+            "2032-03-26": "Wafat Isa Almasih",
+            "2032-04-12": "Tahun Baru Islam 1454 H",
+            "2032-05-01": "Hari Buruh Internasional",
+            "2032-05-13": "Kenaikan Isa Almasih",
+            "2032-05-28": "Hari Raya Waisak",
+            "2032-06-01": "Hari Lahir Pancasila",
+            "2032-07-21": "Maulid Nabi Muhammad SAW",
+            "2032-08-17": "Hari Kemerdekaan RI",
+            "2032-12-05": "Isra Mikraj Nabi Muhammad SAW",
+            "2032-12-25": "Hari Raya Natal",
+            "2033-01-01": "Tahun Baru 2033 Masehi",
+            "2033-01-04": "Idul Fitri 1454 H",
+            "2033-01-05": "Idul Fitri 1454 H",
+            "2033-01-31": "Tahun Baru Imlek 2584 Kongzili",
+            "2033-03-02": "Hari Suci Nyepi Tahun Baru Saka 1955",
+            "2033-03-14": "Idul Adha 1454 H",
+            "2033-04-01": "Tahun Baru Islam 1455 H",
+            "2033-04-15": "Wafat Isa Almasih",
+            "2033-05-01": "Hari Buruh Internasional",
+            "2033-05-17": "Hari Raya Waisak",
+            "2033-05-26": "Kenaikan Isa Almasih",
+            "2033-06-01": "Hari Lahir Pancasila",
+            "2033-07-10": "Maulid Nabi Muhammad SAW",
+            "2033-08-17": "Hari Kemerdekaan RI",
+            "2033-11-23": "Isra Mikraj Nabi Muhammad SAW",
+            "2033-12-24": "Idul Fitri 1455 H",
+            "2033-12-25": "Idul Fitri 1455 H & Natal",
+            "2034-01-01": "Tahun Baru Masehi",
+            "2034-02-19": "Tahun Baru Imlek 2585 Kongzili",
+            "2034-03-03": "Idul Adha 1455 H",
+            "2034-03-21": "Tahun Baru Islam 1456 H",
+            "2034-03-21": "Hari Suci Nyepi Tahun Baru Saka 1956",
+            "2034-04-07": "Wafat Isa Almasih",
+            "2034-05-01": "Hari Buruh Internasional",
+            "2034-05-06": "Hari Raya Waisak",
+            "2034-05-18": "Kenaikan Isa Almasih",
+            "2034-05-30": "Maulid Nabi Muhammad SAW",
+            "2034-06-01": "Hari Lahir Pancasila",
+            "2034-08-17": "Hari Kemerdekaan RI",
+            "2034-11-12": "Isra Mikraj Nabi Muhammad SAW",
+            "2034-12-13": "Idul Fitri 1456 H",
+            "2034-12-14": "Idul Fitri 1456 H",
+            "2034-12-25": "Hari Raya Natal",
+            "2035-01-01": "Tahun Baru Masehi",
+            "2035-02-08": "Tahun Baru Imlek 2586 Kongzili",
+            "2035-02-21": "Idul Adha 1456 H",
+            "2035-03-10": "Tahun Baru Islam 1457 H",
+            "2035-03-11": "Hari Suci Nyepi Tahun Baru Saka 1957",
+            "2035-03-23": "Wafat Isa Almasih",
+            "2035-05-01": "Hari Buruh Internasional",
+            "2035-05-01": "Isra Mikraj Nabi Muhammad SAW",
+            "2035-05-03": "Kenaikan Isa Almasih",
+            "2035-05-20": "Maulid Nabi Muhammad SAW",
+            "2035-05-25": "Hari Raya Waisak",
+            "2035-06-01": "Hari Lahir Pancasila",
+            "2035-08-17": "Hari Kemerdekaan RI",
+            "2035-12-02": "Idul Fitri 1457 H",
+            "2035-12-03": "Idul Fitri 1457 H",
+            "2035-12-25": "Hari Raya Natal"
+        };
 
 
         const hookCategoryStyles = {
@@ -794,8 +969,8 @@
                 } catch (error) {
                     console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
                      if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                         throw error; 
-                    }
+                          throw error; 
+                     }
                     if (i < maxRetries - 1) {
                         await new Promise(resolve => setTimeout(resolve, delay));
                         delay *= 2;
@@ -1008,13 +1183,13 @@ Contoh struktur JSON yang diharapkan:
                                     </div>`;
                     
                     editHTML = `<div class="space-y-2">
-                                        <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
-                                    </div>`;
+                                            <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                                        </div>`;
                 }
 
                 sectionWrapper.innerHTML = `
@@ -1157,6 +1332,7 @@ Contoh struktur JSON yang diharapkan:
         function saveScheduledContent() {
             localStorage.setItem('contentCheatSchedule', JSON.stringify(scheduledContent));
         }
+
         function renderCalendar(isScheduling = false) {
             const year = calendarDate.getFullYear();
             const month = calendarDate.getMonth();
@@ -1165,8 +1341,10 @@ Contoh struktur JSON yang diharapkan:
 
             const grid = document.getElementById('calendar-grid');
             grid.innerHTML = '';
-            ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].forEach(day => {
-                grid.innerHTML += `<div class="calendar-header-day">${day}</div>`;
+            // MODIFIED: Add 'sunday' class to Sunday header
+            ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].forEach((day, index) => {
+                const headerClass = index === 0 ? 'calendar-header-day sunday' : 'calendar-header-day';
+                grid.innerHTML += `<div class="${headerClass}">${day}</div>`;
             });
 
             const firstDay = new Date(year, month, 1).getDay();
@@ -1180,9 +1358,23 @@ Contoh struktur JSON yang diharapkan:
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day';
-                dayEl.innerHTML = `<span>${i}</span>`;
+                
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                 dayEl.dataset.date = dateStr;
+
+                // MODIFIED: Check for holiday and Sunday
+                const isHoliday = !!holidays[dateStr];
+                const isSunday = new Date(year, month, i).getDay() === 0;
+                
+                dayEl.innerHTML = `<span class="date-number ${isHoliday || isSunday ? 'holiday' : ''}">${i}</span>`;
+                
+                // MODIFIED: Add tooltip for holidays
+                if (isHoliday) {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'holiday-tooltip';
+                    tooltip.textContent = holidays[dateStr];
+                    dayEl.appendChild(tooltip);
+                }
 
                 if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
                     dayEl.classList.add('today');
@@ -1214,6 +1406,7 @@ Contoh struktur JSON yang diharapkan:
                  showCalendarDetails(selectedDay ? selectedDay.dataset.date : todayStr);
             }
         }
+
 
         function showCalendarDetails(dateStr) {
             document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
@@ -1287,7 +1480,8 @@ Contoh struktur JSON yang diharapkan:
                     detailsContainer.appendChild(itemEl);
                 });
             } else {
-                detailsContainer.innerHTML += `<p class="text-slate-400">Tidak ada jadwal untuk tanggal ini.</p>`;
+                // MODIFIED: Changed empty schedule text
+                detailsContainer.innerHTML += `<p class="text-slate-400">Belum ada jadwal konten.</p>`;
             }
         }
 
@@ -1717,7 +1911,7 @@ Contoh struktur JSON yang diharapkan:
                  let fullText = getFullScriptAsText();
                  fallbackCopy(fullText, 'Teks disalin! Buka Google Docs dan paste (Ctrl+V).');
                  setTimeout(() => {
-                    window.open('https://docs.new', '_blank');
+                     window.open('https://docs.new', '_blank');
                  }, 100);
              }
 
@@ -1727,37 +1921,37 @@ Contoh struktur JSON yang diharapkan:
              }
              
              if (buttonId === 'download-doc-btn') {
-                if (!currentScriptData) return;
-                
-                const topicValue = document.getElementById('topic').value.trim();
-                const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
-                const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
+                 if (!currentScriptData) return;
+                 
+                 const topicValue = document.getElementById('topic').value.trim();
+                 const sanitizedTopic = topicValue.replace(/[\/\\?%*:|"<>]/g, '-') || 'KONTEN';
+                 const fileName = `SCRIPT ${sanitizedTopic.toUpperCase()}.doc`;
 
-                let content = `<h1>Kerangka Konten AI</h1>`;
-                const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
-                const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
-                sectionOrder.forEach(key => {
-                    if(currentScriptData[key]) {
-                        content += `<h2>${sectionTitles[key]}</h2>`;
-                        const data = currentScriptData[key];
-                        if (key === 'saran_audio') {
-                            content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
-                        } else if (key === 'hashtags') {
-                             content += `<p>${'#' + data.join(' #')}</p>`;
-                        } else if (typeof data === 'string') { 
-                            content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
-                        } else if (typeof data === 'object') { 
-                            content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
-                        }
-                    }
-                });
-                const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                 let content = `<h1>Kerangka Konten AI</h1>`;
+                 const sectionTitles = { saran_audio: 'Saran Audio Trending', hook_scene: 'Hook (Scene)', masalah: 'Masalah', solusi: 'Solusi', cta: 'CTA', caption: 'Caption', hashtags: 'Hashtags' };
+                 const sectionOrder = ["saran_audio", "hook_scene", "masalah", "solusi", "cta", "caption", "hashtags"];
+                 sectionOrder.forEach(key => {
+                     if(currentScriptData[key]) {
+                         content += `<h2>${sectionTitles[key]}</h2>`;
+                         const data = currentScriptData[key];
+                         if (key === 'saran_audio') {
+                             content += `<p>${data.map(a => `'${a.title}' by ${a.artist}`).join('; ')}</p>`;
+                         } else if (key === 'hashtags') {
+                              content += `<p>${'#' + data.join(' #')}</p>`;
+                         } else if (typeof data === 'string') { 
+                             content += `<p>${data.replace(/\n/g, '<br>')}</p>`;
+                         } else if (typeof data === 'object') { 
+                             content += `<p><b>Durasi:</b> Detik ${data.durasi}<br/><b>Lokasi:</b> ${data.lokasi}<br/><b>Properti:</b> ${data.properti}<br/><b>Pencahayaan:</b> ${data.pencahayaan}<br/><b>Mood:</b> ${data.mood}<br/><br/><b>Visual:</b> ${data.visual}<br/><b>Narasi:</b> ${data.narasi}<br/><b>Saran Shot:</b> ${data.saran_shot}</p>`;
+                         }
+                     }
+                 });
+                 const blob = new Blob(['<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka Konten</title></head><body>' + content + '</body></html>'], {type: 'application/msword'});
+                 const link = document.createElement('a');
+                 link.href = URL.createObjectURL(blob);
+                 link.download = fileName;
+                 document.body.appendChild(link);
+                 link.click();
+                 document.body.removeChild(link);
              }
         });
         
@@ -1771,13 +1965,13 @@ Contoh struktur JSON yang diharapkan:
                     fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
                      const data = currentScriptData[key];
                      if (key === 'saran_audio') {
-                         fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                        fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
                      } else if (key === 'hashtags') {
-                         fullText += '#' + data.join(' #') + '\n\n';
+                        fullText += '#' + data.join(' #') + '\n\n';
                      } else if (typeof data === 'string') { 
-                         fullText += data + '\n\n'; 
+                        fullText += data + '\n\n'; 
                      } else if (typeof data === 'object') { 
-                         fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                        fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
                      }
                 }
             });
