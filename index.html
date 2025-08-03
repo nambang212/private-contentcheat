@@ -324,10 +324,10 @@
         
           /* Mengecilkan font di panel detail jadwal */
           #calendar-details h4 {
-              font-size: 1.1rem;
+             font-size: 1.1rem;
           }
           #calendar-details p, #calendar-details button, #calendar-details select {
-              font-size: 0.9rem;
+             font-size: 0.9rem;
           }
         }
     </style>
@@ -873,7 +873,7 @@
                         delay *= 2;
                     } else {
                         if (error instanceof TypeError) {
-                               throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
+                                throw new Error("Gagal terhubung ke server AI. Periksa koneksi internet Anda.");
                         }
                         throw new Error("Gagal terhubung ke sistem AI. Coba lagi nanti.");
                     }
@@ -883,9 +883,9 @@
 
 
         async function generateAIHooks(topic, audience, details, hookType, hookCount, tone, apiKey) {
-             const allCategories = Object.keys(hookExplanations).join(", ");
-             const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
-             const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
+              const allCategories = Object.keys(hookExplanations).join(", ");
+              const allTones = "Profesional, Lucu/Humoris, Inspiratif, Storytelling, Santai";
+              const prompt = `Anda adalah seorang content strategist AI. Buat ${hookCount} hook video pendek untuk TikTok/Reels.
 ATURAN:
 1. **WAJIB SINGKAT!** (di bawah 12 kata).
 2. Gunakan bahasa Indonesia sehari-hari.
@@ -901,21 +901,21 @@ DATA:
 
 Respon HARUS berupa string array JSON valid tanpa karakter markdown (seperti \`\`\`json). 
 Contoh format: [{"hook": "Teks hook pertama...", "category": "Narasi", "tone": "Storytelling"}, {"hook": "Teks hook kedua...", "category": "Pertanyaan", "tone": "Santai"}]`;
-             const result = await callGeminiAPI(prompt, apiKey);
-             if (result.candidates?.[0]?.content?.parts?.[0]) {
-                 const rawText = result.candidates[0].content.parts[0].text;
-                 const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                 try {
-                     const parsed = JSON.parse(cleanedText);
-                     addToHistory(parsed);
-                     return parsed;
-                 } catch (e) {
-                     console.error("JSON Parsing Error. Raw text:", cleanedText);
-                     throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
-                 }
-             }
-             throw new Error("Struktur respons AI tidak terduga.");
-        }
+              const result = await callGeminiAPI(prompt, apiKey);
+              if (result.candidates?.[0]?.content?.parts?.[0]) {
+                  const rawText = result.candidates[0].content.parts[0].text;
+                  const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                  try {
+                      const parsed = JSON.parse(cleanedText);
+                      addToHistory(parsed);
+                      return parsed;
+                  } catch (e) {
+                      console.error("JSON Parsing Error. Raw text:", cleanedText);
+                      throw new Error("Gagal memproses respons dari AI. Coba generate lagi.");
+                  }
+              }
+              throw new Error("Struktur respons AI tidak terduga.");
+         }
 
         async function generateAIScript(hookText, apiKey, imageBase64 = null) {
             let prompt = `Anda adalah seorang AI Scriptwriter profesional. Berdasarkan hook dan data berikut, buatlah kerangka konten video pendek (TikTok/Reels) yang lengkap, terstruktur, dan gunakan Bahasa Indonesia. Izinkan penggunaan istilah teknis umum (seperti 'close-up') tetapi mayoritas harus dalam Bahasa Indonesia.`;
@@ -1306,14 +1306,13 @@ Contoh struktur JSON yang diharapkan:
                 }
                 
                 dayEl.addEventListener('click', () => {
-                    // **MODIFICATION FOR POINT 3**
                     if (isScheduling) {
                         selectedDateForScheduling = dateStr;
                         document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                         dayEl.classList.add('selected');
                         document.getElementById('calendar-actions').style.display = 'block';
 
-                        // Update the details pane to reflect the selection
+                        // MODIFICATION: Update the details pane to show existing content
                         const detailsContainer = document.getElementById('calendar-details');
                         const formatDate = (ds) => new Date(ds + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                         let detailText = `<h4 class="font-bold text-lg mb-2">Akan menjadwalkan untuk ${formatDate(dateStr)}</h4>`;
@@ -1322,7 +1321,13 @@ Contoh struktur JSON yang diharapkan:
                         if (!contentForDate || contentForDate.length === 0) {
                             detailText += `<p class="text-slate-400">Belum ada jadwal lain di tanggal ini.</p>`;
                         } else {
-                            detailText += `<p class="text-slate-300">Sudah ada ${contentForDate.length} konten terjadwal di tanggal ini.</p>`;
+                            detailText += `<p class="text-slate-300 mb-2">Sudah ada ${contentForDate.length} konten terjadwal di tanggal ini:</p>`;
+                            detailText += `<ul class="list-disc list-inside text-slate-400 text-sm space-y-1 pl-2">`;
+                            contentForDate.forEach((item, index) => {
+                                const hookText = item.hook_scene ? item.hook_scene.narasi : 'Konten terjadwal';
+                                detailText += `<li><strong class="text-purple-300/80">#${index + 1}:</strong> ${hookText.substring(0, 50)}...</li>`;
+                            });
+                            detailText += `</ul>`;
                         }
                         detailsContainer.innerHTML = detailText;
                     } else {
@@ -1928,49 +1933,49 @@ Contoh struktur JSON yang diharapkan:
         }
 
         document.getElementById('save-schedule-btn').addEventListener('click', () => {
-             if (itemToMove) {
-                 if (!selectedDateForScheduling) {
-                     showNotification('Silakan pilih tanggal baru di kalender.', true);
-                     return;
-                 }
-                 if (!scheduledContent[selectedDateForScheduling]) {
-                     scheduledContent[selectedDateForScheduling] = [];
-                 }
-                 scheduledContent[selectedDateForScheduling].push(itemToMove.item);
-                 scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
-                 if (scheduledContent[itemToMove.originalDate].length === 0) {
-                     delete scheduledContent[itemToMove.originalDate];
-                 }
-                 showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
-                 itemToMove = null;
-             } else {
-                 if (!selectedDateForScheduling) {
-                     showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
-                     return;
-                 }
-                 if (!scheduledContent[selectedDateForScheduling]) {
-                     scheduledContent[selectedDateForScheduling] = [];
-                 }
-                 const newItem = {
-                     ...currentScriptData,
-                     id: Date.now(),
-                     platforms: {
-                         'IG': { status: 'Siap Upload', time: '' },
-                         'FB': { status: 'Siap Upload', time: '' },
-                         'TikTok': { status: 'Siap Upload', time: '' },
-                         'YouTube': { status: '-', time: '' },
-                         'Shopee': { status: '-', time: '' },
-                         'TokPed': { status: '-', time: '' }
-                     }
-                 };
-                 scheduledContent[selectedDateForScheduling].push(newItem);
-                 showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
-                 document.getElementById('scriptModal').classList.remove('visible');
-             }
-             
-             saveScheduledContent();
-             document.getElementById('calendarModal').classList.remove('visible');
-             selectedDateForScheduling = null;
+              if (itemToMove) {
+                  if (!selectedDateForScheduling) {
+                      showNotification('Silakan pilih tanggal baru di kalender.', true);
+                      return;
+                  }
+                  if (!scheduledContent[selectedDateForScheduling]) {
+                      scheduledContent[selectedDateForScheduling] = [];
+                  }
+                  scheduledContent[selectedDateForScheduling].push(itemToMove.item);
+                  scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
+                  if (scheduledContent[itemToMove.originalDate].length === 0) {
+                      delete scheduledContent[itemToMove.originalDate];
+                  }
+                  showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
+                  itemToMove = null;
+              } else {
+                  if (!selectedDateForScheduling) {
+                      showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
+                      return;
+                  }
+                  if (!scheduledContent[selectedDateForScheduling]) {
+                      scheduledContent[selectedDateForScheduling] = [];
+                  }
+                  const newItem = {
+                      ...currentScriptData,
+                      id: Date.now(),
+                      platforms: {
+                          'IG': { status: 'Siap Upload', time: '' },
+                          'FB': { status: 'Siap Upload', time: '' },
+                          'TikTok': { status: 'Siap Upload', time: '' },
+                          'YouTube': { status: '-', time: '' },
+                          'Shopee': { status: '-', time: '' },
+                          'TokPed': { status: '-', time: '' }
+                      }
+                  };
+                  scheduledContent[selectedDateForScheduling].push(newItem);
+                  showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
+                  document.getElementById('scriptModal').classList.remove('visible');
+              }
+              
+              saveScheduledContent();
+              document.getElementById('calendarModal').classList.remove('visible');
+              selectedDateForScheduling = null;
         });
 
         document.getElementById('calendar-view-btn').addEventListener('click', () => {
