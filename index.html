@@ -172,7 +172,7 @@
             transition: opacity 0.3s, visibility 0.3s;
         }
         #scrollToTopBtn:hover {
-             background-color: rgba(167, 139, 250, 1);
+            background-color: rgba(167, 139, 250, 1);
         }
         .tone-label {
             background-color: rgba(209, 213, 219, 0.1);
@@ -192,9 +192,9 @@
             color: #c4b5fd;
         }
         .file-upload-btn {
-             background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
-             display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-             cursor: pointer; transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            cursor: pointer; transition: all 0.3s ease;
         }
         .file-upload-btn:hover, .file-upload-btn.dragover {
             border-color: rgba(167, 139, 250, 0.8);
@@ -309,25 +309,25 @@
           .calendar-day {
             min-height: 65px; /* Mengurangi tinggi minimum sel */
           }
-        
+          
           /* Mengecilkan header hari (Sen, Sel, Rab, dst.) */
           .calendar-header-day {
             font-size: 0.75rem;
           }
-        
+          
           /* Mengecilkan titik penanda jadwal */
           .scheduled-dot {
             width: 6px;
             height: 6px;
             margin-top: 2px;
           }
-        
+          
           /* Mengecilkan font di panel detail jadwal */
           #calendar-details h4 {
-             font-size: 1.1rem;
+              font-size: 1.1rem;
           }
           #calendar-details p, #calendar-details button, #calendar-details select {
-             font-size: 0.9rem;
+              font-size: 0.9rem;
           }
         }
     </style>
@@ -398,6 +398,17 @@
         </div>
     </div>
     
+    <div id="trendModal" class="modal-overlay">
+        <div class="modal-content !max-w-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-purple-400">🔥 Rekomendasi Tren Terkini</h2>
+                <button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button>
+            </div>
+            <div id="trend-results-container" class="modal-body space-y-4 text-slate-300">
+                </div>
+        </div>
+    </div>
+    
     <div id="hookExplanationModal" class="modal-overlay">
         <div class="modal-content !max-w-lg">
             <div class="flex justify-between items-center mb-4"><h2 id="explanation-title" class="text-2xl font-bold text-purple-400"></h2><button class="close-modal-btn text-slate-400 hover:text-white text-3xl">×</button></div>
@@ -443,7 +454,7 @@
                     <h3 class="font-bold text-lg text-slate-100">Kapan kuota generate direset?</h3>
                     <p class="mt-1">Kuota generate gratis Anda direset setiap hari pada pukul <strong class="efektif-title">00:00 (tengah malam)</strong> sesuai waktu lokal perangkat Anda.</p>
                 </div>
-                 <div class="faq-entry">
+                <div class="faq-entry">
                     <h3 class="font-bold text-lg text-slate-100">Mengapa ada kuota generate?</h3>
                     <p class="mt-1">Kuota harian adalah fitur keamanan untuk melindungi Anda dari penggunaan berlebih yang tidak disengaja, yang mungkin bisa menimbulkan biaya dari Google. Ini membantu memastikan penggunaan API Key Anda tetap dalam batas wjar setiap harinya.</p>
                 </div>
@@ -513,7 +524,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="flex-shrink-0"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.022.26-.01.104c-.048.519-.119 1.023-.22-1.402a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.086-.003c-1.702-.074-2.973-.17-3.294-.265a2.007 2.007 0 0 1-1.416-1.42c-.101-.38-.172-.883-.22-1.402l-.01-.104-.022-.26-.008-.104c-.065-.914-.073-1.77-.074-1.957v-.075c.001-.194.01-1.108.082-2.06l.008-.105.022.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.418-.105 1.912-.19 3.455-.254l.262-.007.126-.003h.09c1.27.006 2.404.01 3.294.026h.093zM6.425 7.648V10.5l3.295-1.426L6.425 7.648z"></path></svg>
                     Dengarkan di YouTube
                 </a>
-                 <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
+                <a id="spotify-audio-link" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full text-white font-bold py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z"/></svg>
                     Cari di Spotify
                 </a>
@@ -576,7 +587,7 @@
 
         <div class="p-8 glass-effect">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                 <div>
+                <div>
                     <label for="topic" class="block text-sm font-medium text-slate-300 mb-2">1. Masukkan Produk / Jasa Anda <span class="text-red-400">(Wajib)</span></label>
                     <div class="flex items-center gap-2">
                         <input type="text" id="topic" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Tripod, Serum Wajah">
@@ -586,14 +597,14 @@
                             </svg>
                         </button>
                     </div>
-                 </div>
-                 <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
+                </div>
+                <div><label for="audience" class="block text-sm font-medium text-slate-300 mb-2">2. Siapa Target Audiens Anda? <span class="text-slate-400">(Opsional)</span></label><input type="text" id="audience" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Konten Kreator, Pebisnis Online"></div>
                 
-                 <div>
+                <div>
                     <label for="details" class="block text-sm font-medium text-slate-300 mb-2">3. Detail Tambahan (Opsional)</label>
                     <input type="text" id="details" class="w-full rounded-lg p-3 modern-input" placeholder="Cth: Merk, Harga, Manfaat Utama">
                 </div>
-                 <div>
+                <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">4. Unggah Referensi Visual (Opsional)</label>
                     <div id="image-upload-container">
                         <label for="image-upload" class="file-upload-btn w-full rounded-lg p-3">
@@ -608,7 +619,7 @@
                     </div>
                 </div>
 
-                 <div>
+                <div>
                     <label for="hook-type" class="block text-sm font-medium text-slate-300 mb-2">5. Pilih Jenis Hook (Opsional)</label>
                     <select id="hook-type" class="w-full rounded-lg p-3 modern-input">
                         <option value="semua">🔥 Tampilkan Semua (Direkomendasikan)</option><option value="Narasi">Narasi</option><option value="Pertanyaan">Pertanyaan</option><option value="Sebelum & Sesudah">Sebelum & Sesudah</option><option value="Social Proof">Social Proof</option><option value="Janji & Manfaat">Janji & Manfaat</option><option value="How-To">How-To</option><option value="Kontroversial">Kontroversial</option><option value="Negatif">Negatif</option><option value="FOMO">FOMO</option><option value="Penasaran">Penasaran</option><option value="Statistik">Statistik</option><option value="Kutipan">Kutipan</option><option value="Panggilan Langsung">Panggilan Langsung</option>
@@ -878,9 +889,9 @@
 
             } catch (error) {
                 console.error(`Fetch/Logic Error (Attempt ${i + 1}):`, error);
-                 if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
-                      throw error; 
-                 }
+                if (error.message === "API Key tidak valid." || error.message === "API_QUOTA_EXCEEDED") {
+                    throw error; 
+                }
                 if (i < maxRetries - 1) {
                     await new Promise(resolve => setTimeout(resolve, delay));
                     delay *= 2;
@@ -892,6 +903,38 @@
                 }
             }
         }
+    }
+
+    // NEW: Function to generate trends
+    async function generateAITrends(topic, apiKey) {
+        const prompt = `Anda adalah seorang Social Media Trend Analyst. Berikan 3 rekomendasi format video pendek (TikTok/Reels) yang sedang tren dan relevan untuk produk ini: "${topic}".
+        
+        ATURAN:
+        1. Berikan 3 rekomendasi yang berbeda.
+        2. Setiap rekomendasi harus singkat, jelas, dan actionable.
+        3. Sertakan judul singkat untuk setiap tren (kunci "title").
+        4. Sertakan deskripsi singkat tentang cara mengaplikasikan tren tersebut ke produk (kunci "description").
+        
+        Respon WAJIB berupa string array JSON yang valid tanpa karakter markdown (seperti \`\`\`json).
+        Contoh format: 
+        [
+            {"title": "Unboxing Estetik", "description": "Buat video unboxing produk dengan gaya sinematik, musik yang menenangkan, dan fokus pada detail kemasan."},
+            {"title": "Problem-Solution Cepat", "description": "Tunjukkan masalah umum yang dihadapi audiens (misal: kulit kusam), lalu perlihatkan produk sebagai solusi instan dalam 15 detik."},
+            {"title": "Get Ready With Me (GRWM)", "description": "Integrasikan produk ke dalam rutinitas harian, seperti 'GRWM untuk pergi ke kantor' menggunakan produk tersebut."}
+        ]
+        `;
+        const result = await callGeminiAPI(prompt, apiKey);
+        if (result.candidates?.[0]?.content?.parts?.[0]) {
+            const rawText = result.candidates[0].content.parts[0].text;
+            const cleanedText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+            try {
+                return JSON.parse(cleanedText);
+            } catch (e) {
+                console.error("JSON Parsing Error for Trends. Raw text:", cleanedText);
+                throw new Error("Gagal memproses rekomendasi tren dari AI.");
+            }
+        }
+        throw new Error("Struktur respons tren dari AI tidak terduga.");
     }
 
 
@@ -1019,22 +1062,22 @@ Contoh struktur JSON yang diharapkan:
             const card = document.createElement('div');
             card.className = 'bg-slate-800/50 p-5 rounded-2xl fade-in flex flex-col justify-between border border-slate-700/50';
             card.innerHTML = `
-                            <div>
-                                <div class="flex items-center gap-3 mb-3">
-                                    <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
-                                    </button>
-                                    <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
-                                    ${toneLabel}
-                                    ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <button class="favorite-btn p-1 text-slate-400 hover:text-yellow-400 transition-colors ${isFavorited ? 'favorited' : ''}" data-hook="${hookData.hook}" data-category="${hookData.category}" data-tone="${hookData.tone || ''}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill star-icon" viewBox="0 0 16 16"><path d="M3.612 15.443c-.343.197-.732.026-.976-.316C2.384 14.79 2.421 14.34 2.658 14.1l.099-.101 2.56-2.528-3.797-2.61L.064 6.25c-.26-.193-.398-.5-.358-.814.04-.314.25-.583.543-.695L4.82 3.32 6.59.165c.195-.33.542-.515.91-.492.368.023.68.26.83.585l1.78 3.155 4.542 1.32c.303.088.513.368.553.68.04.313-.098.62-.358.814l-2.823 2.062 1.005 4.423c.06.264-.028.54-.25.728-.222.188-.533.243-.815.145L8 13.34l-3.267 2.007-.093.057-.003.002z"/></svg>
+                                        </button>
+                                        <button class="text-sm font-semibold px-4 py-1 rounded-full cursor-pointer transition-opacity hover:opacity-80 result-card-category ${categoryStyle}" data-category="${hookData.category}">${hookData.category}</button>
+                                        ${toneLabel}
+                                        ${isHistoryView ? `<button class="delete-history-item-btn ml-auto p-1 text-slate-500 hover:text-red-400" data-index="${index}" title="Hapus dari riwayat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></button>`: ''}
+                                    </div>
+                                    <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
                                 </div>
-                                <p class="text-slate-200 text-lg mb-4">${hookData.hook}</p>
-                            </div>
-                            <div class="flex items-center gap-2 mt-2">
-                                <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
-                                <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
-                            </div>
-                            `;
+                                <div class="flex items-center gap-2 mt-2">
+                                    <button class="result-card-copy-btn text-sm font-bold px-4 py-2 rounded-lg" data-hook="${hookData.hook}">Salin</button>
+                                    <button class="result-card-script-btn flex-1 text-sm font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2" data-hook="${hookData.hook}">✨ Buat Script</button>
+                                </div>
+                                `;
             resultsGrid.appendChild(card);
         });
     }
@@ -1079,27 +1122,27 @@ Contoh struktur JSON yang diharapkan:
             } else if (typeof data[key] === 'object' && data[key] !== null) {
                 const item = data[key];
                 displayHTML = `<div class="pl-7 space-y-2">
-                                    <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
-                                        <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
-                                        <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
-                                        <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
-                                        <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
-                                    </div>
-                                    <hr class="border-slate-700 my-2">
-                                    <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
-                                    <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
-                                    <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
-                                </div>`;
+                                        <p class="text-sm text-slate-400">🕒 Detik ${item.durasi || ''} (Estimasi: ${item.estimasi || '?'} detik)</p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-slate-300 text-sm">
+                                            <p>🌍 <strong class="font-medium text-slate-100/80">Lokasi:</strong> ${item.lokasi || ''}</p>
+                                            <p>📦 <strong class="font-medium text-slate-100/80">Properti:</strong> ${item.properti || ''}</p>
+                                            <p>💡 <strong class="font-medium text-slate-100/80">Pencahayaan:</strong> ${item.pencahayaan || ''}</p>
+                                            <p>🎭 <strong class="font-medium text-slate-100/80">Mood:</strong> ${item.mood || ''}</p>
+                                        </div>
+                                        <hr class="border-slate-700 my-2">
+                                        <p class="text-slate-300">📸 <strong class="text-slate-100/80 font-medium">VISUAL:</strong> ${item.visual || ''}</p>
+                                        <p class="text-slate-300">🎤 <strong class="text-slate-100/80 font-medium">NARASI:</strong> ${item.narasi || ''}</p>
+                                        <p>🎬 <span class="saran-shot-text">Saran Shot: ${item.saran_shot || ''}</span></p>
+                                    </div>`;
                 
                 editHTML = `<div class="space-y-2">
-                                        <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
-                                        <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
-                                    </div>`;
+                                            <label class="block text-xs text-slate-400">Lokasi</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="lokasi">${item.lokasi || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Properti</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="properti">${item.properti || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Pencahayaan</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="pencahayaan">${item.pencahayaan || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Mood</label><textarea class="w-full h-12 p-2 rounded-md edit-textarea" data-field="mood">${item.mood || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Visual</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="visual">${item.visual || ''}</textarea>
+                                            <label class="block text-xs text-slate-400">Narasi</label><textarea class="w-full h-20 p-2 rounded-md edit-textarea" data-field="narasi">${item.narasi || ''}</textarea>
+                                        </div>`;
             }
 
             sectionWrapper.innerHTML = `
@@ -1694,6 +1737,75 @@ Contoh struktur JSON yang diharapkan:
             generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>Generate Konten!';
         }
     });
+    
+    // NEW: Event Listener for Trend Search Button
+    document.getElementById('search-trend-btn').addEventListener('click', async () => {
+        if (quotaManager.getQuotaData().quotaLeft <= 0) {
+            showNotification('Maaf, kuota generate harian Anda sudah habis. Coba lagi besok.', true);
+            return;
+        }
+        const topic = document.getElementById('topic').value.trim();
+        if (!topic) {
+            showNotification('Mohon isi Produk / Jasa Anda terlebih dahulu.', true);
+            return;
+        }
+
+        const trendModal = document.getElementById('trendModal');
+        const trendContainer = document.getElementById('trend-results-container');
+        trendModal.classList.add('visible');
+
+        // Show loading spinner
+        trendContainer.innerHTML = `<div class="flex flex-col justify-center items-center h-full gap-4 py-8">
+            <div class="script-loading-spinner"></div>
+            <p class="text-slate-400">Menganalisis tren terkini...</p>
+        </div>`;
+
+        try {
+            const trends = await generateAITrends(topic, userAPIKey);
+            quotaManager.decrementQuota();
+
+            // Clear spinner and display results
+            trendContainer.innerHTML = '';
+            trends.forEach(trend => {
+                const trendCard = document.createElement('div');
+                trendCard.className = 'bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3';
+                trendCard.innerHTML = `
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-slate-100">${trend.title}</h4>
+                        <p class="text-sm text-slate-400 mt-1">${trend.description}</p>
+                    </div>
+                    <button class="use-trend-btn w-full sm:w-auto flex-shrink-0 text-white font-bold py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700 transition-colors" data-trend-text="${trend.title}: ${trend.description}">
+                        Gunakan Tren Ini
+                    </button>
+                `;
+                trendContainer.appendChild(trendCard);
+            });
+
+        } catch (error) {
+            console.error('Trend Generation Error:', error);
+            trendContainer.innerHTML = `<p class="text-red-400 text-center">${error.message}</p>`;
+        }
+    });
+
+    // NEW: Event listener for using a trend
+    document.getElementById('trend-results-container').addEventListener('click', (e) => {
+        const useBtn = e.target.closest('.use-trend-btn');
+        if (useBtn) {
+            const trendText = useBtn.dataset.trendText;
+            const detailsInput = document.getElementById('details');
+            
+            // Append the trend to the details input
+            if (detailsInput.value.trim()) {
+                detailsInput.value += `\n- ${trendText}`;
+            } else {
+                detailsInput.value = `- ${trendText}`;
+            }
+
+            document.getElementById('trendModal').classList.remove('visible');
+            showNotification('Tren berhasil ditambahkan ke Detail Tambahan!');
+        }
+    });
+
 
     document.getElementById('view-favorites-btn').addEventListener('click', () => {
         currentView = (currentView === 'favorites') ? 'results' : 'favorites';
@@ -1795,8 +1907,8 @@ Contoh struktur JSON yang diharapkan:
             const artist = audioSpan.dataset.artist;
             const fullQuery = `${title} ${artist}`;
             document.getElementById('audio-title').textContent = `'${title}' by ${artist}`;
-            document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=$${encodeURIComponent(fullQuery)}`;
-            document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/$${encodeURIComponent(fullQuery)}`;
+            document.getElementById('youtube-audio-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(fullQuery)}`;
+            document.getElementById('spotify-audio-link').href = `https://open.spotify.com/search/${encodeURIComponent(fullQuery)}`;
             document.getElementById('audioSearchModal').classList.add('visible');
         } else if (wrapper) {
             const editBtn = e.target.closest('.edit-section-btn');
@@ -1930,65 +2042,65 @@ Contoh struktur JSON yang diharapkan:
         sectionOrder.forEach(key => {
             if(currentScriptData[key]) {
                 fullText += `--- ${sectionTitles[key].toUpperCase()} ---\n`;
-                 const data = currentScriptData[key];
-                 if (key === 'saran_audio') {
-                     fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
-                 } else if (key === 'hashtags') {
-                     fullText += '#' + data.join(' #') + '\n\n';
-                 } else if (typeof data === 'string') { 
-                     fullText += data + '\n\n'; 
-                 } else if (typeof data === 'object') { 
-                     fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
-                 }
+                const data = currentScriptData[key];
+                if (key === 'saran_audio') {
+                    fullText += data.map(a => `'${a.title}' by ${a.artist}`).join('; ') + '\n\n';
+                } else if (key === 'hashtags') {
+                    fullText += '#' + data.join(' #') + '\n\n';
+                } else if (typeof data === 'string') { 
+                    fullText += data + '\n\n'; 
+                } else if (typeof data === 'object') { 
+                    fullText += `Durasi: Detik ${data.durasi}\nLokasi: ${data.lokasi}\nProperti: ${data.properti}\nPencahayaan: ${data.pencahayaan}\nMood: ${data.mood}\n\nVisual: ${data.visual}\nNarasi: ${data.narasi}\nSaran Shot: ${data.saran_shot}\n\n`;
+                }
             }
         });
         return fullText;
     }
 
     document.getElementById('save-schedule-btn').addEventListener('click', () => {
-          if (itemToMove) {
-              if (!selectedDateForScheduling) {
-                  showNotification('Silakan pilih tanggal baru di kalender.', true);
-                  return;
-              }
-              if (!scheduledContent[selectedDateForScheduling]) {
-                  scheduledContent[selectedDateForScheduling] = [];
-              }
-              scheduledContent[selectedDateForScheduling].push(itemToMove.item);
-              scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
-              if (scheduledContent[itemToMove.originalDate].length === 0) {
-                  delete scheduledContent[itemToMove.originalDate];
-              }
-              showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
-              itemToMove = null;
-          } else {
-              if (!selectedDateForScheduling) {
-                  showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
-                  return;
-              }
-              if (!scheduledContent[selectedDateForScheduling]) {
-                  scheduledContent[selectedDateForScheduling] = [];
-              }
-              const newItem = {
-                  ...currentScriptData,
-                  id: Date.now(),
-                  platforms: {
-                      'IG': { status: 'Siap Upload', time: '' },
-                      'FB': { status: 'Siap Upload', time: '' },
-                      'TikTok': { status: 'Siap Upload', time: '' },
-                      'YouTube': { status: '-', time: '' },
-                      'Shopee': { status: '-', time: '' },
-                      'TokPed': { status: '-', time: '' }
-                  }
-              };
-              scheduledContent[selectedDateForScheduling].push(newItem);
-              showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
-              document.getElementById('scriptModal').classList.remove('visible');
-          }
-          
-          saveScheduledContent();
-          document.getElementById('calendarModal').classList.remove('visible');
-          selectedDateForScheduling = null;
+         if (itemToMove) {
+             if (!selectedDateForScheduling) {
+                 showNotification('Silakan pilih tanggal baru di kalender.', true);
+                 return;
+             }
+             if (!scheduledContent[selectedDateForScheduling]) {
+                 scheduledContent[selectedDateForScheduling] = [];
+             }
+             scheduledContent[selectedDateForScheduling].push(itemToMove.item);
+             scheduledContent[itemToMove.originalDate].splice(itemToMove.originalIndex, 1);
+             if (scheduledContent[itemToMove.originalDate].length === 0) {
+                 delete scheduledContent[itemToMove.originalDate];
+             }
+             showNotification(`Konten dipindahkan ke ${selectedDateForScheduling}!`);
+             itemToMove = null;
+         } else {
+             if (!selectedDateForScheduling) {
+                 showNotification('Silakan pilih tanggal di kalender terlebih dahulu.', true);
+                 return;
+             }
+             if (!scheduledContent[selectedDateForScheduling]) {
+                 scheduledContent[selectedDateForScheduling] = [];
+             }
+             const newItem = {
+                 ...currentScriptData,
+                 id: Date.now(),
+                 platforms: {
+                     'IG': { status: 'Siap Upload', time: '' },
+                     'FB': { status: 'Siap Upload', time: '' },
+                     'TikTok': { status: 'Siap Upload', time: '' },
+                     'YouTube': { status: '-', time: '' },
+                     'Shopee': { status: '-', time: '' },
+                     'TokPed': { status: '-', time: '' }
+                 }
+             };
+             scheduledContent[selectedDateForScheduling].push(newItem);
+             showNotification(`Konten berhasil dijadwalkan untuk ${selectedDateForScheduling}!`);
+             document.getElementById('scriptModal').classList.remove('visible');
+         }
+        
+         saveScheduledContent();
+         document.getElementById('calendarModal').classList.remove('visible');
+         selectedDateForScheduling = null;
     });
 
     document.getElementById('calendar-view-btn').addEventListener('click', () => {
